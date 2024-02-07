@@ -1,7 +1,7 @@
 # SheepyTime
 A draft of Sheepy Time game
 
-## DO NOT COMMIT ANYTHING TO THE MAIN BRANCH!!!
+## Do NOT commit anything to the main branch!!!
 
 ## Initial commit notes:
 
