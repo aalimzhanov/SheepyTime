@@ -1,6 +1,8 @@
 # SheepyTime
 A draft of Sheepy Time game
 
+## DO NOT COMMIT ANYTHING TO THE MAIN BRANCH!!!
+
 ## Initial commit notes:
 
 `Sheep` might have to be reworked. There is no reason to hold a reference to a player. The gameboard can associate player and sheep by the color.
