@@ -12,3 +12,9 @@ A draft of Sheepy Time game
 `Player` logic needs to be complete. Unclear on how to handle playing a card or making a resting move. 
 
 `Deck` logic is complete.
+
+`Tile` logic is incomplete. Do we store actionType as a String or ActionType enum? Also when using a token, do we pass in the token we want to use up? We could alternatively pass the player match a token based on colors and use that.
+
+`TileDeck` logic is complete.
+
+`Movable` we should consider adding isSheep() method, so that we can easily check endOfRound in `GameBoard`. See comments in `GameBoard` class for clarification.
