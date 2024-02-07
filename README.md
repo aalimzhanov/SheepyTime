@@ -17,4 +17,3 @@ A draft of Sheepy Time game
 
 `TileDeck` logic is complete.
 
-`Movable` we should consider adding isSheep() method, so that we can easily check endOfRound in `GameBoard`. See comments in `GameBoard` class for clarification.

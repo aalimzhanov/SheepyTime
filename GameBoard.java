@@ -66,8 +66,7 @@ public class GameBoard {
         for (int i = 0; i < gameBoard.size() ; i++){
             List<Movable> square = gameBoard.get(i);
             for (int j = 0; j < square.size(); j++){
-                // Would make it easy if we added isSheep() to Movable inteface.
-                if (square.get(j).isSheep()){
+                if (square.get(j) instanceof Sheep){
                     isEndOfRound = false;
                     break;
                 }
