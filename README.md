@@ -17,3 +17,4 @@ A draft of Sheepy Time game
 
 `TileDeck` logic is complete.
 
+`PlayerController` in the `playARacingMove` how does a player get a new card?
