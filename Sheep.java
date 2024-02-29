@@ -1,11 +1,22 @@
-public class Sheep {
-    private Player player;
-    private Color color;
-    private int scaredness;
+public class Sheep{
+    private String color;
+    private int position;
+    private final int STARTER_POSITION = 1;
 
-    public Sheep(Color color, Player player){
+    public Sheep(String color){
         this.color = color;
-        this.player = player;
-        scaredness = 0;
+        resetPosition();
+    }
+    public String getColor() {
+        return color;
+    }
+    public int getPosition() {
+        return position;
+    }
+    public void move(int newPosition) {
+        this.position = newPosition;
+    }
+    public void resetPosition(){
+        position = STARTER_POSITION;
     }
 }

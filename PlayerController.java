@@ -1,75 +1,42 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
-public class PlayerController implements Controller{
-
-    private Queue<Player> players;
+public class PlayerController {
+    private Player model;
     private PlayerView view;
-
-
-    public PlayerController(){
-        players = new LinkedList<>();
-        view = new PlayerView();
+    public PlayerController(Player model, PlayerView view) {
+        this.model = model;
+        this.view = view;
     }
-
-    @Override
-    public void initialize() {
-
+    public void updateView(){
+        view.updateView(model);
     }
-
-    @Override
-    public void updateModel() {
-    
+    public String getPlayerName() {
+        return model.getName();
     }
-
-    @Override
-    public void updateView() {
-        view.update();
+    public Sheep getSheep() {
+        return model.getSheep();
     }
-
-    public void addPlayer(Player newPlayer){
-        if(players.size()<=4){
-            players.offer(newPlayer);
-        }
-        else{
-            throw new IllegalStateException("Players limit(4) is reached");
-        }
+    public Card getCard(int index) {
+        return model.getCard(index);
     }
-    public void removePlayer(Player playerToRemove){
-        boolean playerFound = false;
-        Queue<Player> tempQueue = new LinkedList<>();
-        while(!players.isEmpty()){
-            Player tempPlayer = players.poll();
-            if(tempPlayer.equals(playerToRemove)){
-                playerFound = true;
-            }
-            else{
-                tempQueue.offer(tempPlayer);
-            }
-        }
-        while(!tempQueue.isEmpty()){
-            players.offer(tempQueue.poll());
-        }
-        if(!playerFound){
-            throw new IllegalArgumentException("Player not found");
-        }
+    public int getNumOfZzzs() {
+        return model.getNumOfZzzs();
+    }
+    public void pickUpCard(int index, Card card) {
+        model.pickUpCard(index, card);
         updateView();
     }
-    public Card playARacingMove(){
-        Player activePlayer = players.poll();
-        Card playedCard = activePlayer.makeARacingMove();
-        // How does a player get a new card?
-        activePlayer.pickUpACard(null);
-        players.offer(activePlayer);
+    public Card playCard(int index) {
+        Card card = model.playCard(index);
         updateView();
-        return playedCard;
+        return card;
     }
-
-    public ActionType playARestingMove(){
-        Player activePlayer = players.poll();
-        ActionType playedAction = activePlayer.makeARestingMove();
-        players.offer(activePlayer);
+    public void catchZZZs(int amount){
+        model.catchZZZs(amount);
         updateView();
-        return playedAction;
+    }
+    /**
+     * @return the model
+     */
+    public Player getModel() {
+        return model;
     }
 }

@@ -1,4 +1,4 @@
-public class DeckController implements Controller{
+public class DeckController{
     private Deck deck;
     private DeckView view;
     public DeckController(){
@@ -8,17 +8,5 @@ public class DeckController implements Controller{
     }
     public void populateDeck(){
         
-    }
-    @Override
-    public void initialize() {
-        
-    }
-    @Override
-    public void updateModel() {
-     
-    }
-    @Override
-    public void updateView() {
-     
     }
 }

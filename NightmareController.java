@@ -1,4 +1,4 @@
-public class NightmareController implements Controller{
+public class NightmareController {
 
     Nightmare nightmare;
     NightmareView view;
@@ -9,20 +9,6 @@ public class NightmareController implements Controller{
         view = new NightmareView();
     }
 
-    @Override
-    public void initialize() {
-        
-    }
-
-    @Override
-    public void updateModel() {
-        
-    }
-
-    @Override
-    public void updateView() {
-     
-    }
     
 
 }

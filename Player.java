@@ -1,30 +1,46 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class Player {
-    private String playerName;
+public class Player implements Movable{
+    private String name;
     private Sheep sheep;
-    private List<ZZZToken> zzzs;
     private Card[] hand;
-    public Player(String playerName, Color color){
-        this.playerName = playerName;
-        sheep = new Sheep(color, this);
-        zzzs = new ArrayList<>();
+    private int zzzs;
+    public Player(String name, String sheepColor){
+        this.name = name;
+        this.sheep = new Sheep(sheepColor);
         hand = new Card[2];
+        zzzs = 20; // whatever the initial amount of zzzs is
     }
-    public ActionType makeARestingMove(){
-        // temporary
-        return ActionType.CALL_IT_A_NIGHT;
+    public String getName() {
+        return name;
     }
-    public Card makeARacingMove(){
-        // temporary
-        return hand[1];
-    } 
-    public void pickUpACard(Card newCard){
-        // temporary
-        hand[1] = newCard;
-    }
-    public Sheep getSheep(){
+    public Sheep getSheep() {
         return sheep;
+    }
+    public Card getCard(int index) {
+        return hand[index];
+    }
+    public int getNumOfZzzs() {
+        return zzzs;
+    }
+    public void pickUpCard(int index, Card newCard){
+        hand[index] = newCard;
+    }
+    public Card playCard(int index){
+        Card playerCard = hand[index];
+        hand[index] = null;
+        return playerCard;
+    }
+    public void catchZZZs(int amount){
+        if(amount > zzzs){
+            throw new IllegalStateException("Not enough zzzs");
+        }
+        zzzs -= amount;
+    }
+    @Override
+    public void crossTheFence() {
+    //    Do something
+    }
+    @Override
+    public void move(int newPos) {
+        sheep.move(newPos);
     }
 }

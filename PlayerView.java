@@ -1,22 +1,10 @@
-public class PlayerView implements View{
-
-    public PlayerView(){
-        
-    }
-    @Override
-    public void initialize() {
-    }
-
-    @Override
-    public void display() {
-    }
-
-    @Override
-    public void update() {
-    }
-
-    @Override
-    public void showError() {
-    }
+public class PlayerView {
     
+    public void updateView(Player player) {
+        System.out.println("Player name: "+player.getName());
+        System.out.println("Sheep color: "+player.getSheep().getColor());
+        System.out.println("Player's first card: "+player.getCard(0).getInformation());
+        System.out.println("Player's second card: "+player.getCard(1).getInformation());
+        System.out.println("Player has "+player.getNumOfZzzs()+" zzzs");
+    }
 }
