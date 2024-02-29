@@ -1,4 +1,5 @@
 # SheepyTime
+
 A draft of Sheepy Time game
 
 ## Do NOT commit anything to the main branch!!!
@@ -9,7 +10,7 @@ A draft of Sheepy Time game
 
 `SheepyCard` logic needs to be reworked. Eeach card can have different options: "or", "and", etc..
 
-`Player` logic needs to be complete. Unclear on how to handle playing a card or making a resting move. 
+`Player` logic needs to be complete. Unclear on how to handle playing a card or making a resting move.
 
 `Deck` logic is complete.
 
@@ -18,3 +19,15 @@ A draft of Sheepy Time game
 `TileDeck` logic is complete.
 
 `PlayerController` in the `playARacingMove` how does a player get a new card?
+
+## Second commit notes:
+
+`Card`, `PlayerController`, `Player`, `GameBoard`, `Sheep`, and all `Card` implementations are almost done. See comments in the code for more details.
+
+`Tile`, `Nightmare` and `ScoreBoard` logic missing
+
+
+## Add more game logic that is missing below:
+
+How do we deal with 'Calling it a Night', or rather which class should deal with that
+
