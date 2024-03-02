@@ -1,13 +1,17 @@
+import java.util.Arrays;
+
 public class Player implements Movable{
     private String name;
     private Sheep sheep;
     private Card[] hand;
     private int zzzs;
+    private int winks;
     public Player(String name, String sheepColor){
         this.name = name;
         this.sheep = new Sheep(sheepColor);
         hand = new Card[2];
-        zzzs = 20; // whatever the initial amount of zzzs is
+        zzzs = 10;
+        winks = 0;
     }
     public String getName() {
         return name;
@@ -43,4 +47,23 @@ public class Player implements Movable{
     public void move(int newPos) {
         sheep.move(newPos);
     }
+    public boolean isScared(){
+        return sheep.isScared();
+    }
+    public void scareSheep(){
+        sheep.scare();
+    }
+    public void becomeBrave(){
+        sheep.becomeBrave();
+    }
+    public void gainWinks(int amount){
+        winks += amount;
+    }
+    public int getWinks(){
+        return winks;
+    }
+    public void discardHand() {
+        Arrays.fill(hand, null); 
+    }
+
 }
