@@ -1,4 +1,4 @@
 public interface Card {
     public String getInformation();
-    public void executeAction(PlayerController playerController, GameBoard gameBoard, UserInput input);
+    public void executeAction(Player player, GameBoard gameBoard);
 }

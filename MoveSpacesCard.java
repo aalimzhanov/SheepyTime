@@ -6,8 +6,8 @@ public class MoveSpacesCard implements Card {
     }
 
     @Override
-    public void executeAction(PlayerController playerController, GameBoard gameBoard, UserInput input) {
-        gameBoard.moveMovable(playerController.getModel(), spaces);
+    public void executeAction(Player player, GameBoard gameBoard) {
+        gameBoard.moveMovable(player, spaces);
     }
 
     @Override
