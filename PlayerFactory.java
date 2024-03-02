@@ -1,3 +1,8 @@
+import controllers.GameController;
+import controllers.PlayerController;
+import models.Player;
+import models.UserInput;
+import views.PlayerView;
 
 public class PlayerFactory{
     public static void intialisePlayers(UserInput userInput, GameController gameController, int numOfPlayers) {
