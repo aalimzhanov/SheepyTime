@@ -20,6 +20,8 @@ Created a Coordinator class which creates and initializes all the controllers an
 
 Created a Main class to serve as the entry point of the game. This class will contain the main method.
 
+Overall I did not change much in the game logic, just the organization of the files.
+
 
 
 
