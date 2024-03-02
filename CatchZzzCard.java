@@ -1,9 +1,3 @@
-
-import controllers.PlayerController;
-import models.Card;
-import models.GameBoard;
-import models.UserInput;
-
 public class CatchZzzCard implements Card {
     private int zzzs;
 
@@ -21,8 +15,8 @@ public class CatchZzzCard implements Card {
     }
 
     @Override
-    public void executeAction(PlayerController playerController, GameBoard gameBoard, UserInput input) {
+    public void executeAction(Player player, GameBoard gameBoard) {
         // Figure out the logic for tile placement
-        playerController.catchZZZs(zzzs); 
+        player.catchZZZs(zzzs); 
     }
 }
