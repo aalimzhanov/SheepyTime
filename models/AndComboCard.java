@@ -17,4 +17,10 @@ public class AndComboCard implements Card {
     public String getInformation() {
         return actions[0].getInformation() + " and " + actions[1].getInformation();
     }
+
+    @Override
+    public boolean isNightmare() {
+        return false;
+    }
+    
 }

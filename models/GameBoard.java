@@ -90,8 +90,11 @@ public class GameBoard {
         } else if (newPosition <= 0) {
             newPosition = 1; // Can't cross the fence backwards
         }
-
+        
         boolean crossedTheFence = amount > 0 && newPosition <= amount;
+        if(!crossedTheFence && newPosition == nightmarePos){
+            movable.becomeScared();
+        }
         gameBoard.put(movable, newPosition);
     
         return crossedTheFence;

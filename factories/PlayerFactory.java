@@ -12,9 +12,9 @@ public class PlayerFactory{
     public static List<PlayerController> intialisePlayers(UserInput userInput, int numOfPlayers) {
         List<PlayerController> playerControllers = new ArrayList<>();
         for (int i = 0; i < numOfPlayers; i++){
-            Player newPlayer = new Player(userInput.getPlayerName(), userInput.getSheepColor());
+            Player newPlayer = new Player(userInput.getPlayerName(), userInput.getSheepColor(), userInput.getSleepTime());
             PlayerView newView = new PlayerView();
-            PlayerController controller = new PlayerController(newPlayer, newView);
+            PlayerController controller = new PlayerController(newPlayer, newView, userInput);
             playerControllers.add(controller);
         }
         return playerControllers;

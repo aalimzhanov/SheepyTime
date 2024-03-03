@@ -45,10 +45,16 @@ public class GameBoardController {
         updateView(); 
     }
 
-    public boolean moveMovable(Movable movable, int amount) {
+    public void moveMovable(Movable movable, int amount) {
         boolean crossedFence = gameBoard.moveMovable(movable, amount);
         updateView();
-        return crossedFence; 
+        if(crossedFence){
+            movable.crossFence();
+        }
+    }
+    public void callItANight(Movable movable) {
+        gameBoard.callItANight(movable);
+        updateView();
     }
 
     public boolean moveNightmare(int amount) {

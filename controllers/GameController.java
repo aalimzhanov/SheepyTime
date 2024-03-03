@@ -1,10 +1,10 @@
 package controllers;
+
 import views.UserInput;
 import views.GameView;
 import java.util.List;
 
 import models.ScoreBoard;
-
 
 public class GameController {
     private List<PlayerController> playerControllers;
@@ -15,6 +15,7 @@ public class GameController {
     private ScoreBoardController scoreBoardController;
     private UserInput userInput;
     private GameView gameView;
+
     public GameController(List<PlayerController> playerControllers, NightmareController nightmareController) {
         this.playerControllers = playerControllers;
         this.nightmareController = nightmareController;
@@ -38,26 +39,27 @@ public class GameController {
         playerControllers.forEach(pc -> gameBoardController.addMovableToBoard(pc.getModel()));
         gameBoardController.addNightmareToBoard(nightmareController.getModel());
     }
+
     private void playGame() {
         boolean gameEnded = false;
         while (!gameEnded) {
             for (PlayerController playerController : playerControllers) {
                 gameView.showPlayerTurn(playerController.getPlayerName());
-                playerController.takeTurn(gameBoardController.getModel(), userInput);
+
+                // figure out phases
+                playerController.takeTurn(gameBoardController, deckController, true);
                 gameEnded = checkWinConditions();
-                if (gameEnded) break;
+                if (gameEnded)
+                    break;
             }
         }
     }
+
     private boolean checkWinConditions() {
-        for (PlayerController pc : playerControllers) {
-            if (pc.hasWon()) {
-                gameView.showWinner(pc.getPlayerName());
-                return true;
-            }
-        }
-        return false;
+        return scoreBoardController.isGameOver();
+
     }
+
     private void concludeGame() {
         gameView.showGameOver();
     }
