@@ -5,7 +5,7 @@ import java.util.List;
 import models.GameBoard;
 import models.Movable;
 import models.Nightmare;
-import tiles.Tile;
+import models.Tile;
 import views.GameBoardView;
 
 public class GameBoardController {
@@ -13,16 +13,9 @@ public class GameBoardController {
     private GameBoard gameBoard;
     private GameBoardView gameBoardView;
 
-    public GameBoardController(GameBoard gameBoard, GameBoardView gameBoardView){
-        this.gameBoard = gameBoard;
-        this.gameBoardView = gameBoardView;
-    }
-    public void setupBoard(List<Movable> players, Nightmare nightmare){
-        for (Movable movable : players) {
-            addMovableToBoard(movable);
-        }
-        addNightmareToBoard(nightmare);
-        updateView();
+    public GameBoardController(){
+        this.gameBoard = new GameBoard();
+        this.gameBoardView = new GameBoardView();
     }
     
     public GameBoard getModel(){

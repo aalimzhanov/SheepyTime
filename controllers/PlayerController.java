@@ -27,8 +27,8 @@ public class PlayerController {
     public int getNumOfZzzs() {
         return model.getNumOfZzzs();
     }
-    public void pickUpCard(int index, Card card) {
-        model.pickUpCard(index, card);
+    public void gainCard(Card card) {
+        model.gainCard(card);
         updateView();
     }
     public Card playCard(int index) {

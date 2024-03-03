@@ -1,24 +1,28 @@
 package controllers;
-/*
- * This class is responsible for creating all the controllers, 
- * initializing them and handling interaction between them.
- */
+import factories.*;;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Coordinator {
     private DeckController deckController;
     private GameBoardController gameBoardController;
     private GameController gameController;
-    private InitialController initialController;
     private NightmareController nightmareController;
-    private PlayerController playerController;
+    private List<PlayerController> playerControllers;
 
     public Coordinator(){
         deckController = new DeckController();
         gameBoardController = new GameBoardController();
         gameController = new GameController();
-        initialController = new InitialController();
         nightmareController = new NightmareController();
-        playerController = new PlayerController(null, null);
+        playerControllers = new ArrayList<>();
+    }
+    public void addGameBoardController(GameBoardController gameBoardController){
+        this.gameBoardController = gameBoardController;
+    }
+    public void addPlayerControllers(List<PlayerController> playerControllers){
+        this.playerControllers = playerControllers;
     }
 
 }

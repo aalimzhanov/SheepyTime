@@ -1,6 +1,7 @@
-package tiles;
+package models.tiles;
 import models.GameBoard;
 import models.Player;
+import models.Tile;
 
 public class CoolKidsClubTile extends Tile {
 

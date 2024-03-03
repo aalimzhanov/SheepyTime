@@ -1,7 +1,4 @@
-package tiles;
-
-import models.GameBoard;
-import models.Player;
+package models;
 
 public abstract class Tile {
     

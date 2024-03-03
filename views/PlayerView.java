@@ -10,4 +10,7 @@ public class PlayerView {
         System.out.println("Player's second card: "+player.getCard(1).getInformation());
         System.out.println("Player has "+player.getNumOfZzzs()+" zzzs");
     }
+    public void showError(String message) {
+        System.err.println("Error: " + message);
+    }
 }

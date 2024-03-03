@@ -1,5 +1,5 @@
 package views;
-import tiles.Tile;
+import models.Tile;
 
 public class TileView {
 
