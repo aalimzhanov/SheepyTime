@@ -20,4 +20,5 @@ public class Coordinator {
         nightmareController = new NightmareController();
         playerController = new PlayerController(null, null);
     }
+
 }

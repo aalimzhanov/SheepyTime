@@ -23,8 +23,6 @@ This how you detect that:
 
 We should have a class (or this can be made in the main class) which initializes the game and all of the game environment. This class should be outside the packages.
 
-Right now our Player model is breaking MVC because it imports controllers and other models to work. (I just checked your updated code and it seems this is fixed).
-
 Reworked the Nightmare controller and Nightmare view to adhere to MVC
 
 Reworked the Gameboard controller and Gameboard view to adhere to MVC
@@ -36,3 +34,14 @@ Created a Coordinator class which creates and initializes all the controllers an
 Created a Main class to serve as the entry point of the game. This class will contain the main method.
 
 Overall I did not change much in the game logic, just the organization of the files.
+
+## Important
+Is the Card interface and the classes that implement this interface a model?
+
+1. Should we create a new package for Card and store them there? 
+
+Because if Card is a model, then we are breaking MVC because the player class holds an instance of the Card(as an array). I cannot figure out how to break the dependency between them.
+
+Reworked the Tile class and took out the displayInfo into a TileView and Tile controller. In the TileController the tight coupling is revealed because we have to import 2 other models for the Tilecontroller to work(Player and Gameboard). 
+
+It seems this problem is everywhere(also in PlayerController and CardController), where we have to import Player and Gameboard models for the controllers to work.

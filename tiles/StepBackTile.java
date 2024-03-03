@@ -15,7 +15,7 @@ public class StepBackTile extends Tile {
         board.moveMovable(player, -1);
         
         if (player.isScared()) {
-            player.getBrave();;
+            player.becomeBrave();
         }
     }
 }

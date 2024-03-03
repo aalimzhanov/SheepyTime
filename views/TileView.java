@@ -1,24 +1,13 @@
 package views;
-public class TileView implements View{
+import tiles.Tile;
 
-    @Override
-    public void initialize() {
-        
-    }
+public class TileView {
 
-    @Override
-    public void display() {
-     
-    }
-
-    @Override
-    public void update() {
-     
-    }
-
-    @Override
-    public void showError() {
-     
+    public void displayInfo(Tile tile) {
+        System.out.println("Name: " + tile.getName());
+        System.out.println("Ability: " + tile.getAbilityDescription());
+        System.out.println("ZZZ Type: " + (tile.isInfinite()  ? "Infinite" : "Regular"));
+        System.out.println("ZZZ Count: " + tile.getZzzCount());
     }
     
 }
