@@ -12,7 +12,7 @@ public class IntenseDreamsTile extends Tile {
 
     @Override
     public void activateEffect(Player player, GameBoard board) {
-        player.scareSheep();
+        player.becomeScared();
         player.gainWinks(4);
     }
 }

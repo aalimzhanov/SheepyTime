@@ -40,18 +40,11 @@ public class Player implements Movable{
         }
         zzzs -= amount;
     }
-    @Override
-    public void crossTheFence() {
-    //    Do something
-    }
-    @Override
-    public void move(int newPos) {
-        sheep.move(newPos);
-    }
     public boolean isScared(){
         return sheep.isScared();
     }
-    public void scareSheep(){
+    @Override
+    public void becomeScared(){
         sheep.scare();
     }
     public void becomeBrave(){
