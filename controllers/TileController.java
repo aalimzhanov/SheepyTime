@@ -2,7 +2,7 @@ package controllers;
 
 import models.GameBoard;
 import models.Player;
-import tiles.Tile;
+import models.Tile;
 import views.TileView;
 
 public class TileController {

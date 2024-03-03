@@ -2,8 +2,6 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 
-import tiles.Tile;
-
 public class GameBoard {
     private Map<Movable, Integer> gameBoard;
     private Nightmare nightmare;

@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import tiles.Tile;
-
 public class TileDeck {
     
     // We don't need to create playedTiles like we did in Deck class, since there can only be 10 played tiles in a round, 

@@ -27,4 +27,7 @@ public class NightmareController {
     public int getNightmareDifficulty(){
         return model.getDifficulty();
     }
+    public Nightmare getModel() {
+        return model;
+    }
 }

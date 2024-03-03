@@ -8,8 +8,8 @@ public class DeckController{
     private DeckView view;
     public DeckController(){
         deck = new Deck();
-        populateDeck();
         view = new DeckView();
+        populateDeck();
     }
     public void populateDeck(){
         

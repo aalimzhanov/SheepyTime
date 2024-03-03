@@ -5,11 +5,13 @@ public class Player implements Movable{
     private String name;
     private Sheep sheep;
     private Card[] hand;
+    private String sleepTime;
     private int zzzs;
     private int winks;
-    public Player(String name, String sheepColor){
+    public Player(String name, String sheepColor, String sleepTime){
         this.name = name;
         this.sheep = new Sheep(sheepColor);
+        this.sleepTime = sleepTime;
         hand = new Card[2];
         zzzs = 10;
         winks = 0;
@@ -26,9 +28,19 @@ public class Player implements Movable{
     public int getNumOfZzzs() {
         return zzzs;
     }
-    public void pickUpCard(int index, Card newCard){
-        hand[index] = newCard;
+    public String getSleepTime() {
+        return sleepTime;
     }
+    public void gainCard(Card newCard){
+        if(hand[0] == null){
+            hand[0] = newCard;
+        } else if(hand[1] == null){
+            hand[1] = newCard;
+        } else {
+            throw new IllegalStateException("Hand is full");
+        }
+    }
+
     public Card playCard(int index){
         Card playerCard = hand[index];
         hand[index] = null;
@@ -43,10 +55,7 @@ public class Player implements Movable{
     public boolean isScared(){
         return sheep.isScared();
     }
-    @Override
-    public void becomeScared(){
-        sheep.scare();
-    }
+    
     public void becomeBrave(){
         sheep.becomeBrave();
     }
@@ -60,4 +69,8 @@ public class Player implements Movable{
         Arrays.fill(hand, null); 
     }
 
+    @Override
+    public void becomeScared(){
+        sheep.scare();
+    }
 }

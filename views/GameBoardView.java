@@ -1,7 +1,7 @@
 package views;
 
 import models.GameBoard;
-import tiles.Tile;
+import models.Tile;
 
 public class GameBoardView {
 
