@@ -38,7 +38,7 @@ public class Deck
      *
      * @return The drawn card from the active cards queue, or null if no cards are available.
      */
-    public Card drawACard() {
+    public Card drawCard() {
         if (isEmpty()) {
             shuffleDeck();
         }

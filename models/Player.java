@@ -8,6 +8,7 @@ public class Player implements Movable{
     private String sleepTime;
     private int zzzs;
     private int winks;
+    private boolean crossedTheFence;
     public Player(String name, String sheepColor, String sleepTime){
         this.name = name;
         this.sheep = new Sheep(sheepColor);
@@ -15,6 +16,7 @@ public class Player implements Movable{
         hand = new Card[2];
         zzzs = 10;
         winks = 0;
+        crossedTheFence = false;
     }
     public String getName() {
         return name;
@@ -69,6 +71,16 @@ public class Player implements Movable{
         Arrays.fill(hand, null); 
     }
 
+    public void resetFence(){
+        crossedTheFence = false;
+    }
+    public boolean hasCrossedFence(){
+        return crossedTheFence;
+    }
+    @Override
+    public void crossFence() {
+        crossedTheFence = true;
+    }
     @Override
     public void becomeScared(){
         sheep.scare();

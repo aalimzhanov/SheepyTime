@@ -19,4 +19,8 @@ public class MoveSpacesCard implements Card {
         return "Move "+spaces+" spaces";
     }
 
+    @Override
+    public boolean isNightmare() {
+        return false;
+    }
 }

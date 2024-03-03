@@ -20,4 +20,9 @@ public class CatchZzzCard implements Card {
         // Figure out the logic for tile placement
         player.catchZZZs(zzzs); 
     }
+    
+    @Override
+    public boolean isNightmare() {
+        return false;
+    }
 }
