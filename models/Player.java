@@ -42,6 +42,9 @@ public class Player implements Movable{
             throw new IllegalStateException("Hand is full");
         }
     }
+    public void resetWinks(){
+        winks = 0;
+    }
 
     public Card playCard(int index){
         Card playerCard = hand[index];

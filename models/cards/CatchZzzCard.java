@@ -1,4 +1,10 @@
-package models;
+package models.cards;
+
+import models.Card;
+import models.GameBoard;
+import models.Player;
+import views.UserInput;
+
 public class CatchZzzCard implements Card {
     private int zzzs;
 
@@ -16,11 +22,11 @@ public class CatchZzzCard implements Card {
     }
 
     @Override
-    public void executeAction(Player player, GameBoard gameBoard) {
+    public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
         // Figure out the logic for tile placement
         player.catchZZZs(zzzs); 
     }
-    
+
     @Override
     public boolean isNightmare() {
         return false;

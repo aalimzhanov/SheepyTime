@@ -103,4 +103,29 @@ public class UserInput {
 
         return input; 
     }
+    public int getNightmareSelection() {
+        System.out.println("Select a nightmare:");
+        System.out.println("1. Wolf");
+        System.out.println("2. Bump in the Night");
+        System.out.println("3. Spider");
+        System.out.print("Enter your choice (1-3): ");
+
+        int selection = 0;
+        boolean validSelection = false;
+        
+        while (!validSelection) {
+            if (scanner.hasNextInt()) {
+                selection = scanner.nextInt();
+                validSelection = selection >= 1 && selection <= 3;
+            } else {
+                scanner.next(); // Consume non-integer input
+            }
+            if (!validSelection) {
+                System.out.println("Invalid choice. Please select a number between 1 and 3:");
+            }
+        }
+        scanner.nextLine(); // Consume newline
+
+        return selection;
+    }
 }

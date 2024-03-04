@@ -4,7 +4,10 @@ import views.UserInput;
 import views.GameView;
 import java.util.List;
 
-import models.ScoreBoard;
+import factories.NightmareFactory;
+import factories.PlayerFactory;
+import models.Nightmare;
+
 
 public class GameController {
     private List<PlayerController> playerControllers;
@@ -16,10 +19,8 @@ public class GameController {
     private UserInput userInput;
     private GameView gameView;
 
-    public GameController(List<PlayerController> playerControllers, NightmareController nightmareController) {
-        this.playerControllers = playerControllers;
-        this.nightmareController = nightmareController;
-        initializeGame();
+    public GameController(int numOfPlayers) {
+        initializeGame(numOfPlayers);
     }
 
     public void startGame() {
@@ -28,14 +29,15 @@ public class GameController {
         concludeGame();
     }
 
-    private void initializeGame() {
+    private void initializeGame(int numOfPlayers) {
         // Add players and the nightmare to the game board
+        this.playerControllers = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
+        this.nightmareController = NightmareFactory.createNightmare(userInput);
         this.gameBoardController = new GameBoardController();
         this.deckController = new DeckController();
         this.userInput = new UserInput();
         this.gameView = new GameView();
-        List<String> playerNames = playerControllers.stream().map(pc -> pc.getPlayerName()).toList();
-        scoreBoardController = new ScoreBoardController(playerNames);
+        this.scoreBoardController = new ScoreBoardController(playerControllers);
         playerControllers.forEach(pc -> gameBoardController.addMovableToBoard(pc.getModel()));
         gameBoardController.addNightmareToBoard(nightmareController.getModel());
     }

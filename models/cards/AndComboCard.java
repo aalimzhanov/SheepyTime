@@ -1,4 +1,10 @@
-package models;
+package models.cards;
+
+import models.Card;
+import models.GameBoard;
+import models.Player;
+import views.UserInput;
+
 public class AndComboCard implements Card {
     private Card[] actions;
 
@@ -7,9 +13,9 @@ public class AndComboCard implements Card {
     }
 
     @Override
-    public void executeAction(Player player, GameBoard gameBoard) {
+    public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
         for (Card action : actions) {
-            action.executeAction(player, gameBoard);
+            action.executeAction(player, gameBoard, input);
         }
     }
 

@@ -6,37 +6,40 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Represents a deck of cards with functionalities to shuffle, draw, and play cards.
+ * Represents a deck of cards with functionalities to shuffle, draw, and play
+ * cards.
  * 
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
- * @version 
+ * @version
  */
-public class Deck
-{
+public class Deck {
     private Queue<Card> activeCards;
-    private List<Card> playedCards;
-    
+    private int playedCards;
+
     /**
      * Constructs a new Deck with empty active and played cards.
      */
     public Deck() {
         activeCards = new LinkedList<>();
-        playedCards = new LinkedList<>();
+        playedCards = 0;
     }
 
     /**
-     * Shuffles the played cards and transfers them to the active cards queue.
+     * Shuffles the cards.
      */
     public void shuffleDeck() {
-        Collections.shuffle(playedCards);
-        transferCards();
+        List<Card> cardList = new LinkedList<>(activeCards);
+        Collections.shuffle(cardList);
+        activeCards = new LinkedList<>(cardList);
+        playedCards = 0;
     }
 
     /**
      * Draws a card from the active cards queue. If the active cards queue is empty,
-     * shuffles the played cards and transfers them to the active cards queue before drawing.
+     * shuffles deck before drawing.
      *
-     * @return The drawn card from the active cards queue, or null if no cards are available.
+     * @return The drawn card from the active cards queue, or null if no cards are
+     *         available.
      */
     public Card drawCard() {
         if (isEmpty()) {
@@ -46,12 +49,12 @@ public class Deck
     }
 
     /**
-     * Adds a played card to the played cards list.
+     * Adds a new card.
      *
-     * @param playedCard The card to be added to the played cards list.
+     * @param card The card to be added to the played cards list.
      */
-    public void playACard(Card playedCard) {
-        playedCards.add(playedCard);
+    public void addCard(Card card) {
+        activeCards.offer(card);
     }
 
     /**
@@ -60,16 +63,7 @@ public class Deck
      * @return true if the active cards queue is empty, false otherwise.
      */
     private boolean isEmpty() {
-        return activeCards.isEmpty();
+        return activeCards.size() == playedCards;
     }
 
-    /**
-     * Transfers all cards from the played cards list to the active cards queue.
-     * This method is used internally to refill the active cards queue after shuffling.
-     */
-    private void transferCards() {
-        while (!playedCards.isEmpty()) {
-            activeCards.add(playedCards.remove(0));
-        }
-    }
 }
