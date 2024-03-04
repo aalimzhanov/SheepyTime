@@ -82,5 +82,21 @@ public class GameBoardController {
         gameBoard.resetPositions();
         updateView();
     }
+    public boolean isTilePlaced(int position){
+        return gameBoard.isTilePlaced(position);
+    }
+    public Tile getTile(int position){
+        return gameBoard.getTile(position);
+    }
+    public int getMovablePosition(Movable movable){
+        return gameBoard.getMovablePosition(movable);
+    }
+    public int getNumOfDreamTiles(){
+        return gameBoard.getNumOfDreamTiles();
+    }
+    
+    public void placeTopTile(Tile tile){
+        gameBoard.placeTopTile(tile);
+    }
 
 }

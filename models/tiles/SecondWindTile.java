@@ -3,6 +3,7 @@ package models.tiles;
 import models.GameBoard;
 import models.Player;
 import models.Tile;
+import views.UserInput;
 
 public class SecondWindTile extends Tile {
 
@@ -11,12 +12,16 @@ public class SecondWindTile extends Tile {
     }
 
     @Override
-    public void activateEffect(Player player, GameBoard board) {
-        // Discard the player's hand. Assuming there's a method in Player to handle this.
-        // player.discardHand();   // How do we discard the hand?
-        
-        if (player.isScared()) {
-            player.becomeBrave();
+    public void activateEffect(Player player, GameBoard board, UserInput userInput) {
+        if (playerInfiniteZZZs > 0 || playerZZZs > 0) {
+            player.discardHand();
+            if (player.isScared()) {
+                player.becomeBrave();
+            }
+            if (playerInfiniteZZZs == 0) {
+                playerZZZs--;
+            }
         }
+        
     }
 }

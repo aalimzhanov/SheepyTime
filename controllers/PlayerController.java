@@ -1,7 +1,11 @@
 package controllers;
 
 import models.Player;
+import models.RacingPhaseLogic;
+import models.RestingPhaseLogic;
 import models.Sheep;
+import models.Tile;
+import models.TileDeck;
 import models.Card;
 import views.PlayerView;
 import views.UserInput;
@@ -44,45 +48,27 @@ public class PlayerController {
         return card;
     }
 
-    public void catchZZZs(int amount) {
-        model.catchZZZs(amount);
+    public int catchZZZs(int amount) {
+        int zzzs = model.catchZZZs(amount);
         updateView();
+        return zzzs;
     }
 
-    public void takeTurn(GameBoardController gameBoardController, DeckController deckController,
+    public void takeTurn(GameBoardController gameBoardController, DeckController deckController, TileDeck tileDeck,
             boolean isRacingPhase) {
         if (isRacingPhase) {
             // Need to modify this for multiplayer
-            Card topCard = deckController.drawCard();
-            // Find a way to determine if that is a Nightmare card
-            if (topCard.isNightmare()) {
-                topCard.executeAction(model, gameBoardController.getModel(), userInput);
-            }
-
-            int cardIndex = userInput.getCardSelection();
-            Card playedCard = model.playCard(cardIndex);
-            playedCard.executeAction(model, gameBoardController.getModel(), userInput);
-            checkFence(gameBoardController);
-            // Draw a new card
-            Card newCard = deckController.drawCard();
-            while (newCard.isNightmare()) {
-                newCard.executeAction(model, gameBoardController.getModel(), userInput);
-                newCard = deckController.drawCard();
-            }
-            model.gainCard(newCard);
+            RacingPhaseLogic racingPhaseLogic = new RacingPhaseLogic();
+            racingPhaseLogic.playRacingMove(model, gameBoardController, deckController, userInput);
+            view.updateView(model);
+        }else{
+            RestingPhaseLogic restingPhaseLogic = new RestingPhaseLogic();
+            restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, model);
             view.updateView(model);
         }
     }
 
-    public void checkFence(GameBoardController gameBoardController) {
-        if (model.hasCrossedFence()) {
-            boolean callItANight = userInput.getCallItANightDecision();
-            if (callItANight) {
-                gameBoardController.callItANight(model);
-            }
-            model.resetFence();
-        }
-    }
+    
 
     public Player getModel() {
         return model;

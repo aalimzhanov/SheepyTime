@@ -3,7 +3,7 @@ package models.tiles;
 import models.GameBoard;
 import models.Player;
 import models.Tile;
-
+import views.UserInput;
 
 public class IntenseDreamsTile extends Tile {
 
@@ -12,8 +12,14 @@ public class IntenseDreamsTile extends Tile {
     }
 
     @Override
-    public void activateEffect(Player player, GameBoard board) {
-        player.becomeScared();
-        player.gainWinks(4);
+    public void activateEffect(Player player, GameBoard board, UserInput userInput) {
+
+        if (playerInfiniteZZZs > 0 || playerZZZs > 0) {
+            player.becomeScared();
+            player.gainWinks(4);
+            if (playerInfiniteZZZs == 0) {
+                playerZZZs--;
+            }
+        }
     }
 }

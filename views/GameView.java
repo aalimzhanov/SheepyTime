@@ -18,6 +18,11 @@ public class GameView {
         System.out.println("Thank you for playing. The game has now ended.");
     }
 
-    // Any one action performed can be printed through this class, and then display updated version of other classes
-
+    public void showPlayerTurn(String name, boolean isRacingPhase) {
+        if (isRacingPhase) {
+            System.out.println("It's " + name + "'s turn in the racing phase. Choose your action wisely.");
+        } else {
+            System.out.println("It's " + name + "'s turn in the resting phase. Choose your action wisely.");
+        }
+    }
 }

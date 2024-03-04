@@ -46,7 +46,9 @@ public class Deck {
             shuffleDeck();
         }
         playedCards++;
-        return activeCards.poll();
+        Card card = activeCards.poll();
+        activeCards.offer(card);
+        return card;
     }
 
     /**

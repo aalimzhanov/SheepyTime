@@ -132,4 +132,30 @@ public class GameBoard {
         });
         nightmarePos = NIGHTMARE_DEFAULT_POSITION;
     }
+    public boolean isTilePlaced(int position){
+        return tiles[position - 1] != null;
+    }
+    public Tile getTile(int position){
+        return tiles[position - 1];
+    }
+    public int getMovablePosition(Movable movable){
+        return gameBoard.get(movable);
+    }
+    public int getNumOfDreamTiles(){
+        int count = 0;
+        for(Tile tile : tiles){
+            if(tile != null){
+                count++;
+            }
+        }
+        return count;
+    }
+    public void placeTopTile(Tile tile){
+        for(int i = 0; i < tiles.length; i++){
+            if(tiles[i] == null){
+                tiles[i] = tile;
+                return;
+            }
+        }
+    }
 }

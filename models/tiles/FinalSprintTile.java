@@ -1,8 +1,10 @@
 package models.tiles;
 
+import models.Card;
 import models.GameBoard;
 import models.Player;
 import models.Tile;
+import views.UserInput;
 
 public class FinalSprintTile extends Tile {
 
@@ -11,9 +13,15 @@ public class FinalSprintTile extends Tile {
     }
 
     @Override
-    public void activateEffect(Player player, GameBoard board) {
+    public void activateEffect(Player player, GameBoard board, UserInput userInput) {
         if (player.isScared()) {
-            board.moveMovable(player, 7);
+            if (playerInfiniteZZZs > 0 || playerZZZs > 0) {
+                board.moveMovable(player, 7);
+                if (playerInfiniteZZZs == 0) {
+                    playerZZZs--;
+                }
+            }
+            
         }
     }
 }

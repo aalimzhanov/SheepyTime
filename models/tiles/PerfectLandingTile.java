@@ -3,6 +3,7 @@ package models.tiles;
 import models.GameBoard;
 import models.Player;
 import models.Tile;
+import views.UserInput;
 
 
 public class PerfectLandingTile extends Tile {
@@ -12,10 +13,16 @@ public class PerfectLandingTile extends Tile {
     }
 
     @Override
-    public void activateEffect(Player player, GameBoard board) {
-        // if (player.hasCrossedFenceThisTurn()) {  
-        //     int currentSpace = player.getCurrentSpace(); 
-        //     player.gainWinks(currentSpace);  
-        // }
+    public void activateEffect(Player player, GameBoard board, UserInput userInput) {
+        if (player.hasCrossedFenceThisTurn()) {
+            if (playerInfiniteZZZs > 0 || playerZZZs > 0) {
+                int currentSpace = board.getMovablePosition(player); 
+                player.gainWinks(currentSpace);
+                if (playerInfiniteZZZs == 0) {
+                    playerZZZs--;
+                }
+            }    
+        }
+        
     }
 }

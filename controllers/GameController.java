@@ -2,24 +2,24 @@ package controllers;
 
 import views.UserInput;
 import views.GameView;
-import java.util.ArrayList;
 import java.util.List;
 
 import factories.DeckFactory;
 import factories.NightmareFactory;
 import factories.PlayerFactory;
-import models.Nightmare;
+import factories.TileDeckFactory;
+import models.TileDeck;
 
 
 public class GameController {
     private List<PlayerController> playerControllers;
     private GameBoardController gameBoardController;
     private NightmareController nightmareController;
-    private Coordinator coordinator;
     private DeckController deckController;
     private ScoreBoardController scoreBoardController;
     private UserInput userInput;
     private GameView gameView;
+    private TileDeck tileDeck;
 
     public GameController(int numOfPlayers) {
         initializeGame(numOfPlayers);
@@ -32,13 +32,14 @@ public class GameController {
     }
 
     private void initializeGame(int numOfPlayers) {
-        this.userInput = new UserInput();
-        this.gameView = new GameView();
-        this.playerControllers = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
-        this.nightmareController = NightmareFactory.createNightmare(userInput);
-        this.gameBoardController = new GameBoardController();
-        this.deckController = DeckFactory.createDeck();
-        this.scoreBoardController = new ScoreBoardController(playerControllers);
+        userInput = new UserInput();
+        gameView = new GameView();
+        playerControllers = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
+        nightmareController = NightmareFactory.createNightmare(userInput);
+        gameBoardController = new GameBoardController();
+        deckController = DeckFactory.createDeck();
+        scoreBoardController = new ScoreBoardController(playerControllers);
+        tileDeck = TileDeckFactory.createTiles();
         
         for (PlayerController playerController : playerControllers) {
             gameBoardController.addMovableToBoard(playerController.getModel());
@@ -52,7 +53,7 @@ public class GameController {
         while (!gameEnded) {
             for (PlayerController playerController : playerControllers) {
                 gameView.showPlayerTurn(playerController.getPlayerName());
-                playerController.takeTurn(gameBoardController, deckController, true);
+                playerController.takeTurn(gameBoardController, deckController, tileDeck, true);
                 gameEnded = checkWinConditions();
                 if (gameEnded) {
                     break;
