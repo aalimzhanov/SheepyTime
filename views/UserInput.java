@@ -127,4 +127,55 @@ public class UserInput {
 
         return selection;
     }
+
+    public boolean getActivateTileDecision(String tileInformation) {
+        System.out.println("You landed on the following tile: " + tileInformation);
+        System.out.println("Do you want to activate this tile? (yes/no): ");
+        String input = scanner.nextLine().trim().toLowerCase();
+
+        while (!input.equals("yes") && !input.equals("no")) {
+            System.out.println("Invalid input. Please enter 'yes' or 'no': ");
+            input = scanner.nextLine().trim().toLowerCase();
+        }
+
+        return input.equals("yes");
+    }
+
+    public boolean getRestingMoveDecision() {
+        System.out.println("Do you want to place a new tile or catch zzzs? (1/2): ");
+        String input = scanner.nextLine().trim().toLowerCase();
+
+        while (!input.equals("1") && !input.equals("2")) {
+            System.out.println("Invalid input. Please enter '1' or '2': ");
+            input = scanner.nextLine().trim().toLowerCase();
+        }
+
+        return input.equals("1");
+    }
+
+    public int getTileSelection() {
+        System.out.println("Enter the index of the tile you want to place: ");
+        int input = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+        return input;
+    }
+
+    public boolean getCatchZzzsDecision() {
+        System.out.println("Do you want to catch ZZZs onto only one tile? (yes/no): ");
+        String input = scanner.nextLine().trim().toLowerCase();
+
+        while (!input.equals("yes") && !input.equals("no")) {
+            System.out.println("Invalid input. Please enter 'yes' or 'no': ");
+            input = scanner.nextLine().trim().toLowerCase();
+        }
+
+        return input.equals("yes");
+    }
+
+    public int getCatchTileIndex() {
+        System.out.println("Enter the index of the tile you want to catch ZZZs onto: ");
+        int input = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+        return input;
+    }
 }

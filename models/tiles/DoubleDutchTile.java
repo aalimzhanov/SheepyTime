@@ -4,7 +4,7 @@ import models.Card;
 import models.GameBoard;
 import models.Player;
 import models.Tile;
-import models.cards.MoveSpacesCard;
+import views.UserInput;
 
 
 public class DoubleDutchTile extends Tile {
@@ -14,8 +14,13 @@ public class DoubleDutchTile extends Tile {
     }
 
     @Override
-    public void activateEffect(Player player, GameBoard board) {
-        Card otherCard = player.getOtherCardToPlay();
-        otherCard.executeAction(player, board, userInput);
+    public void activateEffect(Player player, GameBoard board, UserInput userInput) {
+       if (playerInfiniteZZZs > 0 || playerZZZs > 0) {
+            Card otherCard = player.getOtherCardToPlay();
+            otherCard.executeAction(player, board, userInput);
+            if (playerInfiniteZZZs == 0) {
+                playerZZZs--;
+            }
+        }
     }
 }

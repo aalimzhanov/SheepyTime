@@ -9,6 +9,7 @@ public class Player implements Movable {
     private String sleepTime;
     private int zzzs;
     private int winks;
+    private int pillowPosition;
     private boolean crossedTheFence;
 
     public Player(String name, String sheepColor, String sleepTime) {
@@ -18,6 +19,7 @@ public class Player implements Movable {
         hand = new Card[2];
         zzzs = 10;
         winks = 0;
+        pillowPosition = 40;
         crossedTheFence = false;
     }
 
@@ -61,13 +63,6 @@ public class Player implements Movable {
         return playerCard;
     }
 
-    public void catchZZZs(int amount) {
-        if (amount > zzzs) {
-            throw new IllegalStateException("Not enough zzzs");
-        }
-        zzzs -= amount;
-    }
-
     public boolean isScared() {
         return sheep.isScared();
     }
@@ -94,6 +89,31 @@ public class Player implements Movable {
 
     public boolean hasCrossedFence() {
         return crossedTheFence;
+    }
+    public Card getOtherCardToPlay() {
+        if (hand[0] != null) {
+            return hand[0];
+        } else {
+            return hand[1];
+        }
+    }
+    public void movePillow(int amount) {
+        pillowPosition += amount;
+    }
+    public int getPillowPosition() {
+        return pillowPosition;
+    }
+    public void resetPillowPosition() {
+        pillowPosition = 40;
+    }
+    public int catchZZZs(int amount){
+        if(amount > zzzs){
+            int temp = zzzs;
+            zzzs = 0;
+            return temp;
+        }
+        zzzs -= amount;
+        return amount;
     }
 
     @Override
