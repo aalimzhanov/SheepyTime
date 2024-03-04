@@ -1,4 +1,10 @@
-package models;
+package models.cards;
+
+import models.Card;
+import models.GameBoard;
+import models.Player;
+import views.UserInput;
+
 public class MoveSpacesCard implements Card {
     private int spaces;
 
@@ -7,7 +13,7 @@ public class MoveSpacesCard implements Card {
     }
 
     @Override
-    public void executeAction(Player player, GameBoard gameBoard) {
+    public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
         gameBoard.moveMovable(player, spaces);
     }
 

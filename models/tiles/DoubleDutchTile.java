@@ -2,9 +2,9 @@ package models.tiles;
 
 import models.Card;
 import models.GameBoard;
-import models.MoveSpacesCard;
 import models.Player;
 import models.Tile;
+import models.cards.MoveSpacesCard;
 
 
 public class DoubleDutchTile extends Tile {
