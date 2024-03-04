@@ -1,9 +1,5 @@
 package views;
 
-/**
- * Responsible for User Input
- */
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +19,7 @@ public class UserInput {
     public String getSheepColor() {
         System.out.println("Enter sheep color (yellow/pink/purple/blue): ");
         String input = scanner.nextLine().trim().toLowerCase();
-        if (input.equals("yellow") || input.equals("pink") || input.equals("purple") || input.equals("blue")) {
+        if (input.matches("yellow|pink|purple|blue")) {
             return input;
         } else {
             System.out.println("Invalid input. Please enter 'yellow', 'pink', 'purple' or 'blue'.");
@@ -87,6 +83,7 @@ public class UserInput {
         }
         return input.equals("yes");
     }
+
     public String getSleepTime() {
         System.out.println("Enter the time you went to bed last night in 24-hour format (HH:mm):");
         String input = scanner.nextLine().trim();
@@ -96,13 +93,15 @@ public class UserInput {
         Matcher matcher = pattern.matcher(input);
 
         while (!matcher.matches()) {
-            System.out.println("Invalid time format. Please enter time in 24-hour format (HH:mm), e.g., '23:45' or '01:20':");
+            System.out.println(
+                    "Invalid time format. Please enter time in 24-hour format (HH:mm), e.g., '23:45' or '01:20':");
             input = scanner.nextLine().trim();
             matcher = pattern.matcher(input);
         }
 
-        return input; 
+        return input;
     }
+
     public int getNightmareSelection() {
         System.out.println("Select a nightmare:");
         System.out.println("1. Wolf");
@@ -112,7 +111,7 @@ public class UserInput {
 
         int selection = 0;
         boolean validSelection = false;
-        
+
         while (!validSelection) {
             if (scanner.hasNextInt()) {
                 selection = scanner.nextInt();

@@ -2,8 +2,10 @@ package controllers;
 
 import views.UserInput;
 import views.GameView;
+import java.util.ArrayList;
 import java.util.List;
 
+import factories.DeckFactory;
 import factories.NightmareFactory;
 import factories.PlayerFactory;
 import models.Nightmare;
@@ -30,15 +32,18 @@ public class GameController {
     }
 
     private void initializeGame(int numOfPlayers) {
-        // Add players and the nightmare to the game board
+        this.userInput = new UserInput();
+        this.gameView = new GameView();
         this.playerControllers = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
         this.nightmareController = NightmareFactory.createNightmare(userInput);
         this.gameBoardController = new GameBoardController();
-        this.deckController = new DeckController();
-        this.userInput = new UserInput();
-        this.gameView = new GameView();
+        this.deckController = DeckFactory.createDeck();
         this.scoreBoardController = new ScoreBoardController(playerControllers);
-        playerControllers.forEach(pc -> gameBoardController.addMovableToBoard(pc.getModel()));
+        
+        for (PlayerController playerController : playerControllers) {
+            gameBoardController.addMovableToBoard(playerController.getModel());
+        }
+        
         gameBoardController.addNightmareToBoard(nightmareController.getModel());
     }
 
@@ -47,19 +52,17 @@ public class GameController {
         while (!gameEnded) {
             for (PlayerController playerController : playerControllers) {
                 gameView.showPlayerTurn(playerController.getPlayerName());
-
-                // figure out phases
                 playerController.takeTurn(gameBoardController, deckController, true);
                 gameEnded = checkWinConditions();
-                if (gameEnded)
+                if (gameEnded) {
                     break;
+                }
             }
         }
     }
 
     private boolean checkWinConditions() {
         return scoreBoardController.isGameOver();
-
     }
 
     private void concludeGame() {

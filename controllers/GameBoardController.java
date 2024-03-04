@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.List;
-
 import models.GameBoard;
 import models.Movable;
 import models.Nightmare;

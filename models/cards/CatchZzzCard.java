@@ -12,19 +12,16 @@ public class CatchZzzCard implements Card {
         this.zzzs = zzzs;
     }
 
-
     @Override
     public String getInformation() {
-        if(zzzs == 1){
-            return "Catch 1 zzz";
-        }
-        return "Catch "+zzzs+" zzzs";
+        return "Catch " + zzzs + (zzzs == 1 ? " zzz" : " zzzs");
     }
 
     @Override
     public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
-        // Figure out the logic for tile placement
-        player.catchZZZs(zzzs); 
+        // Figure out tile Logic for this
+        // Should be in the player or the gameBoard?
+        player.catchZZZs(zzzs);
     }
 
     @Override

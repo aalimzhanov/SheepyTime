@@ -42,8 +42,7 @@ public class TurnManager {
 
     // Optional: Resets the game to its initial state
     public void resetGame() {
-        currentPlayerIndex = -1; // Reset the current player index
-        // Optionally clear players if needed: players.clear();
+        determineFirstTurn();
     }
 
     public void determineFirstTurn(){

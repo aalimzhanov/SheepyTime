@@ -17,8 +17,7 @@ public class RushAheadTile extends Tile {
     public void activateEffect(Player player, GameBoard board) {
         player.gainWinks(1);
         
-        // Card topCard = board.getDeck().drawTopCard(); // How do we draw the card?
-        Card topCard = new MoveSpacesCard(1);   // Temporary card for testing
-        topCard.executeAction(player, board);
+        Card topCard = board.getDeck().drawTopCard();
+        topCard.executeAction(player, board, userInput);
     }
 }

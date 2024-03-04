@@ -15,8 +15,7 @@ public class DoubleDutchTile extends Tile {
 
     @Override
     public void activateEffect(Player player, GameBoard board) {
-        // Card otherCard = player.getOtherCardToPlay();
-        Card otherCard = new MoveSpacesCard(2);   // Temporary card for testing
-        otherCard.executeAction(player, board);
+        Card otherCard = player.getOtherCardToPlay();
+        otherCard.executeAction(player, board, userInput);
     }
 }

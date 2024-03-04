@@ -12,49 +12,42 @@ import models.cards.OrComboCard;
 public class DeckFactory {
     public static DeckController createDeck() {
         Deck deck = new Deck();
-
+        
         // Add all SheepyCards to the deck
         for (int i = 0; i < 2; i++) {
-            Card card1 = new MoveSpacesCard(1);
-            Card card2 = new MoveSpacesCard(5);
-            deck.addCard(new OrComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createOrComboCard(new MoveSpacesCard(1), new MoveSpacesCard(5)));
         }
+        
         for (int i = 0; i < 7; i++) {
-            Card card1 = new MoveSpacesCard(4);
-            Card card2 = new CatchZzzCard(1);
-            deck.addCard(new OrComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createOrComboCard(new MoveSpacesCard(4), new CatchZzzCard(1)));
         }
+        
         for (int i = 0; i < 2; i++) {
-            Card card1 = new MoveSpacesCard(1);
-            Card card2 = new CatchZzzCard(1);
-            deck.addCard(new AndComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createAndComboCard(new MoveSpacesCard(1), new CatchZzzCard(1)));
         }
+        
         for (int i = 0; i < 2; i++) {
             Card card1 = new MoveSpacesCard(1);
             Card card2 = new MoveSpacesCard(2);
-            Card card3 = new OrComboCard(new Card[] { card1, card2 });
+            Card card3 = createOrComboCard(card1, card2);
             Card card4 = new CatchZzzCard(1);
-            deck.addCard(new AndComboCard(new Card[] { card3, card4 }));
+            deck.addCard(createAndComboCard(card3, card4));
         }
+        
         for (int i = 0; i < 2; i++) {
-            Card card1 = new MoveSpacesCard(5);
-            Card card2 = new GainWinksCard(2);
-            deck.addCard(new OrComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createOrComboCard(new MoveSpacesCard(5), new GainWinksCard(2)));
         }
+        
         for (int i = 0; i < 3; i++) {
-            Card card1 = new MoveSpacesCard(2);
-            Card card2 = new CatchZzzCard(2);
-            deck.addCard(new OrComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createOrComboCard(new MoveSpacesCard(2), new CatchZzzCard(2)));
         }
+        
         for (int i = 0; i < 3; i++) {
-            Card card1 = new MoveSpacesCard(6);
-            Card card2 = new GainWinksCard(3);
-            deck.addCard(new OrComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createOrComboCard(new MoveSpacesCard(6), new GainWinksCard(3)));
         }
+        
         for (int i = 0; i < 7; i++) {
-            Card card1 = new MoveSpacesCard(3);
-            Card card2 = new CatchZzzCard(1);
-            deck.addCard(new OrComboCard(new Card[] { card1, card2 }));
+            deck.addCard(createOrComboCard(new MoveSpacesCard(3), new CatchZzzCard(1)));
         }
 
         for (int i = 0; i < 2; i++) {
@@ -63,5 +56,13 @@ public class DeckFactory {
 
         DeckController deckController = new DeckController(deck);
         return deckController;
+    }
+    
+    private static Card createOrComboCard(Card card1, Card card2) {
+        return new OrComboCard(new Card[] { card1, card2 });
+    }
+    
+    private static Card createAndComboCard(Card card1, Card card2) {
+        return new AndComboCard(new Card[] { card1, card2 });
     }
 }

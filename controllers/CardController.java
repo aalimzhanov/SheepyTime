@@ -4,14 +4,17 @@ import models.Card;
 import models.GameBoard;
 import models.Player;
 import views.CardView;
+import views.UserInput;
 
 public class CardController {
     private Card model;
     private CardView view;
+    private UserInput input;
 
-    public CardController(Card card, CardView view){
+    public CardController(Card card, CardView view, UserInput input){
         this.model = card;
         this.view = view;
+        this.input = input;
     }
 
     public void updateView(){
@@ -23,6 +26,6 @@ public class CardController {
      }
 
     public void executeCardAction(Player player, GameBoard gameBoard){
-        model.executeAction(player, gameBoard);
+        model.executeAction(player, gameBoard, input);
     }
 }
