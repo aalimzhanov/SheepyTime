@@ -56,17 +56,17 @@ public class PlayerController {
             Card topCard = deckController.drawCard();
             // Find a way to determine if that is a Nightmare card
             if (topCard.isNightmare()) {
-                topCard.executeAction(model, gameBoardController.getModel());
+                topCard.executeAction(model, gameBoardController.getModel(), userInput);
             }
 
             int cardIndex = userInput.getCardSelection();
             Card playedCard = model.playCard(cardIndex);
-            playedCard.executeAction(model, gameBoardController.getModel());
+            playedCard.executeAction(model, gameBoardController.getModel(), userInput);
             checkFence(gameBoardController);
             // Draw a new card
             Card newCard = deckController.drawCard();
             while (newCard.isNightmare()) {
-                newCard.executeAction(model, gameBoardController.getModel());
+                newCard.executeAction(model, gameBoardController.getModel(), userInput);
                 newCard = deckController.drawCard();
             }
             model.gainCard(newCard);
@@ -76,7 +76,7 @@ public class PlayerController {
 
     public void checkFence(GameBoardController gameBoardController) {
         if (model.hasCrossedFence()) {
-            boolean callItANight = userInput.getCallItANightDecision(); // Assuming this method exists
+            boolean callItANight = userInput.getCallItANightDecision();
             if (callItANight) {
                 gameBoardController.callItANight(model);
             }
@@ -84,9 +84,6 @@ public class PlayerController {
         }
     }
 
-    /**
-     * @return the model
-     */
     public Player getModel() {
         return model;
     }

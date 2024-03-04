@@ -45,6 +45,7 @@ public class Deck {
         if (isEmpty()) {
             shuffleDeck();
         }
+        playedCards++;
         return activeCards.poll();
     }
 
@@ -58,9 +59,9 @@ public class Deck {
     }
 
     /**
-     * Checks if the active cards queue is empty.
+     * Checks if all cards were played.
      *
-     * @return true if the active cards queue is empty, false otherwise.
+     * @return true if all cards were played, false otherwise.
      */
     private boolean isEmpty() {
         return activeCards.size() == playedCards;

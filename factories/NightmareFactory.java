@@ -26,8 +26,8 @@ public class NightmareFactory {
                 nightmare = new Wolf();
                 break;
         }
+
         NightmareView nightmareView = new NightmareView();
-        NightmareController nightmareController = new NightmareController(nightmare, nightmareView);
-        return nightmareController;
+        return new NightmareController(nightmare, nightmareView);
     }
 }
