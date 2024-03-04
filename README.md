@@ -15,5 +15,7 @@ A draft of Sheepy Time game
 
 ## Updates
 Moved the `take turn method` into the game logic class
+
 Modified `GameController` to call the game logic
+
 Got rid of `Coordinator` class.
