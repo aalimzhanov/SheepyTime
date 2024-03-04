@@ -8,6 +8,7 @@ import factories.DeckFactory;
 import factories.NightmareFactory;
 import factories.PlayerFactory;
 import factories.TileDeckFactory;
+import models.GameLogic;
 import models.TileDeck;
 
 
@@ -49,22 +50,9 @@ public class GameController {
     }
 
     private void playGame() {
-        boolean gameEnded = false;
-        while (!gameEnded) {
-            for (PlayerController playerController : playerControllers) {
-                gameView.showPlayerTurn(playerController.getPlayerName());
-                playerController.takeTurn(gameBoardController, deckController, tileDeck, true);
-                gameEnded = checkWinConditions();
-                if (gameEnded) {
-                    break;
-                }
-            }
-        }
+       GameLogic.playGame(playerControllers, gameBoardController, deckController, scoreBoardController, gameView, tileDeck, userInput);
     }
 
-    private boolean checkWinConditions() {
-        return scoreBoardController.isGameOver();
-    }
 
     private void concludeGame() {
         gameView.showGameOver();
