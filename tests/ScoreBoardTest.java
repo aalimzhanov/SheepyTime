@@ -32,7 +32,6 @@ public class ScoreBoardTest {
         assertEquals(winks, scoreBoard.getWinks(player), "The number of winks should match the value set");
     }
 
-    
     // Testing adding the winks through the scoreboard
     @Test
     void testGainWinks() {
