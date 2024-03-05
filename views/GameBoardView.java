@@ -23,12 +23,12 @@ public class GameBoardView {
 
     private void displayMovables(GameBoard gameBoard) {
         gameBoard.getMovables().forEach((movable, position) -> {
-            System.out.println("Movable " + movable.getName() + " at position " + position);
+            System.out.println("Player " + movable.getName() + " is at position: " + position);
         });
     }
 
     private void displayNightmarePosition(GameBoard gameBoard) {
-        System.out.println(gameBoard.getNightmare().getName()+" is at position: " + gameBoard.getNightmarePos());
+        System.out.println(gameBoard.getNightmare().getName() + " is at position: " + gameBoard.getNightmarePos());
     }
 
     public void showError(String message) {

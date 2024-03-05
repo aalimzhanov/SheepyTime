@@ -14,7 +14,7 @@ public class PlayerFactory{
         for (int i = 0; i < numOfPlayers; i++){
             Player newPlayer = new Player(userInput.getPlayerName(), userInput.getSheepColor(), userInput.getSleepTime());
             PlayerView newView = new PlayerView();
-            PlayerController controller = new PlayerController(newPlayer, newView, userInput);
+            PlayerController controller = new PlayerController(newPlayer, newView);
             playerControllers.add(controller);
         }
         return playerControllers;
