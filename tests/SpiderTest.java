@@ -1,7 +1,10 @@
-package models;
+package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import models.Spider;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpiderTest {

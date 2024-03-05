@@ -1,7 +1,10 @@
-package models;
+package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import models.Sheep;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SheepTest {
@@ -9,12 +12,12 @@ class SheepTest {
 
     @BeforeEach
     void setUp() {
-        sheep = new Sheep("White");
+        sheep = new Sheep("yellow");
     }
 
     @Test
     void testInitialConditions() {
-        assertEquals("White", sheep.getColor(), "Sheep color should be initialized to 'White'");
+        assertEquals("yellow", sheep.getColor(), "Sheep color should be initialized to 'White'");
         assertFalse(sheep.isScared(), "Sheep should not be scared initially");
     }
 
