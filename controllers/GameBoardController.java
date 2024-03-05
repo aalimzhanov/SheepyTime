@@ -11,9 +11,9 @@ public class GameBoardController {
     private GameBoard gameBoard;
     private GameBoardView gameBoardView;
 
-    public GameBoardController(GameBoard gameBoard, GameBoardView gameBoardView){
-        this.gameBoard = gameBoard; 
-        this.gameBoardView = gameBoardView;
+    public GameBoardController(){
+        this.gameBoard = new GameBoard();
+        this.gameBoardView = new GameBoardView();
     }
     
     public GameBoard getModel(){

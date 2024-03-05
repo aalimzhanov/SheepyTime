@@ -5,15 +5,15 @@ import factories.*;
 import views.UserInput;
 public class Main {
     public static void main(String[] args) {
+        Coordinator coordinator = new Coordinator();
         UserInput userInput = new UserInput();
-        int numOfPlayers = userInput.getNumOfPlayers();
-        GameController gameController = new GameController(numOfPlayers);
-        gameController.startGame();
-        initializePlayers(userInput, numOfPlayers);
+        initializePlayers(coordinator, userInput);
     }
     
-    private static void initializePlayers(UserInput userInput, int numOfPlayers) {
+    private static void initializePlayers(Coordinator coordinator, UserInput userInput) {
+        int numOfPlayers = userInput.getNumOfPlayers();
         List<PlayerController> players = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
+        coordinator.addPlayerControllers(players);
     }
     
 }
