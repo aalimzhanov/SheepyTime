@@ -8,14 +8,9 @@ A draft of Sheepy Time game
 
 `Nightmare cards`, `Tilemarket`, `Views`
 
-## Updates
+Populate player's hand at the start of the game <!-- Resolved-->
 
-Moved the `take turn method` into the game logic class
-
-Modified `GameController` to call the game logic
-
-Got rid of `Coordinator` class.
-
-Added `GameBoardFactory` and `ScoreBoardFactory`
-
-Fixed some views by running a test run of the game. Noticed some views contained duplicate messages. Some were also being printed twice.
+Add information for all 3 Nightmares(info available on discord, in the infinite-loop-lunatics chat)
+After adding Tile logic, modify cards that catch zzzs, and any methods that catch zzzs to do so properly.
+Displayed the scaredness for player.
+Update all Viewers to display the appropriate info(i.e. display the nightmareCard when it needs to be resolved, or display play getting scared)

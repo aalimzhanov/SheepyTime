@@ -116,6 +116,10 @@ public class Player implements Movable {
         return amount;
     }
 
+    public boolean needsACard() {
+        return hand[0] == null || hand[1] == null;
+    }
+
     @Override
     public void crossFence() {
         crossedTheFence = true;

@@ -45,11 +45,8 @@ public class GameBoardController {
     }
 
     public void moveMovable(Movable movable, int amount) {
-        boolean crossedFence = gameBoard.moveMovable(movable, amount);
+        gameBoard.moveMovable(movable, amount);
         updateView();
-        if (crossedFence) {
-            movable.crossFence();
-        }
     }
 
     public void callItANight(Movable movable) {
@@ -103,6 +100,9 @@ public class GameBoardController {
 
     public void placeTopTile(Tile tile) {
         gameBoard.placeTopTile(tile);
+    }
+    public boolean isTurnOver(){
+        return gameBoard.isTurnOver();
     }
 
 }

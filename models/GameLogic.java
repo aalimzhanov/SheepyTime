@@ -14,16 +14,21 @@ public class GameLogic {
             DeckController deckController,
             ScoreBoardController scoreBoardController, GameView gameView, TileDeck tileDeck, UserInput userInput) {
         boolean gameEnded = false;
+        
         while (!gameEnded) {
-            for (PlayerController playerController : playerControllers) {
-                // Add a boolean to show if it is the racing phase
-                gameView.showPlayerTurn(playerController.getPlayerName(), true);
-                takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, true);
-                gameEnded = checkWinConditions(scoreBoardController);
-                if (gameEnded) {
-                    break;
+            // Racing phase until everyone either woke up or called it a night
+            while(!gameBoardController.isTurnOver()){
+                for (PlayerController playerController : playerControllers) {
+                    // Add a boolean to show if it is the racing phase
+                    gameView.showPlayerTurn(playerController.getPlayerName(), true);
+                    takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, true);
+                    gameEnded = checkWinConditions(scoreBoardController);
+                    if (gameEnded) {
+                        break;
+                    }
                 }
             }
+            // One turn per player for the resting phase
             for (PlayerController playerController : playerControllers) {
                 gameView.showPlayerTurn(playerController.getPlayerName(), false);
                 takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, false);
@@ -45,12 +50,12 @@ public class GameLogic {
         if (isRacingPhase) {
             // Need to modify this for multiplayer
             RacingPhaseLogic racingPhaseLogic = new RacingPhaseLogic();
-            racingPhaseLogic.playRacingMove(playerController.getModel(), gameBoardController, deckController,
+            racingPhaseLogic.playRacingMove(playerController, gameBoardController, deckController,
                     userInput);
             playerController.updateView();
         } else {
             RestingPhaseLogic restingPhaseLogic = new RestingPhaseLogic();
-            restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, playerController.getModel());
+            restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, playerController);
             playerController.updateView();
         }
     }

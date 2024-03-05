@@ -23,8 +23,8 @@ public class GameController {
     private GameView gameView;
     private TileDeck tileDeck;
 
-    public GameController(int numOfPlayers) {
-        initializeGame(numOfPlayers);
+    public GameController(int numOfPlayers, UserInput userInput) {
+        initializeGame(numOfPlayers, userInput);
     }
 
     public void startGame() {
@@ -33,13 +33,13 @@ public class GameController {
         concludeGame();
     }
 
-    private void initializeGame(int numOfPlayers) {
-        userInput = new UserInput();
+    private void initializeGame(int numOfPlayers, UserInput userInput) {
+        this.userInput = userInput;
         gameView = new GameView();
         playerControllers = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
-        nightmareController = NightmareFactory.createNightmare(userInput);
         gameBoardController = GameBoardFactory.initializeGameBoard();
         deckController = DeckFactory.createDeck();
+        nightmareController = NightmareFactory.createNightmare(userInput, deckController);
         scoreBoardController = ScoreBoardFactory.initializeScoreBoard(playerControllers);
         tileDeck = TileDeckFactory.createTiles();
 
