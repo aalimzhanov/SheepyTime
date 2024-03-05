@@ -11,16 +11,16 @@ public class GameBoardController {
     private GameBoard gameBoard;
     private GameBoardView gameBoardView;
 
-    public GameBoardController(){
-        this.gameBoard = new GameBoard();
-        this.gameBoardView = new GameBoardView();
+    public GameBoardController(GameBoard gameBoard, GameBoardView gameBoardView) {
+        this.gameBoard = gameBoard;
+        this.gameBoardView = gameBoardView;
     }
-    
-    public GameBoard getModel(){
+
+    public GameBoard getModel() {
         return gameBoard;
     }
 
-    public void updateView(){
+    public void updateView() {
         gameBoardView.updateView(gameBoard);
     }
 
@@ -29,7 +29,7 @@ public class GameBoardController {
             gameBoard.placeTile(position, tile);
             updateView();
         } catch (IllegalArgumentException e) {
-            gameBoardView.showError(e.getMessage()); 
+            gameBoardView.showError(e.getMessage());
         }
     }
 
@@ -37,19 +37,21 @@ public class GameBoardController {
         gameBoard.placeMovable(movable, 1);
         updateView();
     }
+
     // In case we need to put the movable to a certain location
     public void placeMovable(Movable movable, int position) {
         gameBoard.placeMovable(movable, position);
-        updateView(); 
+        updateView();
     }
 
     public void moveMovable(Movable movable, int amount) {
         boolean crossedFence = gameBoard.moveMovable(movable, amount);
         updateView();
-        if(crossedFence){
+        if (crossedFence) {
             movable.crossFence();
         }
     }
+
     public void callItANight(Movable movable) {
         gameBoard.callItANight(movable);
         updateView();
@@ -58,7 +60,7 @@ public class GameBoardController {
     public boolean moveNightmare(int amount) {
         boolean crossedFence = gameBoard.moveNightmare(amount);
         if (crossedFence) {
-            gameBoard.wakeEveryone();    
+            gameBoard.wakeEveryone();
         }
         updateView();
         return crossedFence;
@@ -67,7 +69,7 @@ public class GameBoardController {
     public boolean jumpNightmare(int amount) {
         boolean crossedFence = gameBoard.jumpNightmare(amount);
         if (crossedFence) {
-            gameBoard.wakeEveryone();    
+            gameBoard.wakeEveryone();
         }
         updateView();
         return crossedFence;
@@ -82,20 +84,24 @@ public class GameBoardController {
         gameBoard.resetPositions();
         updateView();
     }
-    public boolean isTilePlaced(int position){
+
+    public boolean isTilePlaced(int position) {
         return gameBoard.isTilePlaced(position);
     }
-    public Tile getTile(int position){
+
+    public Tile getTile(int position) {
         return gameBoard.getTile(position);
     }
-    public int getMovablePosition(Movable movable){
+
+    public int getMovablePosition(Movable movable) {
         return gameBoard.getMovablePosition(movable);
     }
-    public int getNumOfDreamTiles(){
+
+    public int getNumOfDreamTiles() {
         return gameBoard.getNumOfDreamTiles();
     }
-    
-    public void placeTopTile(Tile tile){
+
+    public void placeTopTile(Tile tile) {
         gameBoard.placeTopTile(tile);
     }
 
