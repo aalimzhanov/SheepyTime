@@ -1,10 +1,13 @@
-package models;
+package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import models.Wolf;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class WolfTest {
+public class WolfTest {
     
     private Wolf wolf;
 
@@ -27,4 +30,5 @@ class WolfTest {
     void testGetDifficulty() {
         assertEquals(1, wolf.getDifficulty(), "The difficulty level should correctly be 1");
     }
+    
 }
