@@ -5,12 +5,9 @@ import views.GameView;
 import java.util.List;
 
 import factories.DeckFactory;
-import factories.GameBoardFactory;
 import factories.NightmareFactory;
 import factories.PlayerFactory;
-import factories.ScoreBoardFactory;
 import factories.TileDeckFactory;
-import models.GameLogic;
 import models.TileDeck;
 
 
@@ -39,24 +36,35 @@ public class GameController {
         gameView = new GameView();
         playerControllers = PlayerFactory.intialisePlayers(userInput, numOfPlayers);
         nightmareController = NightmareFactory.createNightmare(userInput);
-        gameBoardController = GameBoardFactory.initializeGameBoard();
+        gameBoardController = new GameBoardController();
         deckController = DeckFactory.createDeck();
-        scoreBoardController = ScoreBoardFactory.initializeScoreBoard(playerControllers);
+        scoreBoardController = new ScoreBoardController(playerControllers);
         tileDeck = TileDeckFactory.createTiles();
-
-        gameBoardController.addNightmareToBoard(nightmareController.getModel());
         
         for (PlayerController playerController : playerControllers) {
             gameBoardController.addMovableToBoard(playerController.getModel());
         }
         
-        
+        gameBoardController.addNightmareToBoard(nightmareController.getModel());
     }
 
     private void playGame() {
-       GameLogic.playGame(playerControllers, gameBoardController, deckController, scoreBoardController, gameView, tileDeck, userInput);
+        boolean gameEnded = false;
+        while (!gameEnded) {
+            for (PlayerController playerController : playerControllers) {
+                gameView.showPlayerTurn(playerController.getPlayerName());
+                playerController.takeTurn(gameBoardController, deckController, tileDeck, true);
+                gameEnded = checkWinConditions();
+                if (gameEnded) {
+                    break;
+                }
+            }
+        }
     }
 
+    private boolean checkWinConditions() {
+        return scoreBoardController.isGameOver();
+    }
 
     private void concludeGame() {
         gameView.showGameOver();

@@ -52,8 +52,24 @@ public class PlayerController {
         int zzzs = model.catchZZZs(amount);
         updateView();
         return zzzs;
-    } 
+    }
+
+    public void takeTurn(GameBoardController gameBoardController, DeckController deckController, TileDeck tileDeck,
+            boolean isRacingPhase) {
+        if (isRacingPhase) {
+            // Need to modify this for multiplayer
+            RacingPhaseLogic racingPhaseLogic = new RacingPhaseLogic();
+            racingPhaseLogic.playRacingMove(model, gameBoardController, deckController, userInput);
+            view.updateView(model);
+        }else{
+            RestingPhaseLogic restingPhaseLogic = new RestingPhaseLogic();
+            restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, model);
+            view.updateView(model);
+        }
+    }
+
     
+
     public Player getModel() {
         return model;
     }
