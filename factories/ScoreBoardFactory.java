@@ -10,7 +10,7 @@ import models.ScoreBoard;
 import views.ScoreBoardView;
 
 public class ScoreBoardFactory {
-    public static ScoreBoardController initializScoreBoard(List<PlayerController> playerControllers){
+    public static ScoreBoardController initializeScoreBoard(List<PlayerController> playerControllers){
          List<Player> players = playerControllers.stream().map(PlayerController::getModel).collect(Collectors.toList());
         ScoreBoard scoreBoard = new ScoreBoard(players);
         ScoreBoardView scoreBoardView = new ScoreBoardView();

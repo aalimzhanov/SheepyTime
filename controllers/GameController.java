@@ -41,7 +41,7 @@ public class GameController {
         nightmareController = NightmareFactory.createNightmare(userInput);
         gameBoardController = GameBoardFactory.initializeGameBoard();
         deckController = DeckFactory.createDeck();
-        scoreBoardController = ScoreBoardFactory.initializScoreBoard(playerControllers);
+        scoreBoardController = ScoreBoardFactory.initializeScoreBoard(playerControllers);
         tileDeck = TileDeckFactory.createTiles();
 
         gameBoardController.addNightmareToBoard(nightmareController.getModel());
