@@ -1,8 +1,5 @@
 package controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import models.Player;
 import models.ScoreBoard;
 import views.ScoreBoardView;
@@ -11,10 +8,9 @@ public class ScoreBoardController {
     private ScoreBoard scoreBoard;
     private ScoreBoardView scoreBoardView;
 
-    public ScoreBoardController(List<PlayerController> playerControllers) {
-        List<Player> players = playerControllers.stream().map(PlayerController::getModel).collect(Collectors.toList());
-        this.scoreBoard = new ScoreBoard(players);
-        this.scoreBoardView = new ScoreBoardView();
+    public ScoreBoardController(ScoreBoard scoreBoard, ScoreBoardView scoreBoardView) {
+        this.scoreBoard = scoreBoard;
+        this.scoreBoardView = scoreBoardView;
     }
 
     // Update the pillow position for a player

@@ -1,6 +1,5 @@
 package models.tiles;
 
-import models.Card;
 import models.GameBoard;
 import models.Player;
 import models.Tile;

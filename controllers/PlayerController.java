@@ -4,7 +4,6 @@ import models.Player;
 import models.RacingPhaseLogic;
 import models.RestingPhaseLogic;
 import models.Sheep;
-import models.Tile;
 import models.TileDeck;
 import models.Card;
 import views.PlayerView;
@@ -53,22 +52,6 @@ public class PlayerController {
         updateView();
         return zzzs;
     }
-
-    public void takeTurn(GameBoardController gameBoardController, DeckController deckController, TileDeck tileDeck,
-            boolean isRacingPhase) {
-        if (isRacingPhase) {
-            // Need to modify this for multiplayer
-            RacingPhaseLogic racingPhaseLogic = new RacingPhaseLogic();
-            racingPhaseLogic.playRacingMove(model, gameBoardController, deckController, userInput);
-            view.updateView(model);
-        }else{
-            RestingPhaseLogic restingPhaseLogic = new RestingPhaseLogic();
-            restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, model);
-            view.updateView(model);
-        }
-    }
-
-    
 
     public Player getModel() {
         return model;
