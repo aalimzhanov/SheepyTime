@@ -6,7 +6,8 @@ public class Spider implements Nightmare{
     
     public Spider(){
         name = "Spider";
-        description = "Big scary spider";
+        description = "THIS WEB IS PRETTY RELAXING, KINDA LIKE A HAMMOCK! AND I'M SURE I CAN GET FREE BEFORE THE SINISTER SPIDER COMES BACK. *WEB SHAKES* IT IS RATHER STICKY, THOUGH. CAN SOMEONE HELP ME OUT? *SHAKING\r\n" + //
+                        "INTENSIFIES* GET ME OUTTA HERE!!!";
         difficulty = 2;
     }
 

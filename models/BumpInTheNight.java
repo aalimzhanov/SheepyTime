@@ -6,7 +6,7 @@ public class BumpInTheNight implements Nightmare {
     
     public BumpInTheNight(){
         name = "Bump In The Night";
-        description = "Big scary Bump In The Night";
+        description = "*THUD* WHAT WAS THAT SOUND? PROBABLY NOTHING, THERE'S ONLY SHADOWS. *THUD* I THINK I HEARD A BUMP IN THE NIGHT AGAIN. WAS IT CLOSER? MAYBE I SHOULD GO SEE IF THERE'S ANYTHING THERE... *THUD SQUEEELCH* THERE WAS DEFINITELY SOMETHING THERE!!!";
         difficulty = 3;
     }
 
