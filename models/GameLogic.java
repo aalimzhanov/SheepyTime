@@ -24,17 +24,18 @@ public class GameLogic {
                     takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, true);
                     gameEnded = checkWinConditions(scoreBoardController);
                     if (gameEnded) {
-                        break;
+                        return;
                     }
                 }
             }
+            gameBoardController.resetPositions();
             // One turn per player for the resting phase
             for (PlayerController playerController : playerControllers) {
                 gameView.showPlayerTurn(playerController.getPlayerName(), false);
                 takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, false);
                 gameEnded = checkWinConditions(scoreBoardController);
                 if (gameEnded) {
-                    break;
+                    return;
                 }
             }
         }
