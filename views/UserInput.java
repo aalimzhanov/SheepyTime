@@ -13,7 +13,6 @@ public class UserInput {
 
     public String getPlayerName() {
         System.out.println("Enter player name: ");
-        scanner.nextLine();
         String playerName = scanner.nextLine().trim();
         return playerName;
     }
@@ -45,13 +44,26 @@ public class UserInput {
 
     public int getNumOfPlayers() {
         System.out.println("Enter number of players: ");
-        int input = scanner.nextInt();
-        if (input < 1 || input > 4) {
-            System.out.println("Invalid input. Please enter a number between 1 and 4.");
-            return getNumOfPlayers();
-        } else {
-            return input;
+        int input = -1;
+        boolean validInput = false;
+        
+        while (!validInput) {
+            if (scanner.hasNextInt()) {
+                input = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+                
+                if (input >= 1 || input <= 4) {
+                    validInput = true;
+                } else {
+                    System.out.println("Invalid input. Please enter a number between 1 and 4: ");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer: ");
+                scanner.nextLine(); // Consume the invalid input
+            }
         }
+        
+        return input;
     }
 
     public int pickOption(String option1, String option2) {
@@ -66,14 +78,34 @@ public class UserInput {
     }
 
     public int getCardSelection() {
-        System.out.println("Enter the index of the card you want to play (0/1):");
-        while (!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a number (0 or 1):");
-            scanner.next(); // Consume the invalid input
+        System.out.println("Enter the index of the card you want to play (1/2):");
+        int index = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            String input = scanner.nextLine().trim();
+            if (input.equals("1") || input.equals("2")) {
+                index = Integer.parseInt(input) - 1;    // Convert to 0-based index
+                validInput = true;
+            } else {
+                System.out.println("Invalid input. Please enter either 1 or 2:");
+            }
         }
-        int index = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline
         return index;
+    }
+    public int getTilePlacementPosition(){
+        System.out.println("Enter the position you want to place the tile (1-10):");
+        int position = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            String input = scanner.nextLine().trim();
+            if (input.matches("[1-9]|10")) {
+                position = Integer.parseInt(input);
+                validInput = true;
+            } else {
+                System.out.println("Invalid input. Please enter a number between 1 and 10:");
+            }
+        }
+        return position;
     }
 
     public boolean getCallItANightDecision() {
@@ -106,7 +138,7 @@ public class UserInput {
 
     public int getNightmareSelection() {
         // Spider to be added
-        // Just add change everything to 3 and add a case for Spider
+        // Just change everything to 3 and add a case for Spider
         System.out.println("Select a nightmare:");
         System.out.println("1. Wolf");
         System.out.println("2. Bump in the Night");
@@ -156,10 +188,17 @@ public class UserInput {
         return input.equals("1");
     }
 
-    public int getTileSelection() {
-        System.out.println("Enter the index of the tile you want to place: ");
+    public int getTileSelection(int numOfTiles) {
+        System.out.println("Enter the index of the tile you want to place (1-" + numOfTiles + "): ");
         int input = scanner.nextInt();
         scanner.nextLine(); // Consume the newline
+
+        while (input < 0 || input >= numOfTiles) {
+            System.out.println("Invalid input. Please enter an index between 1 and " + numOfTiles + ": ");
+            input = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline
+        }
+
         return input;
     }
 
@@ -179,6 +218,30 @@ public class UserInput {
         System.out.println("Enter the index of the tile you want to catch ZZZs onto: ");
         int input = scanner.nextInt();
         scanner.nextLine(); // Consume the newline
+        return input;
+    }
+
+    public int getOrComboSelection() {
+        System.out.println("Enter 1 for action 1 or 2 for action 2: ");
+        int input = -1;
+        boolean validInput = false;
+        
+        while (!validInput) {
+            if (scanner.hasNextInt()) {
+                input = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+                
+                if (input == 1 || input == 2) {
+                    validInput = true;
+                } else {
+                    System.out.println("Invalid input. Please enter 1 or 2: ");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer: ");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
+        
         return input;
     }
 }

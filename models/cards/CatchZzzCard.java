@@ -3,6 +3,7 @@ package models.cards;
 import models.Card;
 import models.GameBoard;
 import models.Player;
+import models.Tile;
 import views.UserInput;
 
 public class CatchZzzCard implements Card {
@@ -19,9 +20,13 @@ public class CatchZzzCard implements Card {
 
     @Override
     public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
-        // Figure out tile Logic for this
-        // Should be in the player or the gameBoard?
-        player.catchZZZs(zzzs);
+        int tileSelection = input.getCatchTileIndex();
+        Tile selectedTile = gameBoard.getTile(tileSelection);
+        if(selectedTile == null) {
+            return;
+        }
+        int catchZZZs = player.catchZZZs(zzzs);
+        selectedTile.placeZzzs(catchZZZs, false);;
     }
 
     @Override

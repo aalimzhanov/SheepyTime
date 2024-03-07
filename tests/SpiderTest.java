@@ -23,7 +23,8 @@ class SpiderTest {
 
     @Test
     void testDescription() {
-        assertEquals("Big scary spider", spider.getDescription(), "The description should be correctly initialized");
+        assertEquals("THIS WEB IS PRETTY RELAXING, KINDA LIKE A HAMMOCK! AND I'M SURE I CAN GET FREE BEFORE THE SINISTER SPIDER COMES BACK. *WEB SHAKES* IT IS RATHER STICKY, THOUGH. CAN SOMEONE HELP ME OUT? *SHAKING\r\n" +
+                "INTENSIFIES* GET ME OUTTA HERE!!!", spider.getDescription(), "The description should be correctly initialized");
     }
 
     @Test

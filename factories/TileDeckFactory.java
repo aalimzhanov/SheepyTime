@@ -17,6 +17,7 @@ public class TileDeckFactory {
         deck.addTile(new RestingSpotTile());
         deck.addTile(new SecondWindTile());
         deck.addTile(new StepBackTile());
+        deck.initializeMarket();
         return deck;
     }
 }
