@@ -15,20 +15,19 @@ public class OrComboCard implements Card {
     @Override
     public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
         int userSelection = input.getOrComboSelection();
-        if(userSelection == 1){
+        if (userSelection == 1) {
             actions[0].executeAction(player, gameBoard, input);
-        }
-        else if(userSelection == 2){
+        } else if (userSelection == 2) {
             actions[1].executeAction(player, gameBoard, input);
-        }
-        else{
-            throw new IllegalArgumentException("Invalid input: " + userSelection +"\nValid inputs are: 1 - for action 1; 2 - for action 2");
+        } else {
+            throw new IllegalArgumentException(
+                    "Invalid input: " + userSelection + "\nValid inputs are: 1 - for action 1; 2 - for action 2");
         }
     }
 
     @Override
     public String getInformation() {
-        return actions[0].getInformation() + " or " + actions[1].getInformation();
+        return "'" + actions[0].getInformation() + "'" + " or " + "'" + actions[1].getInformation() + "'";
     }
 
     @Override

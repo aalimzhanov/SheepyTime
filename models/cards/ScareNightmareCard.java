@@ -9,6 +9,8 @@ public class ScareNightmareCard implements Card {
 
     @Override
     public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
+        System.out.println("*Nightmare card was drawn*");
+        System.out.println(getInformation());
         int position = gameBoard.getNightmarePos();
         for (int i = position; i <= position+1; i++) {
             // can't scare over the fence

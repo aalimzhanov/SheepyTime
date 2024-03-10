@@ -4,10 +4,9 @@ import models.Tile;
 public class TileView {
 
     public void displayInfo(Tile tile) {
-        System.out.println("Name: " + tile.getName());
-        System.out.println("Ability: " + tile.getAbilityDescription());
-        System.out.println("ZZZ Type: " + (tile.isInfinite()  ? "Infinite" : "Regular"));
-        System.out.println("ZZZ Count: " + tile.getZzzCount());
+        System.out.println("Tile name: "+ tile.getName());
+        System.out.println("Tile ability: "+ tile.getAbilityDescription());
+        System.out.println("Placement bonus: " + tile.getZzzCount() +(tile.isInfinite()  ? " infinite" : " regular") + " zzzs");
     }
     
 }

@@ -4,4 +4,6 @@ public interface Movable {
     public void becomeScared();
     public void crossFence();
     public boolean isScared();
+    public void becomeBrave();
+    public void wakeUp();
 }

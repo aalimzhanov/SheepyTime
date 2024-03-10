@@ -14,8 +14,7 @@ public class LoneSheepTile extends Tile {
 
     @Override
     public void activateEffect(Player player, GameBoard board, UserInput userInput) {
-        // boolean hasAdjacentZzzs = board.checkAdjacentTilesForZzzs(player, this); // How to check for zzzs on adjacent tiles
-        boolean hasAdjacentZzzs = false; // For testing purposes
+        boolean hasAdjacentZzzs = board.hasAdjacentZzzs(this);
         if (!hasAdjacentZzzs) {
             if (playerInfiniteZZZs > 0 || playerZZZs > 0) {
                 player.gainWinks(3);

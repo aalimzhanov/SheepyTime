@@ -6,16 +6,16 @@ public class Player implements Movable {
     private String name;
     private Sheep sheep;
     private Card[] hand;
-    private String sleepTime;
+    // private String sleepTime;
     private int zzzs;
     private int winks;
     private int pillowPosition;
     private boolean crossedTheFence;
 
-    public Player(String name, String sheepColor, String sleepTime) {
+    public Player(String name, String sheepColor) {
         this.name = name;
         this.sheep = new Sheep(sheepColor);
-        this.sleepTime = sleepTime;
+        // this.sleepTime = sleepTime;
         hand = new Card[2];
         zzzs = 10;
         winks = 0;
@@ -39,9 +39,9 @@ public class Player implements Movable {
         return zzzs;
     }
 
-    public String getSleepTime() {
-        return sleepTime;
-    }
+    // public String getSleepTime() {
+    //     return sleepTime;
+    // }
 
     public void gainCard(Card newCard) {
         for (int i = 0; i < hand.length; i++) {
@@ -123,10 +123,16 @@ public class Player implements Movable {
     @Override
     public void crossFence() {
         crossedTheFence = true;
+        winks += 5;
     }
 
     @Override
     public void becomeScared() {
         sheep.scare();
+    }
+
+    @Override
+    public void wakeUp(){
+        winks = 0;
     }
 }

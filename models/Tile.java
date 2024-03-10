@@ -35,8 +35,9 @@ public abstract class Tile {
         this.playerZZZs = 0;
         this.playerInfiniteZZZs = 0;
     }
+
     public void placeZzzs(int zzzs, boolean isInfinite) {
-        if(isInfinite){
+        if (isInfinite) {
             playerInfiniteZZZs += zzzs;
         } else {
             playerZZZs += zzzs;
@@ -45,4 +46,7 @@ public abstract class Tile {
 
     public abstract void activateEffect(Player player, GameBoard board, UserInput userInput);
 
+    public boolean hasZzzs() {
+        return playerZZZs + playerInfiniteZZZs != 0;
+    }
 }

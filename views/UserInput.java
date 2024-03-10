@@ -193,7 +193,7 @@ public class UserInput {
         int input = scanner.nextInt();
         scanner.nextLine(); // Consume the newline
 
-        while (input < 0 || input >= numOfTiles) {
+        while (input < 1 || input > numOfTiles) {
             System.out.println("Invalid input. Please enter an index between 1 and " + numOfTiles + ": ");
             input = scanner.nextInt();
             scanner.nextLine(); // Consume the newline

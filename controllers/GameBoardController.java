@@ -3,7 +3,6 @@ package controllers;
 import models.GameBoard;
 import models.Movable;
 import models.Nightmare;
-import models.Tile;
 import views.GameBoardView;
 
 public class GameBoardController {
@@ -20,14 +19,13 @@ public class GameBoardController {
         return gameBoard;
     }
 
-    public void updateView() {
-        gameBoardView.updateView(gameBoard);
+    public void displayInformation() {
+        gameBoardView.displayInformation(gameBoard);
     }
 
-    public void placeTile(int position, Tile tile) {
+    public void placeTile(int position, TileController tileController) {
         try {
-            gameBoard.placeTile(position, tile);
-            updateView();
+            gameBoard.placeTile(position, tileController);
         } catch (IllegalArgumentException e) {
             gameBoardView.showError(e.getMessage());
         }
@@ -35,23 +33,19 @@ public class GameBoardController {
 
     public void addMovableToBoard(Movable movable) {
         gameBoard.placeMovable(movable, 1);
-        updateView();
     }
 
     // In case we need to put the movable to a certain location
     public void placeMovable(Movable movable, int position) {
         gameBoard.placeMovable(movable, position);
-        updateView();
     }
 
     public void moveMovable(Movable movable, int amount) {
         gameBoard.moveMovable(movable, amount);
-        updateView();
     }
 
     public void callItANight(Movable movable) {
         gameBoard.callItANight(movable);
-        updateView();
     }
 
     public boolean moveNightmare(int amount) {
@@ -59,7 +53,6 @@ public class GameBoardController {
         if (crossedFence) {
             gameBoard.wakeEveryone();
         }
-        updateView();
         return crossedFence;
     }
 
@@ -68,25 +61,22 @@ public class GameBoardController {
         if (crossedFence) {
             gameBoard.wakeEveryone();
         }
-        updateView();
         return crossedFence;
     }
 
     public void addNightmareToBoard(Nightmare nightmare) {
         gameBoard.addNightmareToBoard(nightmare);
-        updateView();
     }
 
     public void resetPositions() {
         gameBoard.resetPositions();
-        updateView();
     }
 
     public boolean isTilePlaced(int position) {
         return gameBoard.isTilePlaced(position);
     }
 
-    public Tile getTile(int position) {
+    public TileController getTile(int position) {
         return gameBoard.getTile(position);
     }
 
@@ -98,8 +88,8 @@ public class GameBoardController {
         return gameBoard.getNumOfDreamTiles();
     }
 
-    public void placeTopTile(Tile tile) {
-        gameBoard.placeTopTile(tile);
+    public void placeTopTile(TileController tileController) {
+        gameBoard.placeTopTile(tileController);
     }
     public boolean isTurnOver(){
         return gameBoard.isTurnOver();

@@ -30,6 +30,8 @@ public class RacingPhaseLogic {
             }
         }
 
+        gameBoardController.displayInformation();
+
         int cardIndex = userInput.getCardSelection();
         Card playedCard = playerController.playCard(cardIndex);
         playedCard.executeAction(playerController.getModel(), gameBoardController.getModel(), userInput);
@@ -40,10 +42,10 @@ public class RacingPhaseLogic {
         if (gameBoardController.isTilePlaced(gameBoardController.getMovablePosition(playerController.getModel()))) {
             boolean activateTile = userInput.getActivateTileDecision(
                     gameBoardController.getTile(gameBoardController.getMovablePosition(playerController.getModel()))
-                            .getAbilityDescription());
+                            .getTileName());
             if (activateTile) {
                 gameBoardController.getTile(gameBoardController.getMovablePosition(playerController.getModel()))
-                        .activateEffect(playerController.getModel(),
+                        .activateTileEffect(playerController.getModel(),
                                 gameBoardController.getModel(), userInput);
             }
         }

@@ -3,11 +3,12 @@ package views;
 public class GameView {
     
     public void showWelcomeMessage() {
-        System.out.println("Welcome to Sheepy Time! Prepare for an adventure in dreamland.");
+        System.out.println("\nWelcome to Sheepy Time! Prepare for an adventure in dreamland.");
     }
 
-    public void showPlayerTurn(String playerName) {
-        System.out.println("It's " + playerName + "'s turn. Choose your action wisely.");
+    public void showPlayerTurn(String playerName, boolean isRacingPhase) {
+        String phase = isRacingPhase ? "racing" : "resting";
+        System.out.println("It's " + playerName + "'s turn in the " + phase + " phase. Choose your action wisely.");
     }
 
     public void showWinner(String playerName) {
@@ -16,13 +17,5 @@ public class GameView {
 
     public void showGameOver() {
         System.out.println("Thank you for playing. The game has now ended.");
-    }
-
-    public void showPlayerTurn(String name, boolean isRacingPhase) {
-        if (isRacingPhase) {
-            System.out.println("It's " + name + "'s turn in the racing phase. Choose your action wisely.");
-        } else {
-            System.out.println("It's " + name + "'s turn in the resting phase. Choose your action wisely.");
-        }
     }
 }
