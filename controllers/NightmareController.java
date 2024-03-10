@@ -18,7 +18,7 @@ public class NightmareController {
         view.updateView(model);
     }
     
-    public String getNighmareName(){
+    public String getNightmareName(){
         return model.getName();
     }
     public String getNightmareDescription(){
