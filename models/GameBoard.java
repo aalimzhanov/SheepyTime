@@ -3,22 +3,24 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 
+import controllers.TileController;
+
 public class GameBoard {
     private Map<Movable, Integer> gameBoard;
     private Nightmare nightmare;
     private int nightmarePos;
-    private Tile[] tiles;
+    private TileController[] tiles;
     private final int WAKE_UP_POSITION = -1; // not on the board
     private final int NIGHTMARE_DEFAULT_POSITION = 0; // center of the board
     private final int CALL_IT_A_NIGHT_POSITION = 11; // off the board
 
     public GameBoard() {
         gameBoard = new HashMap<>();
-        tiles = new Tile[10];
+        tiles = new TileController[10];
     }
 
     // Tile methods
-    public void placeTile(int position, Tile tile) {
+    public void placeTile(int position, TileController tile) {
 
         if (position < 1 || position > 10) {
             throw new IllegalArgumentException("Invalid position");
@@ -34,13 +36,13 @@ public class GameBoard {
         return tiles[position - 1] != null;
     }
 
-    public Tile getTile(int position) {
+    public TileController getTile(int position) {
         return tiles[position - 1];
     }
 
     public int getNumOfDreamTiles() {
         int count = 0;
-        for (Tile tile : tiles) {
+        for (TileController tile : tiles) {
             if (tile != null) {
                 count++;
             }
@@ -48,7 +50,7 @@ public class GameBoard {
         return count;
     }
 
-    public void placeTopTile(Tile tile) {
+    public void placeTopTile(TileController tile) {
         for (int i = 0; i < tiles.length; i++) {
             if (tiles[i] == null) {
                 tiles[i] = tile;
@@ -106,7 +108,11 @@ public class GameBoard {
     public void scareMovablesAtPosition(int pos) {
         gameBoard.forEach((movable, movablePos) -> {
             if (movablePos == pos) {
-                movable.becomeScared();
+                if(movable.isScared()){
+                    gameBoard.put(movable, WAKE_UP_POSITION);
+                }else{    
+                    movable.becomeScared();
+                }
             }
         });
     }
@@ -114,6 +120,7 @@ public class GameBoard {
     public void wakeUpMovable(Movable movable) {
         if (gameBoard.containsKey(movable)) {
             gameBoard.put(movable, WAKE_UP_POSITION);
+            movable.wakeUp();
         }
     }
 
@@ -187,11 +194,35 @@ public class GameBoard {
     public void resetPositions() {
         gameBoard.forEach((movable, pos) -> {
             gameBoard.put(movable, 1);
+            movable.becomeBrave();
         });
         nightmarePos = NIGHTMARE_DEFAULT_POSITION;
     }
 
-    public Tile[] getTiles() {
+    // Return true if player has zzzs on any other dream tiles within 2 spaces of this one
+    public boolean hasAdjacentZzzs(Tile tile){
+        for (int i = 0; i < 10; i++){
+            if(tiles[i]!= null ){
+                if(tiles[i].getModel().equals(tile)){
+                    if (i > 0 && tiles[i-1].hasZzzs()) {
+                        return true;
+                    }
+                    if (i < 9 && tiles[i+1].hasZzzs()) {
+                        return true;
+                    }
+                    if (i > 1 && tiles[i-2].hasZzzs()){
+                        return true;
+                    }
+                    if (i < 8 && tiles[i+2].hasZzzs()) {
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+    public TileController[] getTiles(){
         return tiles;
     }
 }

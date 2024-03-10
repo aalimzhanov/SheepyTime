@@ -1,11 +1,11 @@
 package views;
 
+import controllers.TileController;
 import models.GameBoard;
-import models.Tile;
 
 public class GameBoardView {
 
-    public void updateView(GameBoard gameBoard) {
+    public void displayInformation(GameBoard gameBoard) {
         System.out.println("Current Game Board State:");
         displayTiles(gameBoard);
         displayMovables(gameBoard);
@@ -13,17 +13,20 @@ public class GameBoardView {
     }
 
     private void displayTiles(GameBoard gameBoard) {
-        Tile[] tiles = gameBoard.getTiles();
+        TileController[] tiles = gameBoard.getTiles();
+        if(tiles.length == 0){
+            System.out.println("No active Dream Tiles.");
+        }
         for (int i = 0; i < tiles.length; i++) {
             if (tiles[i] != null) {
-                System.out.println("Tile at position " + (i + 1) + ": " + tiles[i].getName());
+                System.out.println("Dream Tile at position " + (i + 1) + ": " + tiles[i].getTileName());
             }
         }
     }
 
     private void displayMovables(GameBoard gameBoard) {
         gameBoard.getMovables().forEach((movable, position) -> {
-            System.out.println("Player " + movable.getName() + " is at position: " + position);
+            System.out.println(movable.getName() + " is at position: " + position);
         });
     }
 

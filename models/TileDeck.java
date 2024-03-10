@@ -6,24 +6,24 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import controllers.TileController;
+
 public class TileDeck {
 
-    private Queue<Tile> allTiles;
-    private List<Tile> tileMarket;
+    private Queue<TileController> allTiles;
+    private List<TileController> tileMarket;
 
     public TileDeck() {
         allTiles = new LinkedList<>();
         tileMarket = new ArrayList<>();
     }
 
-    
-    
-    public Tile getTile(int tileIndex) {
+    public TileController getTile(int tileIndex) {
         tileIndex--;
         if (tileIndex < 0 || tileIndex >= tileMarket.size()) {
             throw new IllegalArgumentException("Invalid tile index.");
         }
-        Tile chosenTile = tileMarket.remove(tileIndex);
+        TileController chosenTile = tileMarket.remove(tileIndex);
         // Add a new tile to the market if there are any left
         if (allTiles.isEmpty()) {
             return chosenTile;
@@ -34,13 +34,13 @@ public class TileDeck {
     }
 
     public void shuffleTiles() {
-        List<Tile> tempList = new ArrayList<>(allTiles);
+        List<TileController> tempList = new ArrayList<>(allTiles);
         Collections.shuffle(tempList);
         allTiles = new LinkedList<>(tempList);
     }
 
-    public void addTile(Tile tile) {
-        allTiles.offer(tile);
+    public void addTile(TileController tileController) {
+        allTiles.offer(tileController);
     }
 
     public void initializeMarket() {
@@ -49,14 +49,24 @@ public class TileDeck {
         }
     }
 
-    public Tile getTopTile() {
+    public TileController getTopTile() {
         if (!allTiles.isEmpty()) {
             return allTiles.poll();
         }
         return null;
     }
 
-    public int getNumOfTiles(){
+    public int getNumOfTiles() {
         return tileMarket.size();
+    }
+
+    public void displayTileMarket() {
+        if (getNumOfTiles() == 0)
+            return;
+        System.out.println("Tile Market:");
+        for (int i = 0; i < getNumOfTiles(); i++) {
+            System.out.print(i + 1 + " ");
+            tileMarket.get(i).displayTileInfo();
+        }
     }
 }

@@ -29,6 +29,8 @@ public class GameLogic {
                 }
             }
             gameBoardController.resetPositions();
+            scoreBoardController.endOfTurn();
+            scoreBoardController.displayScoreBoard();
             // One turn per player for the resting phase
             for (PlayerController playerController : playerControllers) {
                 gameView.showPlayerTurn(playerController.getPlayerName(), false);
@@ -53,11 +55,9 @@ public class GameLogic {
             RacingPhaseLogic racingPhaseLogic = new RacingPhaseLogic();
             racingPhaseLogic.playRacingMove(playerController, gameBoardController, deckController,
                     userInput);
-            playerController.updateView();
         } else {
             RestingPhaseLogic restingPhaseLogic = new RestingPhaseLogic();
             restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, playerController);
-            playerController.updateView();
         }
     }
 }

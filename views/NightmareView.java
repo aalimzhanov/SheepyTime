@@ -8,9 +8,9 @@ import models.Nightmare;
 public class NightmareView {
 
     public void updateView(Nightmare model) {
-        System.out.println("Nightmare name: " + model.getName());
-        System.out.println("Nightmare's description: " + model.getDescription());
-        System.out.println("Nightmare's Difficulty " + model.getDifficulty());
+        System.out.println("Nightmare: " + model.getName());
+        System.out.println(model.getDescription());
+        System.out.println("Difficulty level: " + model.getDifficulty());
     }
 
 }

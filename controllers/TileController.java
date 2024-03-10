@@ -22,5 +22,21 @@ public class TileController {
     public void activateTileEffect(Player player, GameBoard gameBoard, UserInput userInput) {
         tile.activateEffect(player, gameBoard, userInput);
     }
+    public boolean isInfinite(){
+        return tile.isInfinite();
+    }
+    public void placeZzzs(int zzzs, boolean isInfinite){
+        tile.placeZzzs(zzzs, isInfinite);
+    }
+    public String getTileName(){
+        return tile.getName();
+    }
+    public boolean hasZzzs(){
+        return tile.hasZzzs();
+    }
+
+    public Tile getModel(){
+        return tile;
+    }
 }
 

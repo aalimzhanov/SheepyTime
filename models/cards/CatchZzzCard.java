@@ -1,9 +1,9 @@
 package models.cards;
 
+import controllers.TileController;
 import models.Card;
 import models.GameBoard;
 import models.Player;
-import models.Tile;
 import views.UserInput;
 
 public class CatchZzzCard implements Card {
@@ -21,10 +21,8 @@ public class CatchZzzCard implements Card {
     @Override
     public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
         int tileSelection = input.getCatchTileIndex();
-        Tile selectedTile = gameBoard.getTile(tileSelection);
-        if(selectedTile == null) {
-            return;
-        }
+        if(!gameBoard.isTilePlaced(tileSelection)) return;
+        TileController selectedTile = gameBoard.getTile(tileSelection);
         int catchZZZs = player.catchZZZs(zzzs);
         selectedTile.placeZzzs(catchZZZs, false);;
     }

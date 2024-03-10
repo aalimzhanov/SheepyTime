@@ -19,7 +19,7 @@ public class ScoreBoardTest {
     @BeforeEach
     void setUp() {
         players = new ArrayList<>();
-        players.add(new Player("Adil", "red", "12:25"));
+        players.add(new Player("Adil", "red"));
         scoreBoard = new ScoreBoard(players);
     }
 

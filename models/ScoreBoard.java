@@ -50,13 +50,13 @@ public class ScoreBoard {
             Player player = players.get(0);
             int winks = getWinks(player);
             movePillow(player, -winks / 5);
-            resetScores();
+            resetWinks();
             return;
         }
         // Multiplayer logic to be added
     }
 
-    private void resetScores() {
+    private void resetWinks() {
         for (Player player : players) {
             player.resetWinks();
         }

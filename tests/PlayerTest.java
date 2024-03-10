@@ -15,7 +15,7 @@ public class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Adil", "yellow", "10:00");
+        player = new Player("Adil", "yellow");
     }
 
     @Test
@@ -45,10 +45,6 @@ public class PlayerTest {
         assertEquals(10, player.getNumOfZzzs(), "The number of Zzzs should correctly be 10");
     }
 
-    @Test
-    void testGetSleepTime() {
-        assertEquals("10:00", player.getSleepTime(), "The sleep time should correctly be '10:00 PM'");
-    }
 
     @Test
     void testGainCard() {

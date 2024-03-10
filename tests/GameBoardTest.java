@@ -4,12 +4,14 @@ import models.GameBoard;
 import models.Movable;
 import models.Nightmare;
 import models.Player;
-import models.Tile;
 import models.Wolf;
 import models.tiles.FinalSprintTile;
+import views.TileView;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import controllers.TileController;
 
 import java.util.Map;
 
@@ -18,15 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GameBoardTest {
 
     private GameBoard gameBoard;
-    private Tile tile;
+    private TileController tile;
     private Movable movable;
     private Nightmare nightmare;
 
     @BeforeEach
     void setUp() {
         gameBoard = new GameBoard();
-        tile = new FinalSprintTile();
-        movable = new Player("Adil", "yellow","12:25");
+        tile = new TileController(new FinalSprintTile(), new TileView());
+        movable = new Player("Adil", "yellow");
         nightmare = new Wolf();
     }
 
@@ -103,7 +105,7 @@ public class GameBoardTest {
 
     @Test
     void testMoveMovable_NotOnBoard() {
-        Movable otherMovable = new Player("Derrik", "pink","12:25");
+        Movable otherMovable = new Player("Derrik", "pink");
         assertThrows(IllegalArgumentException.class, () -> gameBoard.moveMovable(otherMovable, 1));
     }
 
@@ -169,18 +171,20 @@ public class GameBoardTest {
         gameBoard.jumpNightmare(3);
         assertEquals(3, gameBoard.getNightmarePos());
     }
+
     @Test
     void testMoveNightmareScaring() {
         gameBoard.addNightmareToBoard(nightmare);
         gameBoard.placeMovable(movable, 2);
-        gameBoard.moveNightmare(3);    // Scare when passing a movable
+        gameBoard.moveNightmare(3); // Scare when passing a movable
         assertTrue(movable.isScared());
     }
+
     @Test
     void testJumpNightmareScaring() {
         gameBoard.addNightmareToBoard(nightmare);
         gameBoard.placeMovable(movable, 2);
-        gameBoard.jumpNightmare(3);    // Do not care when passing a movable
+        gameBoard.jumpNightmare(3); // Do not care when passing a movable
         assertFalse(movable.isScared());
     }
 

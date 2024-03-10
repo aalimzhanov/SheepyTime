@@ -18,7 +18,7 @@ public class CardController {
     }
 
     public void updateView(){
-        view.updateView(model);
+        view.displayInformation(model);
     }
 
      public String getCardInformation(){

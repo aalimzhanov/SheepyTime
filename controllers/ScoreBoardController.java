@@ -16,24 +16,20 @@ public class ScoreBoardController {
     // Update the pillow position for a player
     public void movePillow(Player player, int amount) {
         scoreBoard.movePillow(player, amount);
-        updateView();
     }
 
     // Update the winks for a player
     public void gainWinks(Player player, int amount) {
         scoreBoard.gainWinks(player, amount);
-        updateView();
     }
 
     // Mark a player as having woken up
     public void wakeUp(Player player) {
         scoreBoard.wakeUp(player);
-        updateView();
     }
 
     public void endOfTurn() {
         scoreBoard.endOfTurn();
-        updateView();
     }
 
     public boolean isGameOver() {
@@ -44,7 +40,8 @@ public class ScoreBoardController {
         return scoreBoard;
     }
 
-    public void updateView() {
+    public void displayScoreBoard() {
         scoreBoardView.displayScoreBoard(scoreBoard);
     }
+
 }

@@ -14,6 +14,8 @@ public class JumpNightmareCard implements Card {
 
     @Override
     public void executeAction(Player player, GameBoard gameBoard, UserInput input) {
+        System.out.println("*Nightmare card was drawn*");
+        System.out.println(getInformation());
         gameBoard.jumpNightmare(spaces);
     }
 
