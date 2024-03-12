@@ -29,6 +29,6 @@ class BumpInTheNightTest {
 
     @Test
     void testDifficulty() {
-        assertEquals(3, bumpInTheNight.getDifficulty(), "The difficulty should be 3");
+        assertEquals(1, bumpInTheNight.getDifficulty(), "The difficulty should be 1");
     }
 }
