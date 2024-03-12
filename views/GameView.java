@@ -23,7 +23,7 @@ public class GameView {
      */
     public void showPlayerTurn(String playerName, boolean isRacingPhase) {
         String phase = isRacingPhase ? "racing" : "resting";
-        System.out.println("It's " + playerName + "'s turn in the " + phase + " phase. Choose your action wisely.");
+        System.out.println("\nIt's " + playerName + "'s turn in the " + phase + " phase. Choose your action wisely.");
     }
 
     /**
