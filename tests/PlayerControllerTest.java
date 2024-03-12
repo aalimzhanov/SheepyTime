@@ -3,6 +3,7 @@ package tests;
 import controllers.PlayerController;
 import models.Player;
 import models.Sheep;
+import models.cards.MoveSpacesCard;
 import models.cards.OrComboCard;
 import models.Card;
 import views.PlayerView;
@@ -19,7 +20,7 @@ public class PlayerControllerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("tolga", "blue", "1"); 
+        player = new Player("Tolga", "blue"); 
         view = new PlayerView(); 
         playerController = new PlayerController(player, view);
     }
@@ -31,28 +32,27 @@ public class PlayerControllerTest {
 
     @Test
     void testGetPlayerName() {
-        String expectedName = "tolga";
-        assertEquals(expectedName, playerController.getPlayerName(), "The name should be the expected name");
+        String expectedName = "Tolga";
+        assertEquals(expectedName, playerController.getPlayerName(), "The name should be Tolga");
     }
 
     @Test
     void testGetSheep() {
-        Sheep expectedSheep = new Sheep("blue"); 
-        assertEquals(expectedSheep, playerController.getSheep(), "The sheep should be the expected sheep");
+        assertEquals("blue", playerController.getSheep().getColor(), "The sheep should be blue");
     }
 
     @Test
     void testGetNumOfZzzs() {
-        int expectedNumOfZzzs = 0;
-        assertEquals(expectedNumOfZzzs, playerController.getNumOfZzzs(), "The number of Zzzs should be the expected number");
+        int expectedNumOfZzzs = 10;
+        assertEquals(expectedNumOfZzzs, playerController.getNumOfZzzs(), "The number of Zzzs should be 10");
     }
 
     @Test
     void testGainCard() {
-        OrComboCard card = new OrComboCard(null);
+        Card card = new MoveSpacesCard(1);
         playerController.gainCard(card);
-        // Guys no clue how to test this method, edit this for me please
-        assertTrue(player.hasCard(card), "The player should have the card that was gained");
+
+        assertEquals(card, player.getCard(0), "The player should have the card that was gained");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class PlayerControllerTest {
 
     @Test
     void testPlayCard() {
-        Card card = new OrComboCard(null); 
+        Card card = new MoveSpacesCard(1); 
         player.gainCard(card);
         assertEquals(card, playerController.playCard(0), "The played card should be the card that was gained");
     }

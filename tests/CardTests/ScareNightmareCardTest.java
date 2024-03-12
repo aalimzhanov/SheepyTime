@@ -21,8 +21,8 @@ public class ScareNightmareCardTest {
     @Test
     public void testGetInformation() {
         ScareNightmareCard card = new ScareNightmareCard();
-        String info = card.getInformation();
-        assertEquals("The nightmare scares all sheep on it space and adjacent spaces.", info);
+        String info = "The nightmare scares all sheep on its space and adjacent spaces.";
+        assertEquals(info, card.getInformation());
     }
 
     @Test

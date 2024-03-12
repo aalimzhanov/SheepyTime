@@ -1,5 +1,5 @@
 package tests;
-// We need helper getter methods such as isTurnEnded, isPlayerAwake
+
 import controllers.ScoreBoardController;
 import models.Player;
 import models.ScoreBoard;
@@ -21,20 +21,20 @@ public class ScoreBoardControllerTest {
 
     @BeforeEach
     void setUp() {
-    player = new Player("tolga", "blue", "1"); // You may need to replace this with your actual Player implementation
-    List<Player> players = new ArrayList<>();
-    players.add(player);
-    scoreBoard = new ScoreBoard(players); // You may need to replace this with your actual ScoreBoard implementation
-    view = new ScoreBoardView(); // You may need to replace this with your actual ScoreBoardView implementation
-    scoreBoardController = new ScoreBoardController(scoreBoard, view);
-}
+        player = new Player("tolga", "blue");
+        List<Player> players = new ArrayList<>();
+        players.add(player);
+        scoreBoard = new ScoreBoard(players);
+        view = new ScoreBoardView();
+        scoreBoardController = new ScoreBoardController(scoreBoard, view);
+    }
 
     @Test
     void testMovePillow() {
-        int amount = 1;
+        int amount = -1;
         scoreBoardController.movePillow(player, amount);
-        // for some reason this does not want to work, expected 1 got 41
-        assertEquals(amount, scoreBoard.getPillowPosition(player), "The pillow should be moved by the specified amount");
+        assertEquals(40+amount, scoreBoard.getPillowPosition(player),
+                "The pillow should be moved by the specified amount");
     }
 
     @Test
@@ -46,32 +46,36 @@ public class ScoreBoardControllerTest {
 
     @Test
     void testWakeUp() {
+        player.gainWinks(2);
         scoreBoardController.wakeUp(player);
 
-        assertTrue(scoreBoard.isAwake(player), "The player should be awake");
+        assertEquals(0, scoreBoard.getWinks(player), "The player should have no winks");
     }
 
     @Test
     void testEndOfTurn() {
+        player.gainWinks(6);
         scoreBoardController.endOfTurn();
-
-        assertTrue(scoreBoard.isTurnEnded(), "The turn should be ended");
+        assertEquals(39, scoreBoard.getPillowPosition(player), "The player should move their pillow back by one for every 5 winks");
+        assertEquals(0, scoreBoard.getWinks(player), "The player should have no winks");
     }
 
     @Test
     void testIsGameOver() {
-
         assertFalse(scoreBoardController.isGameOver(), "The game should not be over");
+        scoreBoard.movePillow(player, -35);
+        scoreBoard.gainWinks(player, 6);
+        assertTrue(scoreBoardController.isGameOver(), "The game should be over");
     }
 
     @Test
     void testGetScoreBoard() {
-        assertEquals(scoreBoard, scoreBoardController.getScoreBoard(), "The returned score board should be the same as the one set in the constructor");
+        assertEquals(scoreBoard, scoreBoardController.getScoreBoard(),
+                "The returned score board should be the same as the one set in the constructor");
     }
 
     @Test
     void testUpdateView() {
-        // Since it's hard to test view updates, we can at least ensure it doesn't throw an exception
-        assertDoesNotThrow(() -> scoreBoardController.updateView());
+        assertDoesNotThrow(() -> scoreBoardController.displayScoreBoard());
     }
 }

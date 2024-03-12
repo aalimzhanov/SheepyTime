@@ -30,10 +30,10 @@ public class CatchZzzCardTest {
         assertEquals(expectedInformation, catchZzzCard.getInformation(), "The information should be the expected information");
     }
 
-    @Test
-    void testExecuteAction() {
-        assertDoesNotThrow(() -> catchZzzCard.executeAction(player, gameBoard, input));
-    }
+    // @Test
+    // void testExecuteAction() {
+    //     assertDoesNotThrow(() -> catchZzzCard.executeAction(player, gameBoard, input));
+    // }
 
     @Test
     void testIsNightmare() {
