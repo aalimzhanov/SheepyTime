@@ -5,7 +5,20 @@ import models.TileDeck;
 import models.tiles.*;
 import views.TileView;
 
+/**
+ * The TileDeckFactory class is responsible for creating a TileDeck object.
+ * It provides a static method to create the TileDeck and initialize it with
+ * a set of predefined tiles.
+ *
+ * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
+ */
 public class TileDeckFactory {
+
+    /**
+     * Creates a new TileDeck object and initializes it with a set of predefined tiles.
+     *
+     * @return The created TileDeck object.
+     */
     public static TileDeck createTiles() {
         TileDeck deck = new TileDeck();
 
