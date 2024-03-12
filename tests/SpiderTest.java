@@ -29,6 +29,6 @@ class SpiderTest {
 
     @Test
     void testDifficulty() {
-        assertEquals(2, spider.getDifficulty(), "The difficulty level should be correctly initialized");
+        assertEquals(3, spider.getDifficulty(), "The difficulty level should be correctly initialized");
     }
 }

@@ -10,7 +10,6 @@ import java.util.Queue;
  * cards.
  * 
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
- * @version
  */
 public class Deck {
     private Queue<Card> activeCards;
