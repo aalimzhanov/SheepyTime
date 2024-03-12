@@ -1,0 +1,44 @@
+package tests.CardTests;
+
+import models.cards.OrComboCard;
+import models.Card;
+import models.GameBoard;
+import models.Player;
+import views.UserInput;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class OrComboCardTest {
+
+    private OrComboCard orComboCard;
+    private Player player;
+    private GameBoard gameBoard;
+    private UserInput input;
+
+    @BeforeEach
+    void setUp() {
+        Card[] actions = new Card[]{}; 
+        orComboCard = new OrComboCard(actions);
+        player = new Player("tolga","blue"); 
+        gameBoard = new GameBoard(); 
+        input = new UserInput(); 
+    }
+
+    @Test
+    void testGetInformation() {
+        String expectedInformation = "";
+        assertEquals(expectedInformation, orComboCard.getInformation(), "The information should be the expected information");
+    }
+
+    @Test
+    void testExecuteAction() {
+        assertDoesNotThrow(() -> orComboCard.executeAction(player, gameBoard, input));
+    }
+
+    @Test
+    void testIsNightmare() {
+        assertFalse(orComboCard.isNightmare(), "The card should not be a nightmare");
+    }
+}
