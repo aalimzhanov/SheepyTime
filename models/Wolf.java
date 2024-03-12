@@ -1,4 +1,9 @@
 package models;
+/**
+ * Represents a Wolf nightmare.
+ * 
+ * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
+ */
 public class Wolf implements Nightmare{
     private String name;
     private String description;
@@ -12,19 +17,27 @@ public class Wolf implements Nightmare{
     }
 
     /**
-     * @return the name
+     * Returns the name of the Wolf.
+     * 
+     * @return the name of the Wolf
      */
     public String getName() {
         return name;
     }
+    
     /**
-     * @return the description
+     * Returns the description of the Wolf.
+     * 
+     * @return the description of the Wolf
      */
     public String getDescription() {
         return description;
     }
+    
     /**
-     * @return the difficulty
+     * Returns the difficulty level of the Wolf.
+     * 
+     * @return the difficulty level of the Wolf
      */
     public int getDifficulty() {
         return difficulty;

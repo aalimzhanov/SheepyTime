@@ -1,4 +1,10 @@
 package models;
+/**
+ * Represents a nightmare called "Spider".
+ * It has a difficulty level of 3.
+ *
+ * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
+ */
 public class Spider implements Nightmare{
     private String name;
     private String description;
@@ -8,7 +14,7 @@ public class Spider implements Nightmare{
         name = "Spider";
         description = "THIS WEB IS PRETTY RELAXING, KINDA LIKE A HAMMOCK! AND I'M SURE I CAN GET FREE BEFORE THE SINISTER SPIDER COMES BACK. *WEB SHAKES* IT IS RATHER STICKY, THOUGH. CAN SOMEONE HELP ME OUT? *SHAKING\r\n" + //
                         "INTENSIFIES* GET ME OUTTA HERE!!!";
-        difficulty = 2;
+        difficulty = 3;
     }
 
     /**

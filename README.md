@@ -24,6 +24,6 @@ Add the Spider Nightmare + Web Token + Spider Cards + Update the board to accomo
 
 Display num of player's zzzs on the tile when you land on it
 
-Don't push TurnManager onto the class repo. 
+Don't push TurnManager, TimeParser and Spider onto the class repo. 
 
 Add rulebook?
