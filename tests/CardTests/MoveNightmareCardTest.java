@@ -1,5 +1,3 @@
-// FILEPATH: /c:/Users/tolga/Downloads/SheepyTime/tests/CardTests/MoveNightmareCardTest.java
-
 package tests.CardTests;
 
 import models.cards.MoveNightmareCard;
