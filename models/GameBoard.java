@@ -37,7 +37,7 @@ public class GameBoard {
     public void placeTile(int position, TileController tile) {
 
         if (position < 1 || position > 10) {
-            throw new IllegalArgumentException("Invali position");
+            throw new IllegalArgumentException("Invalid position");
         }
         position -= 1; // Adjust for 0-based indexing
         if (tiles[position] != null) {

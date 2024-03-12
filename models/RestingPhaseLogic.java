@@ -41,13 +41,23 @@ public class RestingPhaseLogic {
                 boolean onlyOneTile = userInput.getCatchZzzsDecision();
                 int tileIndex = userInput.getCatchTileIndex();
                 TileController selectedTile = gameBoardController.getTile(tileIndex);
-                int zzzs = playerController.catchZZZs(onlyOneTile ? 2 : 1);
-                selectedTile.placeZzzs(zzzs, false);
+                if(selectedTile == null){
+                    System.out.println("No tile in this position");
+                }
+                else{
+                    int zzzs = playerController.catchZZZs(onlyOneTile ? 2 : 1);
+                    selectedTile.placeZzzs(zzzs, false);
+                }
                 if (!onlyOneTile) {
                     int tileIndex2 = userInput.getCatchTileIndex();
                     TileController selectedTile2 = gameBoardController.getTile(tileIndex2);
-                    zzzs = playerController.catchZZZs(1);
-                    selectedTile2.placeZzzs(zzzs, false);
+                    if (selectedTile2 == null) {
+                        System.out.println("No tile in this position");
+                    }
+                    else{
+                        int zzzs = playerController.catchZZZs(1);
+                        selectedTile2.placeZzzs(zzzs, false);
+                    } 
                 }
             }
         } else {
