@@ -27,3 +27,5 @@ Display num of player's zzzs on the tile when you land on it
 Don't push TurnManager, TimeParser and Spider onto the class repo. 
 
 Add rulebook?
+
+For next milestone - split up userInput in more classes
