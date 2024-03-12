@@ -42,7 +42,9 @@ public class RestingPhaseLogic {
                 int tileIndex = userInput.getCatchTileIndex();
                 TileController selectedTile = gameBoardController.getTile(tileIndex);
                 int zzzs = playerController.catchZZZs(onlyOneTile ? 2 : 1);
-                selectedTile.placeZzzs(zzzs, false);
+                if(selectedTile != null){
+                    selectedTile.placeZzzs(zzzs, false);
+                }
                 if (!onlyOneTile) {
                     int tileIndex2 = userInput.getCatchTileIndex();
                     TileController selectedTile2 = gameBoardController.getTile(tileIndex2);
