@@ -24,7 +24,7 @@ Add the Spider Nightmare + Web Token + Spider Cards + Update the board to accomo
 
 Display num of player's zzzs on the tile when you land on it
 
-Don't push TurnManager, TimeParser and Spider onto the class repo. 
+Don't push TurnManager, TimeParser and Spider onto the class repo.
 
 Add rulebook?
 
@@ -33,3 +33,5 @@ For next milestone - split up userInput in more classes
 Added view to for better visibility
 
 Bump in the night going to negative positions(should it wrap around to 10 when negative since board is circular?)
+
+GameControllerTest cannot be done since that would require the entire game being played.
