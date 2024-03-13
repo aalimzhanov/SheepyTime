@@ -9,7 +9,7 @@ import controllers.GameBoardController;
 public class GameBoardFactoryTest {
 
     @Test
-    public void testInitializeGameBoard_ReturnsGameBoardController() {
+    public void testInitializeGameBoard() {
         GameBoardController gameBoardController = GameBoardFactory.initializeGameBoard();
         assertNotNull(gameBoardController);
         assertNotNull(gameBoardController.getModel());

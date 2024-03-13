@@ -13,7 +13,7 @@ import java.util.List;
 public class PlayerFactoryTest {
 
     @Test
-    public void testInitialisePlayers_ValidInput_ReturnsListOfPlayers() {
+    public void testInitialisePlayers() {
         String input = "Adil\nblue\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);

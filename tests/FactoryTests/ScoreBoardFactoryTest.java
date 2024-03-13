@@ -15,7 +15,7 @@ import java.util.List;
 public class ScoreBoardFactoryTest {
 
     @Test
-    public void testInitializeScoreBoard_ReturnsScoreBoardController() {
+    public void testInitializeScoreBoard() {
         List<PlayerController> playerControllers = new ArrayList<>();
         Player player = new Player("Adil", "blue");
         playerControllers.add(new PlayerController(player, new PlayerView()));

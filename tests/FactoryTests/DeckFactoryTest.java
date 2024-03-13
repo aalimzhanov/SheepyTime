@@ -9,7 +9,7 @@ import controllers.DeckController;
 public class DeckFactoryTest {
 
     @Test
-    public void testCreateDeck_ReturnsDeckController() {
+    public void testCreateDeck() {
         DeckController deckController = DeckFactory.createDeck();
 
         assertNotNull(deckController);
