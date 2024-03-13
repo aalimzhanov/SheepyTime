@@ -19,7 +19,7 @@ public class ScoreBoardTest {
     @BeforeEach
     void setUp() {
         players = new ArrayList<>();
-        players.add(new Player("Adil", "red"));
+        players.add(new Player("Adil", "blue"));
         scoreBoard = new ScoreBoard(players);
     }
 
@@ -60,7 +60,8 @@ public class ScoreBoardTest {
         Player player = players.get(0);
         int position = -3;
         player.movePillow(position);
-        assertEquals(40+position, scoreBoard.getPillowPosition(player), "The pillow position should match the value set");
+        assertEquals(40 + position, scoreBoard.getPillowPosition(player),
+                "The pillow position should match the value set");
     }
 
     @Test
@@ -81,6 +82,7 @@ public class ScoreBoardTest {
 
     @Test
     void testIsGameOver() {
+        assertFalse(scoreBoard.isGameOver(), "The game should not be over at the start");
         Player player = players.get(0);
         player.movePillow(-5);
         player.gainWinks(35);
