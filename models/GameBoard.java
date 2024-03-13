@@ -7,7 +7,8 @@ import controllers.TileController;
 
 /**
  * Represents the game board for the SheepyTime game.
- * This class manages the placement and movement of tiles, movables, and the nightmare.
+ * This class manages the placement and movement of tiles, movables, and the
+ * nightmare.
  * It also provides various methods to interact with the game board.
  *
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
@@ -30,9 +31,11 @@ public class GameBoard {
     /**
      * Places a tile at the specified position on the game board.
      *
-     * @param position The position where the tile should be placed. Must be between 1 and 10 (inclusive).
-     * @param tile The tile to be placed on the game board.
-     * @throws IllegalArgumentException if the position is invalid or already occupied by a tile.
+     * @param position The position where the tile should be placed. Must be between
+     *                 1 and 10 (inclusive).
+     * @param tile     The tile to be placed on the game board.
+     * @throws IllegalArgumentException if the position is invalid or already
+     *                                  occupied by a tile.
      */
     public void placeTile(int position, TileController tile) {
 
@@ -97,8 +100,9 @@ public class GameBoard {
     /**
      * Places a movable object on the game board at the specified position.
      *
-     * @param movable The movable object to be placed on the game board.
-     * @param position The position on the game board where the movable object should be placed.
+     * @param movable  The movable object to be placed on the game board.
+     * @param position The position on the game board where the movable object
+     *                 should be placed.
      */
     public void placeMovable(Movable movable, int position) {
         gameBoard.put(movable, position);
@@ -117,10 +121,11 @@ public class GameBoard {
      * Moves the specified Movable object on the game board by the given amount.
      * 
      * @param movable The Movable object to be moved.
-     * @param amount The amount by which the Movable object should be moved.
+     * @param amount  The amount by which the Movable object should be moved.
      * @throws IllegalArgumentException if the Movable object is not on the board,
-     *         or if the Movable object has called it a night,
-     *         or if the Movable object has woken up.
+     *                                  or if the Movable object has called it a
+     *                                  night,
+     *                                  or if the Movable object has woken up.
      */
     public void moveMovable(Movable movable, int amount) {
         if (!gameBoard.containsKey(movable)) {
@@ -169,9 +174,9 @@ public class GameBoard {
     public void scareMovablesAtPosition(int pos) {
         gameBoard.forEach((movable, movablePos) -> {
             if (movablePos == pos) {
-                if(movable.isScared()){
+                if (movable.isScared()) {
                     wakeUpMovable(movable);
-                }else{    
+                } else {
                     movable.becomeScared();
                 }
             }
@@ -180,7 +185,8 @@ public class GameBoard {
 
     /**
      * Wakes up the specified movable on the game board.
-     * If the movable is present on the game board, it is moved to the wake up position
+     * If the movable is present on the game board, it is moved to the wake up
+     * position
      * and its `wakeUp` method is called.
      *
      * @param movable the movable to wake up
@@ -203,7 +209,8 @@ public class GameBoard {
     }
 
     /**
-     * Wakes up all the movable objects on the game board and sets their positions to the wake-up position.
+     * Wakes up all the movable objects on the game board and sets their positions
+     * to the wake-up position.
      */
     public void wakeEveryone() {
         gameBoard.forEach((movable, pos) -> {
@@ -212,7 +219,8 @@ public class GameBoard {
     }
 
     /**
-     * Moves the specified movable object to the "call it a night" position on the game board.
+     * Moves the specified movable object to the "call it a night" position on the
+     * game board.
      *
      * @param movable the movable object to be moved
      */
@@ -233,7 +241,8 @@ public class GameBoard {
     }
 
     /**
-     * Checks if the turn is over by verifying if all movables have either woken up or called it a night.
+     * Checks if the turn is over by verifying if all movables have either woken up
+     * or called it a night.
      *
      * @return true if the turn is over, false otherwise.
      */
@@ -262,7 +271,8 @@ public class GameBoard {
      * The nightmare moves one space at a time, scaring any player it lands on.
      * 
      * @param amount the number of spaces to move the nightmare
-     * @return true if the nightmare reaches the end of the board and wraps around to the beginning, false otherwise
+     * @return true if the nightmare reaches the end of the board and wraps around
+     *         to the beginning, false otherwise
      */
     public boolean moveNightmare(int amount) {
         for (int i = 0; i < amount; i++) {
@@ -277,12 +287,15 @@ public class GameBoard {
     }
 
     /**
-     * Moves the nightmare position by the specified amount and scares any movables at the new position.
-     * If the new position exceeds 10, the nightmare position is reset to the default position and true is returned.
+     * Moves the nightmare position by the specified amount and scares any movables
+     * at the new position.
+     * If the new position exceeds 10, the nightmare position is reset to the
+     * default position and true is returned.
      * Otherwise, false is returned.
      *
      * @param amount the amount to move the nightmare position by
-     * @return true if the new position exceeds 10 and the nightmare position is reset, false otherwise
+     * @return true if the new position exceeds 10 and the nightmare position is
+     *         reset, false otherwise
      */
     public boolean jumpNightmare(int amount) {
         nightmarePos += amount;
@@ -315,7 +328,8 @@ public class GameBoard {
     // Other methods
     /**
      * Resets the positions of all the movable objects on the game board.
-     * This method sets the position of each movable object to 1 and makes them become brave.
+     * This method sets the position of each movable object to 1 and makes them
+     * become brave.
      * It also resets the position of the nightmare object to the default position.
      */
     public void resetPositions() {
@@ -327,25 +341,26 @@ public class GameBoard {
     }
 
     /**
-     * Checks if the player has zzzs on any other dream tiles within 2 spaces of this one.
+     * Checks if the player has zzzs on any other dream tiles within 2 spaces of
+     * this one.
      * 
      * @param tile the tile to check for adjacent Zzzs
      * @return true if the tile has adjacent Zzzs, false otherwise
      */
-    public boolean hasAdjacentZzzs(Tile tile){
-        for (int i = 0; i < 10; i++){
-            if(tiles[i]!= null ){
-                if(tiles[i].getModel().equals(tile)){
-                    if (i > 0 && tiles[i-1].hasZzzs()) {
+    public boolean hasAdjacentZzzs(Tile tile) {
+        for (int i = 0; i < 10; i++) {
+            if (tiles[i] != null) {
+                if (tiles[i].getModel().equals(tile)) {
+                    if (i > 0 && tiles[i - 1] != null && tiles[i - 1].hasZzzs()) {
                         return true;
                     }
-                    if (i < 9 && tiles[i+1].hasZzzs()) {
+                    if (i < 9 && tiles[i + 1] != null && tiles[i + 1].hasZzzs()) {
                         return true;
                     }
-                    if (i > 1 && tiles[i-2].hasZzzs()){
+                    if (i > 1 && tiles[i - 2] != null && tiles[i - 2].hasZzzs()) {
                         return true;
                     }
-                    if (i < 8 && tiles[i+2].hasZzzs()) {
+                    if (i < 8 && tiles[i + 2] != null && tiles[i + 2].hasZzzs()) {
                         return true;
                     }
 
@@ -354,12 +369,15 @@ public class GameBoard {
         }
         return false;
     }
+
     /**
-     * Returns an array of TileController objects representing the tiles on the game board.
+     * Returns an array of TileController objects representing the tiles on the game
+     * board.
      *
-     * @return an array of TileController objects representing the tiles on the game board
+     * @return an array of TileController objects representing the tiles on the game
+     *         board
      */
-    public TileController[] getTiles(){
+    public TileController[] getTiles() {
         return tiles;
     }
 }
