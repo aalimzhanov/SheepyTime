@@ -20,7 +20,7 @@ public class GainWinksCardTest {
     void setUp() {
         int winks = 1;
         gainWinksCard = new GainWinksCard(winks);
-        player = new Player("tolga","blue");
+        player = new Player("Adil","blue");
         gameBoard = new GameBoard(); 
         input = new UserInput(); 
     }
@@ -33,7 +33,8 @@ public class GainWinksCardTest {
 
     @Test
     void testExecuteAction() {
-        assertDoesNotThrow(() -> gainWinksCard.executeAction(player, gameBoard, input));
+        gainWinksCard.executeAction(player, gameBoard, input);
+        assertEquals(1, player.getWinks(), "The player should have 1 wink");
     }
 
     @Test
