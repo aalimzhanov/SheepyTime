@@ -198,4 +198,20 @@ public class GameBoardController {
         return gameBoard.isTurnOver();
     }
 
+    /**
+     * Returns the Nightmare object associated with the game board.
+     *
+     * @return the Nightmare object
+     */
+    public Nightmare getNightmare() {
+        return gameBoard.getNightmare();
+    }
+    /**
+     * Returns the position of the nightmare on the game board.
+     *
+     * @return the position of the nightmare
+     */
+    public int getNightmarePosition() {
+        return gameBoard.getNightmarePos();
+    }
 }
