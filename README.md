@@ -37,3 +37,5 @@ Bump in the night going to negative positions(should it wrap around to 10 when n
 GameControllerTest cannot be done since that would require the entire game being played.
 
 CatchZzzCardTest full testing is not possible due to Scanner input
+
+OrComboCardTest full testing is not possible due to Scanner input
