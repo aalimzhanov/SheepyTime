@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import controllers.TileController;
 
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameBoardTest {
@@ -40,13 +38,13 @@ public class GameBoardTest {
     }
 
     @Test
-    void testPlaceTile_InvalidPosition() {
+    void testPlaceTileInvalidPosition() {
         assertThrows(IllegalArgumentException.class, () -> gameBoard.placeTile(0, tile));
         assertThrows(IllegalArgumentException.class, () -> gameBoard.placeTile(11, tile));
     }
 
     @Test
-    void testPlaceTile_PositionOccupied() {
+    void testPlaceTilePositionOccupied() {
         gameBoard.placeTile(1, tile);
         assertThrows(IllegalArgumentException.class, () -> gameBoard.placeTile(1, tile));
     }
@@ -64,14 +62,17 @@ public class GameBoardTest {
         gameBoard.placeTopTile(tile);
         assertTrue(gameBoard.isTilePlaced(1));
         assertEquals(tile, gameBoard.getTile(1));
+        assertFalse(gameBoard.isTilePlaced(2));
+        TileController newTile = new TileController(new FinalSprintTile(), new TileView());
+        gameBoard.placeTopTile(newTile);
+        assertTrue(gameBoard.isTilePlaced(2));
+        assertEquals(newTile, gameBoard.getTile(2));
     }
 
     @Test
     void testPlaceMovable() {
         gameBoard.placeMovable(movable, 1);
-        Map<Movable, Integer> movables = gameBoard.getMovables();
-        assertTrue(movables.containsKey(movable));
-        assertEquals(1, movables.get(movable));
+        assertEquals(1, gameBoard.getMovablePosition(movable));
     }
 
     @Test
@@ -82,37 +83,43 @@ public class GameBoardTest {
     }
 
     @Test
+    void testMoveMovableNotOnBoard() {
+        assertThrows(IllegalArgumentException.class, () -> gameBoard.moveMovable(movable, 1));
+    }
+
+    @Test
+    void testMoveMovableCalledItANight() {
+        gameBoard.placeMovable(movable, 1);
+        gameBoard.callItANight(movable);
+        assertThrows(IllegalArgumentException.class, () -> gameBoard.moveMovable(movable, 1));
+    }
+
+    @Test
+    void testMoveMovableWokenUp() {
+        gameBoard.placeMovable(movable, 1);
+        gameBoard.wakeUpMovable(movable);
+        assertThrows(IllegalArgumentException.class, () -> gameBoard.moveMovable(movable, 1));
+    }
+
+    @Test
     void testMoveMovable_CircularBoard() {
         gameBoard.placeMovable(movable, 9);
         gameBoard.moveMovable(movable, 3);
         assertEquals(2, gameBoard.getMovablePosition(movable));
+        gameBoard.moveMovable(movable, -3);
+        assertEquals(1, gameBoard.getMovablePosition(movable), "Player cannot cross the fence backwards");
     }
 
     @Test
     void testMoveMovable_ScareMovable() {
-        gameBoard.placeMovable(movable, 1);
         gameBoard.addNightmareToBoard(nightmare);
-        gameBoard.moveNightmare(1);
-        assertTrue(movable.isScared());
-    }
-
-    @Test
-    void testMoveMovable_WakeUpMovable() {
+        gameBoard.moveNightmare(2);
         gameBoard.placeMovable(movable, 1);
-        gameBoard.wakeUpMovable(movable);
-        assertTrue(gameBoard.isAwake(movable));
-    }
-
-    @Test
-    void testMoveMovable_NotOnBoard() {
-        Movable otherMovable = new Player("Derrik", "pink");
-        assertThrows(IllegalArgumentException.class, () -> gameBoard.moveMovable(otherMovable, 1));
-    }
-
-    @Test
-    void testMoveMovable_CalledItANight() {
-        gameBoard.placeMovable(movable, 11);
-        assertThrows(IllegalArgumentException.class, () -> gameBoard.moveMovable(movable, 1));
+        gameBoard.moveMovable(movable, 1);
+        assertTrue(movable.isScared(), "Player should be scared");
+        gameBoard.moveNightmare(1);
+        gameBoard.moveMovable(movable, 1);
+        assertTrue(gameBoard.isAwake(movable), "Player should be woken up");
     }
 
     @Test
@@ -144,10 +151,18 @@ public class GameBoardTest {
     }
 
     @Test
-    void testIsTurnOver() {
+    void testIsTurnOverWakeUp() {
         gameBoard.placeMovable(movable, 1);
         assertFalse(gameBoard.isTurnOver());
         gameBoard.wakeUpMovable(movable);
+        assertTrue(gameBoard.isTurnOver());
+    }
+
+    @Test
+    void testIsTurnOverCallItANight() {
+        gameBoard.placeMovable(movable, 1);
+        assertFalse(gameBoard.isTurnOver());
+        gameBoard.callItANight(movable);
         assertTrue(gameBoard.isTurnOver());
     }
 

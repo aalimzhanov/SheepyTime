@@ -32,12 +32,16 @@ public class PlayerTest {
 
     @Test
     void testGetCard() {
+        assertNull(player.getCard(0), "The card at index 0 should be null initially");
+        assertNull(player.getCard(1), "The card at index 1 should be null initially");
         Card card1 = new MoveSpacesCard(2);
         Card card2 = new MoveSpacesCard(3);
         player.gainCard(card1);
         player.gainCard(card2);
         assertEquals(card1, player.getCard(0), "The card at index 0 should be 'Card 1'");
         assertEquals(card2, player.getCard(1), "The card at index 1 should be 'Card 2'");
+        assertThrows(IllegalArgumentException.class, () -> player.getCard(2), "2 is invalid index");
+        assertThrows(IllegalArgumentException.class, () -> player.getCard(-1), "-1 is invalid index");
     }
 
     @Test
@@ -45,12 +49,17 @@ public class PlayerTest {
         assertEquals(10, player.getNumOfZzzs(), "The number of Zzzs should correctly be 10");
     }
 
-
     @Test
     void testGainCard() {
         Card card = new MoveSpacesCard(1);
         player.gainCard(card);
         assertEquals(card, player.getCard(0), "The gained card should be at index 0");
+        Card card2 = new MoveSpacesCard(2);
+        player.gainCard(card2);
+        assertEquals(card2, player.getCard(1), "The gained card should be at index 1");
+        Card card3 = new MoveSpacesCard(3);
+        assertThrows(IllegalStateException.class, () -> player.gainCard(card3),
+                "The player should not be able to gain more than 2 cards");
     }
 
     @Test
@@ -73,6 +82,8 @@ public class PlayerTest {
         Card playedCard = player.playCard(0);
         assertEquals(card, playedCard, "The played card should be the same as the gained card");
         assertNull(player.getCard(0), "The card at index 0 should be null after playing");
+        assertThrows(IllegalArgumentException.class, () -> player.playCard(2), "2 is invalid index");
+        assertThrows(IllegalArgumentException.class, () -> player.playCard(-1), "-1 is invalid index");
     }
 
     @Test
@@ -105,6 +116,7 @@ public class PlayerTest {
         assertNull(player.getCard(0), "The card at index 0 should be null after discarding");
         assertNull(player.getCard(1), "The card at index 1 should be null after discarding");
     }
+
     @Test
     void testCrossFence() {
         player.crossFence();
@@ -124,16 +136,22 @@ public class PlayerTest {
         Card card2 = new MoveSpacesCard(3);
         player.gainCard(card1);
         player.gainCard(card2);
-        assertEquals(card1, player.getOtherCardToPlay(), "The other card to play should be 'Card 1'");
         player.playCard(0);
         assertEquals(card2, player.getOtherCardToPlay(),
                 "The other card to play should be 'Card 2' after playing the first card");
+        assertNull(player.getCard(1), "The card at index 1 should be null after playing it");
+        player.gainCard(card1);
+        player.gainCard(card2);
+        player.playCard(1);
+        assertEquals(card1, player.getOtherCardToPlay(),
+                "The other card to play should be 'Card 1' after playing the second card");
+
     }
 
     @Test
     void testMovePillow() {
         player.movePillow(-5);
-        assertEquals(35, player.getPillowPosition(), "The pillow position should be increased by 5");
+        assertEquals(35, player.getPillowPosition(), "The pillow should move down by 5");
     }
 
     @Test
@@ -149,16 +167,16 @@ public class PlayerTest {
         assertEquals(5, player.getNumOfZzzs(), "The number of Zzzs should be decreased to 5");
         assertEquals(5, player.catchZZZs(10), "The player should catch the remaining 5 Zzzs");
         assertEquals(0, player.getNumOfZzzs(), "The number of Zzzs should be decreased to 0");
+        assertEquals(0, player.catchZZZs(5), "The player should not catch any Zzzs");
     }
 
     @Test
     void testNeedsACard() {
         assertTrue(player.needsACard(), "The player should initially need a card");
         player.gainCard(new MoveSpacesCard(1));
-        assertTrue(player.needsACard(), "The player should not need a card after gaining one");
+        assertTrue(player.needsACard(), "The player should need a card");
         player.gainCard(new MoveSpacesCard(1));
         assertFalse(player.needsACard(), "The player should not need a card after gaining two");
     }
 
-    
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import models.Deck;
-import models.cards.CatchZzzCard;
 import models.cards.MoveNightmareCard;
 import models.cards.MoveSpacesCard;
 import models.Card;

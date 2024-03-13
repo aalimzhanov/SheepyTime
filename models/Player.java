@@ -61,6 +61,9 @@ public class Player implements Movable {
      * @return the card at the specified index
      */
     public Card getCard(int index) {
+        if (index < 0 || index > 1) {
+            throw new IllegalArgumentException("Invalid index. Only 0 and 1 are valid arguments.");
+        }
         return hand[index];
     }
 
@@ -104,6 +107,9 @@ public class Player implements Movable {
      * @return the played card
      */
     public Card playCard(int index) {
+        if (index < 0 || index > 1) {
+            throw new IllegalArgumentException("Invalid index. Only 0 and 1 are valid arguments.");
+        }
         Card playerCard = hand[index];
         hand[index] = null;
         return playerCard;
@@ -175,9 +181,13 @@ public class Player implements Movable {
      */
     public Card getOtherCardToPlay() {
         if (hand[0] != null) {
-            return hand[0];
+            Card temp = hand[0];
+            hand[0] = null;
+            return temp;
         } else {
-            return hand[1];
+            Card temp = hand[1];
+            hand[1] = null;
+            return temp;
         }
     }
 

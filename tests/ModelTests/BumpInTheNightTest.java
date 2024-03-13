@@ -24,7 +24,8 @@ class BumpInTheNightTest {
     @Test
     void testDescription() {
         String expectedDescription = "*THUD* WHAT WAS THAT SOUND? PROBABLY NOTHING, THERE'S ONLY SHADOWS. *THUD* I THINK I HEARD A BUMP IN THE NIGHT AGAIN. WAS IT CLOSER? MAYBE I SHOULD GO SEE IF THERE'S ANYTHING THERE... *THUD SQUEEELCH* THERE WAS DEFINITELY SOMETHING THERE!!!";
-        assertEquals(expectedDescription, bumpInTheNight.getDescription(), "The description should be '" + expectedDescription + "'");
+        assertEquals(expectedDescription, bumpInTheNight.getDescription(),
+                "The description should be '" + expectedDescription + "'");
     }
 
     @Test

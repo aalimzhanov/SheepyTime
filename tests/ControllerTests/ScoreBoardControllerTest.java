@@ -14,8 +14,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.Position;
-
 public class ScoreBoardControllerTest {
 
     private ScoreBoardController scoreBoardController;
