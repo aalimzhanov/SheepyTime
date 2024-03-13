@@ -39,3 +39,5 @@ GameControllerTest cannot be done since that would require the entire game being
 CatchZzzCardTest full testing is not possible due to Scanner input
 
 OrComboCardTest full testing is not possible due to Scanner input
+
+RestingSpotTile does not fully work, because player's catchZzzs() method doesn't actually catch zzzs onto tiles but just removes zzzs from player
