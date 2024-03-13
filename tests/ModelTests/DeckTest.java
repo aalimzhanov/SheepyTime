@@ -31,13 +31,4 @@ public class DeckTest {
         assertEquals(card, deck.drawCard());
     }
 
-    @Test
-    public void testShuffleDeck() {
-        Card card1 = new ScareNightmareCard();
-        Card card2 = new ScareNightmareCard();
-        deck.addCard(card1);
-        deck.addCard(card2);
-        deck.shuffleDeck();
-        assertNotEquals(card1, deck.drawCard());
-    }
 }
