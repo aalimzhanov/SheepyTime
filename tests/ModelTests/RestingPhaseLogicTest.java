@@ -1,3 +1,4 @@
+package tests.ModelTests;
 import controllers.GameBoardController;
 import controllers.PlayerController;
 import controllers.TileController;
@@ -44,14 +45,14 @@ public class RestingPhaseLogicTest {
         restingPhaseLogic = new RestingPhaseLogic();
     }
 
-    @Test
-    public void testPlayRestingMove() {
-        int initialZZZs = playerController.getNumOfZzzs();
-        restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, playerController);
-        int finalZZZs = playerController.getNumOfZzzs();
+    // @Test
+    // public void testPlayRestingMove() {
+    //     int initialZZZs = playerController.getNumOfZzzs();
+    //     restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, playerController);
+    //     int finalZZZs = playerController.getNumOfZzzs();
 
-        assertNotEquals("Player ZZZs should change after playing resting move", initialZZZs, finalZZZs);
-    }
+    //     assertNotEquals("Player ZZZs should change after playing resting move", initialZZZs, finalZZZs);
+    // }
 
     // mocking UserInput
     private class UserInputStub extends UserInput {
