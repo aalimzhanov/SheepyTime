@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import controllers.TileController;
 
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameBoardTest {
