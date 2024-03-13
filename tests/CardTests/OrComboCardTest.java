@@ -4,9 +4,6 @@ import models.cards.CatchZzzCard;
 import models.cards.MoveSpacesCard;
 import models.cards.OrComboCard;
 import models.Card;
-import models.GameBoard;
-import models.Player;
-import views.UserInput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,17 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrComboCardTest {
 
     private OrComboCard orComboCard;
-    private Player player;
-    private GameBoard gameBoard;
-    private UserInput input;
 
     @BeforeEach
     void setUp() {
         Card[] actions = new Card[]{new CatchZzzCard(1), new MoveSpacesCard(2)}; 
         orComboCard = new OrComboCard(actions);
-        player = new Player("tolga","blue"); 
-        gameBoard = new GameBoard(); 
-        input = new UserInput(); 
     }
 
     @Test
@@ -33,12 +24,6 @@ public class OrComboCardTest {
         String expectedInformation = "'Catch 1 zzz' or 'Move 2 spaces'";
         assertEquals(expectedInformation, orComboCard.getInformation(), "The information should be the expected information");
     }
-
-    // Deal with userInput
-    // @Test
-    // void testExecuteAction() {
-    //     assertDoesNotThrow(() -> orComboCard.executeAction(player, gameBoard, input));
-    // }
 
     @Test
     void testIsNightmare() {

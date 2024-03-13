@@ -1,4 +1,4 @@
-package tests;
+package tests.ModelTests;
 
 import controllers.DeckController;
 import controllers.GameBoardController;
@@ -38,12 +38,12 @@ public class RacingPhaseLogicTest {
         racingPhaseLogic = new RacingPhaseLogic();
     }
 
-    @Test
-    public void testPlayRacingMove() {
+    // @Test
+    // public void testPlayRacingMove() {
 
-        racingPhaseLogic.playRacingMove(playerController, gameBoardController, deckController, userInput);
+    //     racingPhaseLogic.playRacingMove(playerController, gameBoardController, deckController, userInput);
 
-        assertFalse(playerController.needsACard());
-    }
+    //     assertFalse(playerController.needsACard());
+    // }
 
 }

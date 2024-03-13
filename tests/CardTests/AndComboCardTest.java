@@ -23,14 +23,16 @@ public class AndComboCardTest {
     void setUp() {
         actions = new Card[]{new MoveSpacesCard(2), new MoveSpacesCard(3)};
         andComboCard = new AndComboCard(actions);
-        player = new Player("tolga","blue"); 
+        player = new Player("Adil","blue"); 
         gameBoard = new GameBoard();
+        gameBoard.placeMovable(player, 1);
     }
 
     @Test
     void testExecuteAction() {
-        assertDoesNotThrow(() -> andComboCard.executeAction(player, gameBoard, input), "executeAction should not throw an exception");
-    }
+        andComboCard.executeAction(player, gameBoard, input);
+        assertEquals(6, gameBoard.getMovablePosition(player), "The player should be at position 6");
+     }
 
     @Test
     void testGetInformation() {

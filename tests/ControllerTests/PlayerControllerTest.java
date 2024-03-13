@@ -2,9 +2,7 @@ package tests.ControllerTests;
 
 import controllers.PlayerController;
 import models.Player;
-import models.Sheep;
 import models.cards.MoveSpacesCard;
-import models.cards.OrComboCard;
 import models.Card;
 import views.PlayerView;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +18,7 @@ public class PlayerControllerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Tolga", "blue"); 
+        player = new Player("Adil", "blue"); 
         view = new PlayerView(); 
         playerController = new PlayerController(player, view);
     }
@@ -32,7 +30,7 @@ public class PlayerControllerTest {
 
     @Test
     void testGetPlayerName() {
-        String expectedName = "Tolga";
+        String expectedName = "Adil";
         assertEquals(expectedName, playerController.getPlayerName(), "The name should be Tolga");
     }
 
@@ -45,6 +43,9 @@ public class PlayerControllerTest {
     void testGetNumOfZzzs() {
         int expectedNumOfZzzs = 10;
         assertEquals(expectedNumOfZzzs, playerController.getNumOfZzzs(), "The number of Zzzs should be 10");
+        playerController.catchZZZs(3);
+        expectedNumOfZzzs -= 3;
+        assertEquals(expectedNumOfZzzs, playerController.getNumOfZzzs(), "The number of Zzzs should be 13");
     }
 
     @Test
@@ -65,12 +66,15 @@ public class PlayerControllerTest {
         Card card = new MoveSpacesCard(1); 
         player.gainCard(card);
         assertEquals(card, playerController.playCard(0), "The played card should be the card that was gained");
+        assertNull(player.getCard(0), "The card should be removed from the player's hand");
     }
 
     @Test
     void testCatchZZZs() {
         int amount = 1;
         assertEquals(amount, playerController.catchZZZs(amount), "The player should catch the specified amount of Zzzs");
+        assertEquals(9, player.getNumOfZzzs(), "The number of Zzzs should be 9");
+        assertEquals(9, playerController.catchZZZs(10), "The player can only catch it's remaining Zzzs");
     }
 
     @Test
