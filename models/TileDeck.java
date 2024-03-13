@@ -71,7 +71,7 @@ public class TileDeck {
      * Initializes the tileMarket by adding tiles from the allTiles queue.
      */
     public void initializeMarket() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4 && !allTiles.isEmpty(); i++) {
             tileMarket.add(allTiles.poll());
         }
     }

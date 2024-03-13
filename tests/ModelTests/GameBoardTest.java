@@ -66,7 +66,7 @@ public class GameBoardTest {
         TileController newTile = new TileController(new FinalSprintTile(), new TileView());
         gameBoard.placeTopTile(newTile);
         assertTrue(gameBoard.isTilePlaced(2));
-        assertEquals(tile, gameBoard.getTile(2));
+        assertEquals(newTile, gameBoard.getTile(2));
     }
 
     @Test
