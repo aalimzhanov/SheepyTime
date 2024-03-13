@@ -9,8 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.text.Position;
 
 public class ScoreBoardControllerTest {
 
@@ -21,7 +25,7 @@ public class ScoreBoardControllerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("tolga", "blue");
+        player = new Player("Adil", "blue");
         List<Player> players = new ArrayList<>();
         players.add(player);
         scoreBoard = new ScoreBoard(players);
@@ -33,7 +37,7 @@ public class ScoreBoardControllerTest {
     void testMovePillow() {
         int amount = -1;
         scoreBoardController.movePillow(player, amount);
-        assertEquals(40+amount, scoreBoard.getPillowPosition(player),
+        assertEquals(40 + amount, scoreBoard.getPillowPosition(player),
                 "The pillow should be moved by the specified amount");
     }
 
@@ -48,15 +52,15 @@ public class ScoreBoardControllerTest {
     void testWakeUp() {
         player.gainWinks(2);
         scoreBoardController.wakeUp(player);
-
-        assertEquals(0, scoreBoard.getWinks(player), "The player should have no winks");
+        assertEquals(0, scoreBoard.getWinks(player), "The player should have no winks if they wake up");
     }
 
     @Test
     void testEndOfTurn() {
         player.gainWinks(6);
         scoreBoardController.endOfTurn();
-        assertEquals(39, scoreBoard.getPillowPosition(player), "The player should move their pillow back by one for every 5 winks");
+        assertEquals(39, scoreBoard.getPillowPosition(player),
+                "The player should move their pillow back by one for every 5 winks");
         assertEquals(0, scoreBoard.getWinks(player), "The player should have no winks");
     }
 
@@ -65,7 +69,7 @@ public class ScoreBoardControllerTest {
         assertFalse(scoreBoardController.isGameOver(), "The game should not be over");
         scoreBoard.movePillow(player, -35);
         scoreBoard.gainWinks(player, 6);
-        assertTrue(scoreBoardController.isGameOver(), "The game should be over");
+        assertTrue(scoreBoardController.isGameOver(), "The game should be over when a player reaches their pillow");
     }
 
     @Test
@@ -76,6 +80,13 @@ public class ScoreBoardControllerTest {
 
     @Test
     void testUpdateView() {
-        assertDoesNotThrow(() -> scoreBoardController.displayScoreBoard());
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+        System.setOut(printStream);
+        scoreBoardController.displayScoreBoard();;
+        String expectedOutput = "Current Game State:\r\n" + //
+                "Player	Score	Pillow Position\r\n" + //
+                "Adil	0	40";
+        assertEquals(expectedOutput, outputStream.toString().trim(), "The player should start with no winks and pillow at 40");
     }
 }

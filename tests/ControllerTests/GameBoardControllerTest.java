@@ -20,8 +20,6 @@ import models.Tile;
 import models.Wolf;
 import models.tiles.ActionHeroTile;
 import controllers.TileController;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.lang.IllegalArgumentException;
 
 public class GameBoardControllerTest {
 
