@@ -4,7 +4,6 @@ import controllers.DeckController;
 import controllers.NightmareController;
 import models.BumpInTheNight;
 import models.Nightmare;
-import models.Spider;
 import models.Wolf;
 import views.NightmareView;
 import views.UserInput;
@@ -35,10 +34,6 @@ public class NightmareFactory {
             case 2:
                 nightmare = new BumpInTheNight();
                 NightmareCardFactory.createNightmareCards(deckController.getModel(), "BumpInTheNight");
-                break;
-            case 3:
-                nightmare = new Spider();
-                NightmareCardFactory.createNightmareCards(deckController.getModel(), "Spider");
                 break;
             default:
                 nightmare = new Wolf();
