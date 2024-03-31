@@ -3,106 +3,215 @@ package controllers;
 import models.GameBoard;
 import models.Movable;
 import models.Nightmare;
-import models.Tile;
 import views.GameBoardView;
 
+/**
+ * The GameBoardController class is responsible for controlling the game board
+ * and interacting with the view.
+ * It provides methods to place tiles, movables, nightmares, and perform various
+ * actions on the game board.
+ *
+ * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
+ */
 public class GameBoardController {
 
     private GameBoard gameBoard;
     private GameBoardView gameBoardView;
 
+    /**
+     * Constructs a GameBoardController object with the specified game board and game board view.
+     *
+     * @param gameBoard     the game board to be controlled
+     * @param gameBoardView the game board view to interact with
+     */
     public GameBoardController(GameBoard gameBoard, GameBoardView gameBoardView) {
         this.gameBoard = gameBoard;
         this.gameBoardView = gameBoardView;
     }
 
+    /**
+     * Returns the game board model.
+     *
+     * @return the game board model
+     */
     public GameBoard getModel() {
         return gameBoard;
     }
 
-    public void updateView() {
-        gameBoardView.updateView(gameBoard);
+    /**
+     * Displays the information of the game board.
+     */
+    public void displayInformation() {
+        gameBoardView.displayInformation(gameBoard);
     }
 
-    public void placeTile(int position, Tile tile) {
+    /**
+     * Places a tile at the specified position on the game board.
+     *
+     * @param position       the position to place the tile
+     * @param tileController the tile controller representing the tile to be placed
+     */
+    public void placeTile(int position, TileController tileController) {
         try {
-            gameBoard.placeTile(position, tile);
-            updateView();
+            gameBoard.placeTile(position, tileController);
         } catch (IllegalArgumentException e) {
             gameBoardView.showError(e.getMessage());
         }
     }
 
+    /**
+     * Adds a movable to the game board at the default position.
+     *
+     * @param movable the movable to be added
+     */
     public void addMovableToBoard(Movable movable) {
         gameBoard.placeMovable(movable, 1);
-        updateView();
     }
 
-    // In case we need to put the movable to a certain location
+    /**
+     * Places a movable at the specified position on the game board.
+     *
+     * @param movable  the movable to be placed
+     * @param position the position to place the movable
+     */
     public void placeMovable(Movable movable, int position) {
         gameBoard.placeMovable(movable, position);
-        updateView();
     }
 
+    /**
+     * Moves a movable by the specified amount on the game board.
+     *
+     * @param movable the movable to be moved
+     * @param amount  the amount to move the movable
+     */
     public void moveMovable(Movable movable, int amount) {
         gameBoard.moveMovable(movable, amount);
-        updateView();
     }
 
+    /**
+     * Calls it a night for the specified movable on the game board.
+     *
+     * @param movable the movable to call it a night for
+     */
     public void callItANight(Movable movable) {
         gameBoard.callItANight(movable);
-        updateView();
     }
 
+    /**
+     * Moves the nightmare by the specified amount on the game board.
+     *
+     * @param amount the amount to move the nightmare
+     * @return true if the nightmare crossed the fence, false otherwise
+     */
     public boolean moveNightmare(int amount) {
         boolean crossedFence = gameBoard.moveNightmare(amount);
         if (crossedFence) {
             gameBoard.wakeEveryone();
         }
-        updateView();
         return crossedFence;
     }
 
+    /**
+     * Jumps the nightmare by the specified amount on the game board.
+     *
+     * @param amount the amount to jump the nightmare
+     * @return true if the nightmare crossed the fence, false otherwise
+     */
     public boolean jumpNightmare(int amount) {
         boolean crossedFence = gameBoard.jumpNightmare(amount);
         if (crossedFence) {
             gameBoard.wakeEveryone();
         }
-        updateView();
         return crossedFence;
     }
 
+    /**
+     * Adds a nightmare to the game board.
+     *
+     * @param nightmare the nightmare to be added
+     */
     public void addNightmareToBoard(Nightmare nightmare) {
         gameBoard.addNightmareToBoard(nightmare);
-        updateView();
     }
 
+    /**
+     * Resets the positions of all movables on the game board.
+     */
     public void resetPositions() {
         gameBoard.resetPositions();
-        updateView();
     }
 
+    /**
+     * Checks if a tile is placed at the specified position on the game board.
+     *
+     * @param position the position to check
+     * @return true if a tile is placed at the position, false otherwise
+     */
     public boolean isTilePlaced(int position) {
         return gameBoard.isTilePlaced(position);
     }
 
-    public Tile getTile(int position) {
+    /**
+     * Returns the tile controller at the specified position on the game board.
+     *
+     * @param position the position to get the tile controller from
+     * @return the tile controller at the position
+     */
+    public TileController getTile(int position) {
         return gameBoard.getTile(position);
     }
 
+    /**
+     * Returns the position of the specified movable on the game board.
+     *
+     * @param movable the movable to get the position of
+     * @return the position of the movable
+     */
     public int getMovablePosition(Movable movable) {
         return gameBoard.getMovablePosition(movable);
     }
 
+    /**
+     * Returns the number of dream tiles on the game board.
+     *
+     * @return the number of dream tiles
+     */
     public int getNumOfDreamTiles() {
         return gameBoard.getNumOfDreamTiles();
     }
 
-    public void placeTopTile(Tile tile) {
-        gameBoard.placeTopTile(tile);
+    /**
+     * Places the top tile on the game board.
+     *
+     * @param tileController the tile controller representing the top tile
+     */
+    public void placeTopTile(TileController tileController) {
+        gameBoard.placeTopTile(tileController);
     }
-    public boolean isTurnOver(){
+
+    /**
+     * Checks if the turn is over on the game board.
+     *
+     * @return true if the turn is over, false otherwise
+     */
+    public boolean isTurnOver() {
         return gameBoard.isTurnOver();
     }
 
+    /**
+     * Returns the Nightmare object associated with the game board.
+     *
+     * @return the Nightmare object
+     */
+    public Nightmare getNightmare() {
+        return gameBoard.getNightmare();
+    }
+    /**
+     * Returns the position of the nightmare on the game board.
+     *
+     * @return the position of the nightmare
+     */
+    public int getNightmarePosition() {
+        return gameBoard.getNightmarePos();
+    }
 }

@@ -9,7 +9,19 @@ import models.cards.GainWinksCard;
 import models.cards.MoveSpacesCard;
 import models.cards.OrComboCard;
 
+/**
+ * The DeckFactory class is responsible for creating a deck of cards for the game.
+ * It provides methods to create different types of cards and a method to create a deck controller.
+ * 
+ * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
+ */
 public class DeckFactory {
+    
+    /**
+     * Creates a deck of cards for the game.
+     * 
+     * @return The deck controller that manages the deck of cards.
+     */
     public static DeckController createDeck() {
         Deck deck = new Deck();
         
@@ -58,10 +70,24 @@ public class DeckFactory {
         return deckController;
     }
     
+    /**
+     * Creates an OrComboCard by combining two cards using the OR logic.
+     * 
+     * @param card1 The first card to be combined.
+     * @param card2 The second card to be combined.
+     * @return The OrComboCard created by combining the two cards.
+     */
     private static Card createOrComboCard(Card card1, Card card2) {
         return new OrComboCard(new Card[] { card1, card2 });
     }
     
+    /**
+     * Creates an AndComboCard by combining two cards using the AND logic.
+     * 
+     * @param card1 The first card to be combined.
+     * @param card2 The second card to be combined.
+     * @return The AndComboCard created by combining the two cards.
+     */
     private static Card createAndComboCard(Card card1, Card card2) {
         return new AndComboCard(new Card[] { card1, card2 });
     }

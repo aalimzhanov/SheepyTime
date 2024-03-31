@@ -2,7 +2,9 @@ package tests.CardTests;
 
 import models.cards.MoveNightmareCard;
 import models.GameBoard;
+import models.Nightmare;
 import models.Player;
+import models.Wolf;
 import views.UserInput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +17,17 @@ public class MoveNightmareCardTest {
     private Player player;
     private GameBoard gameBoard;
     private UserInput input;
+    private Nightmare nightmare;
 
     @BeforeEach
     void setUp() {
         int spaces = 1;
         moveNightmareCard = new MoveNightmareCard(spaces);
-        player = new Player("tolga","blue"); 
-        gameBoard = new GameBoard(); 
-        input = new UserInput(); 
+        player = new Player("Adil","blue"); 
+        gameBoard = new GameBoard();
+        nightmare = new Wolf();
+        gameBoard.addNightmareToBoard(nightmare);
+        gameBoard.placeMovable(player, 1);
     }
 
     @Test
@@ -33,7 +38,16 @@ public class MoveNightmareCardTest {
 
     @Test
     void testExecuteAction() {
-        assertDoesNotThrow(() -> moveNightmareCard.executeAction(player, gameBoard, input));
+        moveNightmareCard.executeAction(player, gameBoard, input);
+        assertEquals(1, gameBoard.getNightmarePos(), "The nightmare should be at position 1");
+        assertTrue(player.isScared(), "The player should be scared");
+    }
+    @Test
+    void testExecuteAction2() {
+        moveNightmareCard = new MoveNightmareCard(2);
+        moveNightmareCard.executeAction(player, gameBoard, input);
+        assertEquals(2, gameBoard.getNightmarePos(), "The nightmare should be at position 1");
+        assertTrue(player.isScared(), "The player should be scared when a nightmare moves past them");
     }
 
     @Test

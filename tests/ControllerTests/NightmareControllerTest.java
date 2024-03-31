@@ -1,4 +1,4 @@
-package tests;
+package tests.ControllerTests;
 
 import controllers.NightmareController;
 import models.Nightmare;

@@ -1,0 +1,601 @@
+%% paste this in mermaid.live and fix the arrows and organize the classes. 
+
+classDiagram
+    Main --> GameController 
+    Main --> UserInput
+    GameController "1" --> "1" UserInput : uses 
+    GameController "1" --> "1" GameView : displays 
+    GameController "1" --> "1" PlayerController : manages 
+    GameController "1" --> "1" GameBoardController : controls 
+    GameController "1" --> "1" NightmareController : controls 
+    GameController "1" --> "1" DeckController : controls 
+    GameController "1" --> "1" ScoreBoardController : controls 
+    GameController "1" --> "1" TileDeck : uses 
+    class CardController {
+        -Card model
+        -CardView view
+        -UserInput input
+        +CardController(Card card, CardView view, UserInput input)
+        +updateView()
+        +getCardInformation() String
+        +executeCardAction(Player player, GameBoard gameBoard)
+    }
+
+    CardController "1" --> "1" Card : has 
+    CardController "1" --> "1" CardView : displays 
+    CardController "1" --> "1" UserInput : uses 
+    CardController "1" --> "1" Player : interacts 
+    CardController "1" --> "1" GameBoard : modifies 
+
+    class DeckController {
+        -Deck deck
+        +DeckController(Deck deck)
+        +getModel() Deck
+        +drawCard() Card
+    }
+
+    DeckController "1" --> "1" Deck : controls 
+
+    class GameBoardController {
+        -GameBoard gameBoard
+        -GameBoardView gameBoardView
+        +GameBoardController(GameBoard gameBoard, GameBoardView gameBoardView)
+        +getModel() GameBoard
+        +displayInformation()
+        +placeTile(int position, TileController tileController)
+        +addMovableToBoard(Movable movable)
+        +placeMovable(Movable movable, int position)
+        +moveMovable(Movable movable, int amount)
+        +callItANight(Movable movable)
+        +moveNightmare(int amount) boolean
+        +jumpNightmare(int amount) boolean
+        +addNightmareToBoard(Nightmare nightmare)
+        +resetPositions()
+        +isTilePlaced(int position) boolean
+        +getTile(int position) TileController
+        +getMovablePosition(Movable movable) int
+        +getNumOfDreamTiles() int
+        +placeTopTile(TileController tileController)
+        +isTurnOver() boolean
+    }
+
+    GameBoardController "1" --> "1" GameBoard : controls 
+    GameBoardController "1" --> "1" GameBoardView : interacts 
+    GameBoardController "1" --> "1" Movable : modifies 
+    GameBoardController "1" --> "1" Nightmare : manages 
+    GameBoardController "1" --> "1..*" TileController : manages 
+
+    class GameController {
+        -List~PlayerController~ playerControllers
+        -GameBoardController gameBoardController
+        -NightmareController nightmareController
+        -DeckController deckController
+        -ScoreBoardController scoreBoardController
+        -UserInput userInput
+        -GameView gameView
+        -TileDeck tileDeck
+        +GameController(int numOfPlayers, UserInput userInput)
+        +startGame()
+        +initializeGame(int numOfPlayers, UserInput userInput)
+        +playGame()
+        +concludeGame()
+    }
+
+    
+
+    class NightmareController {
+        -Nightmare model
+        -NightmareView view
+        +NightmareController(Nightmare model, NightmareView view)
+        +updateView()
+        +getNightmareName() String
+        +getNightmareDescription() String
+        +getNightmareDifficulty() int
+        +getModel() Nightmare
+    }
+
+    NightmareController "1" --> "1" Nightmare : controls 
+    NightmareController "1" --> "1" NightmareView : updates 
+
+    class PlayerController {
+        -Player model
+        -PlayerView view
+        +PlayerController(Player model, PlayerView view)
+        +updateView()
+        +getPlayerName() String
+        +getSheep() Sheep
+        +getNumOfZzzs() int
+        +gainCard(Card card)
+        +needsACard() boolean
+        +playCard(int index) Card
+        +catchZZZs(int amount) int
+        +getModel() Player
+    }
+
+    PlayerController "1" --> "1" Player : controls 
+    PlayerController "1" --> "1" PlayerView : updates 
+
+    class ScoreBoardController {
+        -ScoreBoard scoreBoard
+        -ScoreBoardView scoreBoardView
+        +ScoreBoardController(ScoreBoard scoreBoard, ScoreBoardView scoreBoardView)
+        +movePillow(Player player, int amount)
+        +gainWinks(Player player, int amount)
+        +wakeUp(Player player)
+        +endOfTurn()
+        +isGameOver() boolean
+        +getScoreBoard() ScoreBoard
+        +displayScoreBoard()
+    }
+
+    ScoreBoardController "1" --> "1" ScoreBoard : controls 
+    ScoreBoardController "1" --> "1" ScoreBoardView : updates 
+
+    class TileController {
+        -Tile tile
+        -TileView view
+        +TileController(Tile tile, TileView view)
+        +displayTileInfo()
+        +activateTileEffect(Player player, GameBoard gameBoard, UserInput userInput)
+        +isInfinite() boolean
+        +placeZzzs(int zzzs, boolean isInfinite)
+        +getTileName() String
+        +hasZzzs() boolean
+        +getModel() Tile
+    }
+
+    TileController "1" --> "1" Tile : controls 
+    TileController "1" --> "1" TileView : updates 
+
+    class DeckFactory {
+        +createDeck() DeckController
+        -createOrComboCard(Card card1, Card card2) Card
+        -createAndComboCard(Card card1, Card card2) Card
+    }
+
+    DeckFactory "1" --> "1" DeckController : creates 
+
+    class GameBoardFactory {
+        +initializeGameBoard() GameBoardController
+    }
+
+    GameBoardFactory "1" --> "1" GameBoardController : creates 
+
+    class NightmareCardFactory {
+        +createNightmareCards(Deck deck, String nightmareChoice) void
+    }
+
+    NightmareCardFactory ..> Deck : populates
+
+    class NightmareFactory {
+        +createNightmare(UserInput userInput, DeckController deckController) NightmareController
+    }
+
+    NightmareFactory ..> NightmareController : creates 
+
+    class PlayerFactory {
+        +intialisePlayers(UserInput userInput, int numOfPlayers) List~PlayerController~
+    }
+    PlayerFactory ..> PlayerController : creates
+
+    class ScoreBoardFactory {
+        +initializeScoreBoard(List~PlayerController~ playerControllers) ScoreBoardController
+    }
+
+    ScoreBoardFactory ..> ScoreBoardController : creates 
+
+    class TileDeckFactory {
+        +createTiles() TileDeck
+    }
+    TileDeckFactory ..> TileDeck : creates 
+
+    class AndComboCard {
+        -Card[] actions
+        +AndComboCard(Card[] actions)
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +getInformation() String
+        +isNightmare() boolean
+    }
+
+    class CatchZzzCard {
+        -int zzzs
+        +CatchZzzCard(int zzzs)
+        +getInformation() String
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +isNightmare() boolean
+    }
+    class GainWinksCard {
+        -int winks
+        +GainWinksCard(int winks)
+        +getInformation() String
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +isNightmare() boolean
+    }
+
+    class JumpNightmareCard {
+        -int spaces
+        +JumpNightmareCard(int spaces)
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +getInformation() String
+        +isNightmare() boolean
+    }
+    class MoveNightmareCard {
+        -int spaces
+        +MoveNightmareCard(int spaces)
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +getInformation() String
+        +isNightmare() boolean
+    }
+    class MoveSpacesCard {
+        -int spaces
+        +MoveSpacesCard(int spaces)
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +getInformation() String
+        +isNightmare() boolean
+    }
+    class OrComboCard {
+        -Card[] actions
+        +OrComboCard(Card[] actions)
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +getInformation() String
+        +isNightmare() boolean
+    }
+    class ScareNightmareCard {
+        +executeAction(Player player, GameBoard gameBoard, UserInput input)
+        +getInformation() String
+        +isNightmare() boolean
+    }
+    Card <|.. JumpNightmareCard : implements 
+    Card <|.. MoveNightmareCard : implements 
+    Card <|.. MoveSpacesCard : implements 
+    Card <|.. OrComboCard : implements 
+    Card <|.. ScareNightmareCard : implements 
+    Card <|.. GainWinksCard : implements 
+    Card <|.. CatchZzzCard : implements 
+    Card <|.. AndComboCard : implements 
+    
+    class ActionHeroTile {
+      +ActionHeroTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class CoolKidsClubTile {
+      +CoolKidsClubTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class DoubleDutchTile {
+      +DoubleDutchTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class FinalSprintTile {
+      +FinalSprintTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class IntenseDreamsTile {
+      +IntenseDreamsTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class LoneSheepTile {
+      +LoneSheepTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class PerfectLandingTile {
+      +PerfectLandingTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class RestingSpotTile {
+      +RestingSpotTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class SecondWindTile {
+      +SecondWindTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    class StepBackTile {
+      +StepBackTile()
+      +activateEffect(Player player, GameBoard board, UserInput userInput) void
+    }
+    
+    Tile <|-- ActionHeroTile : implements
+    Tile <|-- CoolKidsClubTile : implements
+    Tile <|-- DoubleDutchTile : implements
+    Tile <|-- FinalSprintTile : implements
+    Tile <|-- IntenseDreamsTile : implements
+    Tile <|-- LoneSheepTile : implements
+    Tile <|-- PerfectLandingTile : implements
+    Tile <|-- RestingSpotTile : implements
+    Tile <|-- SecondWindTile : implements
+    Tile <|-- StepBackTile : implements
+
+    class BumpInTheNight {
+      -String name
+      -String description
+      -int difficulty
+      +BumpInTheNight()
+      +getName() String
+      +getDescription() String
+      +getDifficulty() int
+    }
+    
+    Nightmare <|.. BumpInTheNight : implements
+
+    class Card {
+      <<interface>>
+      +getInformation() String
+      +executeAction(Player, GameBoard, UserInput) void
+      +isNightmare() boolean
+    }
+
+    class Deck {
+      -activeCards Queue~Card~
+      -playedCards int
+      +Deck()
+      +shuffleDeck() void
+      +drawCard() Card
+      +addCard(Card) void
+      +isEmpty() boolean
+    }
+    Deck "1" -- "0..*" Card
+
+    class GameBoard {
+      -gameBoard Map~Movable, Integer~
+      -nightmare Nightmare
+      -nightmarePos int
+      -tiles TileController[]
+      -WAKE_UP_POSITION int
+      -NIGHTMARE_DEFAULT_POSITION int
+      -CALL_IT_A_NIGHT_POSITION int
+      +GameBoard()
+      +placeTile(int, TileController) void
+      +isTilePlaced(int) boolean
+      +getTile(int) TileController
+      +getNumOfDreamTiles() int
+      +placeTopTile(TileController) void
+      +placeMovable(Movable, int) void
+      +getMovables() Map~Movable, Integer~
+      +moveMovable(Movable, int) void
+      +scareMovablesAtPosition(int) void
+      +wakeUpMovable(Movable) void
+      +isAwake(Movable) boolean
+      +wakeEveryone() void
+      +callItANight(Movable) void
+      +getMovablePosition(Movable) int
+      +isTurnOver() boolean
+      +addNightmareToBoard(Nightmare) void
+      +moveNightmare(int) boolean
+      +jumpNightmare(int) boolean
+      +getNightmarePos() int
+      +getNightmare() Nightmare
+      +resetPositions() void
+      +hasAdjacentZzzs(Tile) boolean
+      +getTiles() TileController[]
+    }
+    GameBoard "1" -- "0..*" TileController
+    GameBoard "1" -- "0..*" Movable
+    GameBoard "1" -- "1" Nightmare
+
+    class GameLogic {
+      <<static>>
+      +playGame(List~PlayerController~, GameBoardController, DeckController, ScoreBoardController, GameView, TileDeck, UserInput) void
+      -checkWinConditions(ScoreBoardController) boolean
+      -takeTurn(GameBoardController, DeckController, TileDeck, PlayerController, UserInput, boolean) void
+    }
+    GameLogic --> PlayerController     
+    GameLogic --> GameBoardController 
+    GameLogic --> DeckController 
+    GameLogic --> ScoreBoardController 
+    GameLogic --> GameView 
+    GameLogic --> TileDeck 
+    GameLogic --> UserInput 
+
+    class Movable {
+      <<interface>>
+      +getName() String
+      +becomeScared() void
+      +crossFence() void
+      +isScared() boolean
+      +becomeBrave() void
+      +wakeUp() void
+    }
+
+    class Nightmare {
+      <<interface>>
+      +getName() String
+      +getDescription() String
+      +getDifficulty() int
+    }
+
+    class Player {
+      -name: String
+      -sheep: Sheep
+      -hand: Card[]
+      -zzzs: int
+      -winks: int
+      -pillowPosition: int
+      -crossedTheFence: boolean
+      +Player(name: String, sheepColor: String)
+      +getName() String
+      +getSheep() Sheep
+      +getCard(index: int) Card
+      +getNumOfZzzs() int
+      +gainCard(newCard: Card) void
+      +resetWinks() void
+      +playCard(index: int) Card
+      +isScared() boolean
+      +becomeBrave() void
+      +gainWinks(amount: int) void
+      +getWinks() int
+      +discardHand() void
+      +resetFence() void
+      +hasCrossedFence() boolean
+      +getOtherCardToPlay() Card
+      +movePillow(amount: int) void
+      +getPillowPosition() int
+      +resetPillowPosition() void
+      +catchZZZs(amount: int) int
+      +needsACard() boolean
+      +crossFence() void
+      +becomeScared() void
+      +wakeUp() void
+    }
+    Player --|> Movable : implements
+    Player "1" --> Sheep: has
+    Player "2" --> Card: hand
+
+    class RacingPhaseLogic {
+      +playRacingMove(playerController: PlayerController, gameBoardController: GameBoardController, deckController: DeckController, userInput: UserInput) void
+      -checkFence(gameBoardController: GameBoardController, player: Player, userInput: UserInput) void
+    }
+    RacingPhaseLogic ..> PlayerController
+    RacingPhaseLogic ..> GameBoardController
+    RacingPhaseLogic ..> DeckController
+    RacingPhaseLogic ..> UserInput
+
+    class RestingPhaseLogic {
+      +playRestingMove(gameBoardController: GameBoardController, userInput: UserInput, tileDeck: TileDeck, playerController: PlayerController) void
+    }
+    RestingPhaseLogic ..> GameBoardController
+    RestingPhaseLogic ..> UserInput
+    RestingPhaseLogic ..> TileDeck
+    RestingPhaseLogic ..> PlayerController
+
+    class ScoreBoard {
+      -players : List~Player~
+      +ScoreBoard(players : List~Player~)
+      +movePillow(player : Player, amount : int) : void
+      +getWinks(player : Player) : int
+      +gainWinks(player : Player, amount : int) : void
+      +getPillowPosition(player : Player) : int
+      +wakeUp(player : Player) : void
+      +resetPillowPositions() : void
+      +isGameOver() : boolean
+      +endOfTurn() : void
+      -resetWinks() : void
+      +getPlayers() : List~Player~
+    }
+
+    class Sheep {
+      -color : String
+      -isScared : boolean
+      +Sheep(color : String)
+      +getColor() : String
+      +isScared() : boolean
+      +scare() : void
+      +becomeBrave() : void
+    }
+
+    class Tile {
+      <<abstract>>
+      -name : String
+      -abilityDescription : String
+      -isInfinite : boolean
+      -zzzCount : int
+      -playerZZZs : int
+      -playerInfiniteZZZs : int
+      +Tile(name : String, abilityDescription : String, isInfinite : boolean, zzzCount : int)
+      +getZzzCount() : int
+      +getName() : String
+      +getAbilityDescription() : String
+      +isInfinite() : boolean
+      +placeZzzs(zzzs : int, isInfinite : boolean) : void
+      +activateEffect(player : Player, board : GameBoard, userInput : UserInput) : void
+      +hasZzzs() : boolean
+    }
+
+    class TileDeck {
+      -allTiles : Queue~TileController~
+      -tileMarket : List~TileController~
+      +TileDeck()
+      +getTile(tileIndex : int) : TileController
+      +shuffleTiles() : void
+      +addTile(tileController : TileController) : void
+      +initializeMarket() : void
+      +getTopTile() : TileController
+      +getNumOfTiles() : int
+      +displayTileMarket() : void
+    }
+
+    class Wolf {
+      -name : String
+      -description : String
+      -difficulty : int
+      +Wolf()
+      +getName() : String
+      +getDescription() : String
+      +getDifficulty() : int
+    }
+    Nightmare <|.. Wolf : Implements
+
+    class CardView {
+      +displayInformation(model : Card) : void
+    }
+    CardView --> Card 
+
+    class GameBoardView {
+      -displayTiles(gameBoard : GameBoard) : void
+      -displayMovables(gameBoard : GameBoard) : void
+      -displayNightmarePosition(gameBoard : GameBoard) : void
+      +displayInformation(gameBoard : GameBoard) : void
+      +showError(message : String) : void
+    }
+    GameBoardView --> GameBoard 
+
+    class GameView {
+      +showWelcomeMessage() : void
+      +showPlayerTurn(playerName : String, isRacingPhase : Boolean) : void
+      +showWinner(playerName : String) : void
+      +showGameOver() : void
+    }
+
+    class NightmareView {
+      +updateView(model : Nightmare) : void
+    }
+
+    class PlayerView {
+      +updateView(player : Player) : void
+      +showError(message : String) : void
+    }
+    class ScoreBoardView {
+        +displayScoreBoard(scoreBoard: ScoreBoard): void
+        +showError(message: String): void
+    }
+
+    class TileView {
+        +displayInfo(tile: Tile): void
+    }
+
+    class UserInput {
+        -scanner: Scanner
+        +UserInput()
+        +getPlayerName(): String
+        +getSheepColor(): String
+        +activateTilePrompt(): boolean
+        +getNumOfPlayers(): int
+        +pickOption(option1: String, option2: String): int
+        +getCardSelection(): int
+        +getTilePlacementPosition(): int
+        +getCallItANightDecision(): boolean
+        +getSleepTime(): String
+        +getNightmareSelection(): int
+        +getActivateTileDecision(tileInformation: String): boolean
+        +getRestingMoveDecision(): boolean
+        +getTileSelection(numOfTiles: int): int
+        +getCatchZzzsDecision(): boolean
+        +getCatchTileIndex(): int
+        +getOrComboSelection(): int
+    }
+
+    class Main {
+        +main(args: String[]): void
+    }
+
+
+

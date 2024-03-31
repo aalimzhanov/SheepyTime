@@ -22,6 +22,7 @@ public class MoveSpacesCardTest {
         moveSpacesCard = new MoveSpacesCard(spaces);
         player = new Player("tolga","blue"); 
         gameBoard = new GameBoard(); 
+        gameBoard.placeMovable(player, 1);
         input = new UserInput(); 
     }
 
@@ -33,7 +34,9 @@ public class MoveSpacesCardTest {
 
     @Test
     void testExecuteAction() {
-        assertDoesNotThrow(() -> moveSpacesCard.executeAction(player, gameBoard, input));
+        assertEquals(1, gameBoard.getMovablePosition(player));
+        moveSpacesCard.executeAction(player, gameBoard, input);
+        assertEquals(2, gameBoard.getMovablePosition(player));
     }
 
     @Test

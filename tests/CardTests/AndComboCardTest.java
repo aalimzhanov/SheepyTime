@@ -4,6 +4,7 @@ import models.Card;
 import models.GameBoard;
 import models.Player;
 import models.cards.AndComboCard;
+import models.cards.MoveSpacesCard;
 import views.UserInput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,20 +21,22 @@ public class AndComboCardTest {
 
     @BeforeEach
     void setUp() {
-        actions = new Card[]{}; // You may need to replace this with your actual Card array
+        actions = new Card[]{new MoveSpacesCard(2), new MoveSpacesCard(3)};
         andComboCard = new AndComboCard(actions);
-        player = new Player("tolga","blue"); 
+        player = new Player("Adil","blue"); 
         gameBoard = new GameBoard();
+        gameBoard.placeMovable(player, 1);
     }
 
     @Test
     void testExecuteAction() {
-        assertDoesNotThrow(() -> andComboCard.executeAction(player, gameBoard, input), "executeAction should not throw an exception");
-    }
+        andComboCard.executeAction(player, gameBoard, input);
+        assertEquals(6, gameBoard.getMovablePosition(player), "The player should be at position 6");
+     }
 
     @Test
     void testGetInformation() {
-        String expectedInformation = "";
+        String expectedInformation = "Move 2 spaces and Move 3 spaces";
         assertEquals(expectedInformation, andComboCard.getInformation(), "The information should be the expected information");
     }
 

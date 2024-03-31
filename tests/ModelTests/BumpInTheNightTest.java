@@ -1,4 +1,4 @@
-package tests;
+package tests.ModelTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,11 +23,13 @@ class BumpInTheNightTest {
 
     @Test
     void testDescription() {
-        assertEquals("Big scary Bump In The Night", bumpInTheNight.getDescription(), "The description should be 'Big scary Bump In The Night'");
+        String expectedDescription = "*THUD* WHAT WAS THAT SOUND? PROBABLY NOTHING, THERE'S ONLY SHADOWS. *THUD* I THINK I HEARD A BUMP IN THE NIGHT AGAIN. WAS IT CLOSER? MAYBE I SHOULD GO SEE IF THERE'S ANYTHING THERE... *THUD SQUEEELCH* THERE WAS DEFINITELY SOMETHING THERE!!!";
+        assertEquals(expectedDescription, bumpInTheNight.getDescription(),
+                "The description should be '" + expectedDescription + "'");
     }
 
     @Test
     void testDifficulty() {
-        assertEquals(3, bumpInTheNight.getDifficulty(), "The difficulty should be 3");
+        assertEquals(1, bumpInTheNight.getDifficulty(), "The difficulty should be 1");
     }
 }
