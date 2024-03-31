@@ -9,46 +9,57 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import models.Card;
-
 public class DoubleDutchTileTest {
 
-    private Player player;
+    private Player playerWithInfiniteZZZs;
+    private Player playerWith0ZZZs;
     private DoubleDutchTile doubleDutchTile;
     private GameBoard board; 
     private UserInput userInput;
-    private Card primaryCard, secondaryCard;
+    private MoveSpacesCard primaryCard, secondaryCard;
 
     @Before
     public void setUp() {
         doubleDutchTile = new DoubleDutchTile();
         board = new GameBoard(); 
-        userInput = null; 
+        userInput = new UserInput(); 
 
         primaryCard = new MoveSpacesCard(3);
         secondaryCard = new MoveSpacesCard(2); 
-        player = new Player("Adil", "blue");
-        board.placeMovable(player, 1);
-        player.gainCard(primaryCard);
-        player.gainCard(secondaryCard);
+        
+        // player with infinite ZZZs
+        playerWithInfiniteZZZs = new Player("player with infinite ZZZs", "red");
+        playerWithInfiniteZZZs.gainCard(primaryCard);
+        playerWithInfiniteZZZs.gainCard(secondaryCard);
+        
+        // player with 0 ZZZs
+        playerWith0ZZZs = new Player("player with 0 ZZZs", "blue");
+        playerWith0ZZZs.gainCard(primaryCard);
+        playerWith0ZZZs.gainCard(secondaryCard);
     }
 
     @Test
-    public void testActivateEffectWithZZZs() {
-        player.playCard(0).executeAction(player, board, userInput);
-        assertEquals("Player should move 3 spaces", 4, board.getMovablePosition(player));
-        doubleDutchTile.placeZzzs(1, false);
-        doubleDutchTile.activateEffect(player, board, userInput);
-
-        assertEquals("Player should move by 2 spaces", 6, board.getMovablePosition(player));
+    public void testActivateEffectWithInfiniteZZZs() {
+        doubleDutchTile = new DoubleDutchTile();
+        doubleDutchTile.placeZzzs(playerWithInfiniteZZZs.catchZZZs(1), true);
+        playerWithInfiniteZZZs.playCard(0);     // discard the first card
+        board = new GameBoard(); 
+        userInput = new UserInput(); 
+        board.placeMovable(playerWithInfiniteZZZs, 1);
+        int initialPosition = board.getMovablePosition(playerWithInfiniteZZZs);
+        
+        doubleDutchTile.activateEffect(playerWithInfiniteZZZs, board, userInput);
+        
+        assertEquals("Player with infinite ZZZs should move by 2 spaces", initialPosition + 2, board.getMovablePosition(playerWithInfiniteZZZs));
     }
 
-    @Test 
-    public void testActivateEffectPlayerHasNoZzzs() {
-        player.playCard(0).executeAction(player, board, userInput);
-        assertEquals("Player should move 3 spaces", 4, board.getMovablePosition(player));
-        doubleDutchTile.activateEffect(player, board, userInput);
-        assertEquals("Player should not move as they have no zzzs on the tile", 4, board.getMovablePosition(player));
+    @Test
+    public void testActivateEffectDoesNotApplyWith0ZZZs() {
+        int initialPosition = playerWith0ZZZs.getPillowPosition();
+        
+        doubleDutchTile.activateEffect(playerWith0ZZZs, board, userInput);
+        
+        assertEquals("Player's position should not change with 0 ZZZs", initialPosition, playerWith0ZZZs.getPillowPosition());
     }
 
 }

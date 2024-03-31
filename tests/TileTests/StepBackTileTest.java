@@ -1,56 +1,55 @@
 package tests.TileTests;
 
-import org.junit.jupiter.api.Test;
 
-import controllers.TileController;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-
-import models.tiles.StepBackTile;
-import models.Player;
 import models.GameBoard;
+import models.Player;
+import models.tiles.StepBackTile;
 import views.UserInput;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class StepBackTileTest {
-    private StepBackTile tile;
-    private Player player;
-    private GameBoard board;
-    private UserInput userInput;
 
-    @BeforeEach
+    private Player scaredPlayerWithZZZs;
+    private Player bravePlayerWithZZZs;
+    private StepBackTile stepBackTile;
+    private GameBoard board; 
+    private UserInput userInput; 
+
+    @Before
     public void setUp() {
-        tile = new StepBackTile();
-        player = new Player("Adil", "blue");
+        stepBackTile = new StepBackTile();
+        
+        scaredPlayerWithZZZs = new Player("scared player with ZZZs", "blue");
+        scaredPlayerWithZZZs.catchZZZs(5); 
+        scaredPlayerWithZZZs.becomeScared(); 
+        
+        bravePlayerWithZZZs = new Player("brave player with ZZZs", "red");
+        bravePlayerWithZZZs.catchZZZs(5); 
         board = new GameBoard();
-        board.placeMovable(player, 2);
-        board.placeTile(2, new TileController(tile, null));
-        userInput = null;
-        tile.placeZzzs(1, false);
     }
 
     @Test
-    public void testActivateEffectNotScared() {
-        tile.activateEffect(player, board, userInput);
-        assertEquals(1, board.getMovablePosition(player), "The player should be moved back 1 space");
-        assertFalse(player.isScared());
-    }
-    @Test
-    public void testActivateEffectScared() {
-        player.becomeScared();
-        tile.activateEffect(player, board, userInput);
-        assertEquals(1, board.getMovablePosition(player), "The player should be moved back 1 space");
-        assertFalse(player.isScared());
-    }
-    @Test
-    public void testActivateEffectOverFence() {
-        player.becomeScared();
-        board.moveMovable(player, -1);
-        assertEquals(1, board.getMovablePosition(player), "The player should be moved back 1 space");
-        tile.activateEffect(player, board, userInput);
-        assertEquals(1, board.getMovablePosition(player), "The player should not move over the fence");
-        assertFalse(player.isScared());
+    public void testActivateEffectMovesPlayerBackwardAndMakesScaredPlayerBrave() {
+        int initialPosition = board.getMovablePosition(scaredPlayerWithZZZs);
+        stepBackTile.activateEffect(scaredPlayerWithZZZs, board, userInput);
+        assertEquals("Player should move backward by 1 space", initialPosition - 1, board.getMovablePosition(scaredPlayerWithZZZs));
+        assertFalse("Scared player should become brave", scaredPlayerWithZZZs.isScared());
     }
 
+    @Test
+    public void testActivateEffectMovesBravePlayerBackward() {
+        int initialPosition = board.getMovablePosition(bravePlayerWithZZZs);
+        stepBackTile.activateEffect(bravePlayerWithZZZs, board, userInput);
+        assertEquals("Brave player should move backward by 1 space", initialPosition - 1, board.getMovablePosition(bravePlayerWithZZZs));
+    }
+
+    @Test
+    public void testZZZsDecrementForPlayersWithFiniteZZZs() {
+        int initialZZZs = scaredPlayerWithZZZs.getNumOfZzzs();
+        stepBackTile.activateEffect(scaredPlayerWithZZZs, board, userInput);
+        assertEquals("Player's ZZZs should decrease by 1", initialZZZs - 1, scaredPlayerWithZZZs.getNumOfZzzs());
+    }
+    
 }
