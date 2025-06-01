@@ -1,7 +1,5 @@
 package views;
 
-import models.ScoreBoard;
-
 /**
  * This class represents the view for the scoreboard in the SheepyTime game.
  * It provides methods to display the scoreboard and show error messages.
@@ -13,16 +11,20 @@ public class ScoreBoardView {
     /**
      * Displays the scoreboard with the current game state.
      *
-     * @param scoreBoard the scoreboard object containing player scores and pillow positions
+     * 
      */
-    public void displayScoreBoard(ScoreBoard scoreBoard) {
+    public void displayScoreBoard() {
         System.out.println("Current Game State:");
         System.out.println("Player\tScore\tPillow Position");
-        scoreBoard.getPlayers().forEach(player -> {
-            int score = scoreBoard.getWinks(player);
-            int pillowPosition = scoreBoard.getPillowPosition(player);
-            System.out.printf("%s\t%d\t%d%n", player.getName(), score, pillowPosition);
-        });
+    }
+
+     /**
+     * Displays the scoreboard with the current game state.
+     *
+     * @param name,score,pillowPosition player information
+     */
+    public void displayPlayerPoistions(String name, int score, int pillowPosition){
+        System.out.printf("%s\t%d\t%d%n", name, score, pillowPosition);
     }
 
     /**

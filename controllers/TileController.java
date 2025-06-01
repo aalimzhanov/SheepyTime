@@ -31,7 +31,7 @@ public class TileController {
      * Displays information about the Tile using the TileView.
      */
     public void displayTileInfo() {
-        view.displayInfo(tile);
+        view.displayInfo(tile.getName(),tile.getAbilityDescription(),tile.getZzzCount(),tile.isInfinite());
     }
 
     /**

@@ -84,6 +84,12 @@ public class ScoreBoardController {
      * Displays the score board using the score board view.
      */
     public void displayScoreBoard() {
-        scoreBoardView.displayScoreBoard(scoreBoard);
+        scoreBoardView.displayScoreBoard();
+        scoreBoard.getPlayers().forEach(player -> {
+            int score = scoreBoard.getWinks(player);
+            int pillowPosition = scoreBoard.getPillowPosition(player);
+            scoreBoardView.displayPlayerPoistions(player.getName(), score, pillowPosition);
+        });
+        
     }
 }

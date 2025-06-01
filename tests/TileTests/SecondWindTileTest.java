@@ -1,54 +1,44 @@
-package tests.TileTests;
+package TileTests;
 
-import models.GameBoard;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import models.tiles.SecondWindTile;
 import models.Player;
 import models.cards.MoveSpacesCard;
-import models.tiles.SecondWindTile;
+import models.GameBoard;
 import views.UserInput;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class SecondWindTileTest {
 
+    private SecondWindTile tile;
     private Player player;
-    private SecondWindTile secondWindTile;
-    private GameBoard board; 
-    private UserInput userInput; 
+    private GameBoard board;
+    private UserInput userInput;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        secondWindTile = new SecondWindTile();
-        player = new Player("tolga", "blue");
-        
-        player.gainCard(new MoveSpacesCard(3)); 
-        player.gainCard(new MoveSpacesCard(5)); 
-        
-        board = new GameBoard();
-        userInput = new UserInput(); 
+        tile = new SecondWindTile();
+        player = new Player("Adil", "blue");
+        board = null;
+        userInput = null;
+        tile.placeZzzs(1, false);
     }
-
     @Test
-    public void testActivateEffectDiscardsHand() {
-        assertTrue("Player should initially need a card", player.needsACard()); 
-        secondWindTile.activateEffect(player, board, userInput);
-        assertTrue("Player's hand should be empty after activating Second Wind Tile", player.needsACard());
+    public void testActivateEffectNotScared() {
+        player.gainCard(new MoveSpacesCard(1));
+        tile.activateEffect(player, board, userInput);
+        assertNull(player.getCard(0));
+        assertFalse(player.isScared());
     }
-
     @Test
-    public void testActivateEffectMakesScaredPlayerBrave() {
+    public void testActivateEffectScared() {
+        player.gainCard(new MoveSpacesCard(1));
         player.becomeScared();
-        assertTrue("Player should be scared before activating the tile", player.isScared());
-        secondWindTile.activateEffect(player, board, userInput);
-        assertFalse("Player should become brave after activating Second Wind Tile", player.isScared());
+        tile.activateEffect(player, board, userInput);
+        assertNull(player.getCard(0));
+        assertFalse(player.isScared());
     }
 
-    @Test
-    public void testZZZsDecrementForPlayerWithoutInfiniteZZZs() {
-        int initialZZZs = player.getNumOfZzzs();
-        secondWindTile.activateEffect(player, board, userInput);
-        assertEquals("Player's ZZZs should decrement by 1 after activating the tile", initialZZZs - 1, player.getNumOfZzzs());
-    }
 
-   
 }

@@ -1,7 +1,4 @@
 package views;
-
-import models.Card;
-
 /**
  * This class represents a CardView, which is responsible for displaying information of a Card.
  * 
@@ -12,9 +9,9 @@ public class CardView {
     /**
      * Displays the information of a Card.
      * 
-     * @param model the Card object containing the information to be displayed
+     * @param String the information of the card to be displayed
      */
-    public void displayInformation(Card model){
-        System.out.println(model.getInformation() );
+    public void displayInformation(String information){
+        System.out.println(information);
     }
 }

@@ -9,15 +9,15 @@ import views.UserInput;
  * Represents a card that allows the player to choose between two actions.
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
  */
-public class OrComboCard implements Card {
+public class DualActionChoiceCard implements Card {
     private Card[] actions;
 
     /**
-     * Constructs an OrComboCard with the specified actions.
+     * Constructs a DualActionChoiceCard with the specified actions.
      *
      * @param actions an array of Card objects representing the available actions
      */
-    public OrComboCard(Card[] actions) {
+    public DualActionChoiceCard(Card[] actions) {
         this.actions = actions;
     }
 

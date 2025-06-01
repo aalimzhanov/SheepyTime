@@ -42,7 +42,47 @@ public class GameBoardController {
      * Displays the information of the game board.
      */
     public void displayInformation() {
-        gameBoardView.displayInformation(gameBoard);
+        gameBoardView.displayInformation();
+        displayTiles();
+        displayMovables();
+        displayNightmarePosition();
+    }
+    
+     /**
+     * Displays the dream tiles on the game board.
+     *
+     * 
+     */
+    private void displayTiles() {
+        TileController[] tiles = gameBoard.getTiles();
+        if(tiles.length == 0){
+            gameBoardView.displayNoNightmare();
+        }
+        for (int i = 0; i < tiles.length; i++) {
+            if (tiles[i] != null) {
+                gameBoardView.displayTiles(tiles[i].getTileName(), (i + 1));
+            }
+        }
+    }
+
+     /**
+     * Displays the movables on the game board.
+     *
+     * 
+     */
+    private void displayMovables() {
+        gameBoard.getMovables().forEach((movable, position) -> {
+            gameBoardView.displayMovables(movable.getName(), position);
+        });
+    }
+
+     /**
+     * Displays the nightmare position on the game board.
+     *
+     * 
+     */
+    private void displayNightmarePosition() {
+        gameBoardView.displayNightmarePosition(gameBoard.getNightmare().getName(), gameBoard.getNightmarePos());
     }
 
     /**

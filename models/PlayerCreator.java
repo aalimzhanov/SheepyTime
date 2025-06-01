@@ -1,6 +1,5 @@
-package factories;
+package models;
 import controllers.PlayerController;
-import models.Player;
 import views.PlayerView;
 import views.UserInput;
 
@@ -9,12 +8,12 @@ import java.util.List;
 
 
 /**
- * The PlayerFactory class is responsible for creating and initializing player objects.
+ * The PlayerCreator class is responsible for creating and initializing player objects.
  * It provides a method to initialize a list of PlayerController objects based on user input.
  * 
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
  */
-public class PlayerFactory {
+public class PlayerCreator {
 
     /**
      * Initializes a list of PlayerController objects based on user input.

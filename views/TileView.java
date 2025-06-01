@@ -1,5 +1,4 @@
 package views;
-import models.Tile;
 
 /**
  * This class represents a view for Dream Tiles.
@@ -12,12 +11,15 @@ public class TileView {
     /**
      * Displays information about the given tile.
      *
-     * @param tile the tile to display information about
+     * @param  name name of tile to display information about
+     * @param  abilityDescription ability description of tile to display information about
+     * @param  ZzzCount count of Zzz on tile to display information about
+     * @param  isInfinite infinity value of tile to display information about
      */
-    public void displayInfo(Tile tile) {
-        System.out.println("Tile name: " + tile.getName());
-        System.out.println("Tile ability: " + tile.getAbilityDescription());
-        System.out.println("Placement bonus: " + tile.getZzzCount() + (tile.isInfinite() ? " infinite" : " regular") + " zzzs");
+    public void displayInfo(String name, String abilityDescription, int ZzzCount, boolean isInfinite) {
+        System.out.println("Tile name: " + name);
+        System.out.println("Tile ability: " + abilityDescription);
+        System.out.println("Placement bonus: " + ZzzCount + (isInfinite ? " infinite" : " regular") + " zzzs");
     }
     
 }

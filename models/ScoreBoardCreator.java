@@ -1,21 +1,19 @@
-package factories;
+package models;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import controllers.PlayerController;
 import controllers.ScoreBoardController;
-import models.Player;
-import models.ScoreBoard;
 import views.ScoreBoardView;
 
 /**
- * The ScoreBoardFactory class is responsible for initializing the ScoreBoardController.
+ * The ScoreBoardCreator class is responsible for initializing the ScoreBoardController.
  * It provides a method to initialize the ScoreBoardController with a list of PlayerControllers.
  * 
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
  */
-public class ScoreBoardFactory {
+public class ScoreBoardCreator {
 
     /**
      * Initializes the ScoreBoardController with the given list of PlayerControllers.

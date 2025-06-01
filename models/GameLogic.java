@@ -18,8 +18,16 @@ import views.UserInput;
  */
 public class GameLogic {
 
+    private List<PlayerController> playerControllers;
+    private GameBoardController gameBoardController;
+    private DeckController deckController;
+    private ScoreBoardController scoreBoardController;
+    private GameView gameView;
+    private TileDeck tileDeck;
+    private UserInput userInput;
+
     /**
-     * Plays the SheepyTime game.
+     * Constructs a new instance of the GameLogic class.
      *
      * @param playerControllers    the list of player controllers
      * @param gameBoardController  the game board controller
@@ -29,36 +37,63 @@ public class GameLogic {
      * @param tileDeck             the tile deck
      * @param userInput            the user input
      */
-    public static void playGame(List<PlayerController> playerControllers, GameBoardController gameBoardController,
-            DeckController deckController,
-            ScoreBoardController scoreBoardController, GameView gameView, TileDeck tileDeck, UserInput userInput) {
-        boolean gameEnded = false;
+    public GameLogic(List<PlayerController> playerControllers, GameBoardController gameBoardController,
+            DeckController deckController, ScoreBoardController scoreBoardController, GameView gameView,
+            TileDeck tileDeck, UserInput userInput) {
+        this.playerControllers = playerControllers;
+        this.gameBoardController = gameBoardController;
+        this.deckController = deckController;
+        this.scoreBoardController = scoreBoardController;
+        this.gameView = gameView;
+        this.tileDeck = tileDeck;
+        this.userInput = userInput;
+    }
 
+    /**
+     * Plays the game by executing the game phases until the game ends.
+     * The game consists of alternating racing and resting phases.
+     * 
+     * @return true if the game ended, false otherwise
+     */
+    public void playGame() {
+        boolean gameEnded = false;
         while (!gameEnded) {
-            // Racing phase until everyone either woke up or called it a night
-            while (!gameBoardController.isTurnOver()) {
-                for (PlayerController playerController : playerControllers) {
-                    gameView.showPlayerTurn(playerController.getPlayerName(), true);
-                    takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, true);
-                    gameEnded = checkWinConditions(scoreBoardController);
-                    if (gameEnded) {
-                        return;
-                    }
-                }
+            while(!gameBoardController.isTurnOver()){
+                gameEnded = playPhase(new RacingPhase());
             }
-            gameBoardController.resetPositions();
-            scoreBoardController.endOfTurn();
-            scoreBoardController.displayScoreBoard();
-            // One turn per player for the resting phase
-            for (PlayerController playerController : playerControllers) {
-                gameView.showPlayerTurn(playerController.getPlayerName(), false);
-                takeTurn(gameBoardController, deckController, tileDeck, playerController, userInput, false);
-                gameEnded = checkWinConditions(scoreBoardController);
-                if (gameEnded) {
-                    return;
-                }
+            resetGame();
+            if (!gameEnded) {
+                gameEnded = playPhase(new RestingPhase());
             }
         }
+    }
+
+    /**
+     * Executes the play phase of the game for each player.
+     * 
+     * @param phase The current phase of the game.
+     * @return true if a player has won the game, false otherwise.
+     */
+    private boolean playPhase(Phase phase) {
+        for (PlayerController playerController : playerControllers) {
+            gameView.showPlayerTurn(playerController.getPlayerName(), phase.isRacingPhase());
+            phase.executeMove(gameBoardController, deckController, tileDeck, userInput,
+                    playerController);
+            if (checkWinConditions()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Resets the game by resetting the positions on the game board and updating the
+     * score board.
+     */
+    private void resetGame() {
+        gameBoardController.resetPositions();
+        scoreBoardController.endOfTurn();
+        scoreBoardController.displayScoreBoard();
     }
 
     /**
@@ -67,32 +102,8 @@ public class GameLogic {
      * @param scoreBoardController the score board controller
      * @return true if the win conditions are met, false otherwise
      */
-    private static boolean checkWinConditions(ScoreBoardController scoreBoardController) {
+    private boolean checkWinConditions() {
         return scoreBoardController.isGameOver();
     }
 
-    /**
-     * Takes a turn in the game.
-     *
-     * @param gameBoardController the game board controller
-     * @param deckController      the deck controller
-     * @param tileDeck            the tile deck
-     * @param playerController    the player controller
-     * @param userInput           the user input
-     * @param isRacingPhase       true if it is the racing phase, false if it is the
-     *                            resting phase
-     */
-    private static void takeTurn(GameBoardController gameBoardController, DeckController deckController,
-            TileDeck tileDeck,
-            PlayerController playerController, UserInput userInput, boolean isRacingPhase) {
-        if (isRacingPhase) {
-            // Need to modify this for multiplayer
-            RacingPhaseLogic racingPhaseLogic = new RacingPhaseLogic();
-            racingPhaseLogic.playRacingMove(playerController, gameBoardController, deckController,
-                    userInput);
-        } else {
-            RestingPhaseLogic restingPhaseLogic = new RestingPhaseLogic();
-            restingPhaseLogic.playRestingMove(gameBoardController, userInput, tileDeck, playerController);
-        }
-    }
 }

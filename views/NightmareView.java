@@ -1,5 +1,4 @@
 package views;
-import models.Nightmare;
 
 /**
  * This class represents the view for the Nightmare game mode.
@@ -15,10 +14,10 @@ public class NightmareView {
      *
      * @param model The Nightmare model to update the view with.
      */
-    public void updateView(Nightmare model) {
-        System.out.println("Nightmare: " + model.getName());
-        System.out.println(model.getDescription());
-        System.out.println("Difficulty level: " + model.getDifficulty());
+    public void updateView(String name, String discription, int difficulty) {
+        System.out.println("Nightmare: " + name);
+        System.out.println(discription);
+        System.out.println("Difficulty level: " + difficulty);
     }
 
 }

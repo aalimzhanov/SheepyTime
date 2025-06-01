@@ -30,9 +30,16 @@ public class PlayerController {
      * Updates the view with the current state of the Player model.
      */
     public void updateView() {
-        view.updateView(model);
+        view.updateView(model.getName(), model.getSheep().getColor(), model.getSheep().isScared(), model.getNumOfZzzs());
+        if (model.getCard(0) != null) {
+            view.displayFirstCardInformation(model.getCard(0).getInformation());
+        }
+        if (model.getCard(1) != null) {
+            view.displaySecondCardInformation(model.getCard(1).getInformation());
+        }
     }
 
+   
     /**
      * Returns the name of the Player.
      *

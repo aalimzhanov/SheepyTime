@@ -40,12 +40,10 @@ public class TileDeck {
             throw new IllegalArgumentException("Invalid tile index.");
         }
         TileController chosenTile = tileMarket.remove(tileIndex);
-        // Add a new tile to the market if there are any left
         if (allTiles.isEmpty()) {
             return chosenTile;
         }
         tileMarket.add(allTiles.poll());
-
         return chosenTile;
     }
 

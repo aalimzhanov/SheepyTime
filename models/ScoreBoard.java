@@ -104,7 +104,7 @@ public class ScoreBoard {
             resetWinks();
             return;
         }
-        // Multiplayer logic to be added
+        // logic to be added for multiplayer
     }
 
     /**

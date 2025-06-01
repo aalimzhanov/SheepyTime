@@ -1,18 +1,17 @@
-package factories;
+package models;
 
 import controllers.TileController;
-import models.TileDeck;
 import models.tiles.*;
 import views.TileView;
 
 /**
- * The TileDeckFactory class is responsible for creating a TileDeck object.
+ * The TileDeckBuilder class is responsible for creating a TileDeck object.
  * It provides a static method to create the TileDeck and initialize it with
  * a set of predefined tiles.
  *
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
  */
-public class TileDeckFactory {
+public class TileDeckBuilder {
 
     /**
      * Creates a new TileDeck object and initializes it with a set of predefined tiles.

@@ -10,14 +10,14 @@ import views.UserInput;
  * This card executes each action in the given order when its action is executed.
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
  */
-public class AndComboCard implements Card {
+public class DualActionCard implements Card {
     private Card[] actions;
 
     /**
-     * Constructs an AndComboCard with the given array of actions.
+     * Constructs a DualActionCard with the given array of actions.
      * @param actions the array of actions to be executed in order
      */
-    public AndComboCard(Card[] actions) {
+    public DualActionCard(Card[] actions) {
         this.actions = actions;
     }
 
@@ -45,7 +45,7 @@ public class AndComboCard implements Card {
 
     /**
      * Checks if the card is a nightmare card.
-     * @return false, as AndComboCard is not a nightmare card
+     * @return false, as DualActionCard is not a nightmare card
      */
     @Override
     public boolean isNightmare() {

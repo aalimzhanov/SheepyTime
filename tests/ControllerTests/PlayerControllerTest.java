@@ -1,4 +1,4 @@
-package tests.ControllerTests;
+package ControllerTests;
 
 import controllers.PlayerController;
 import models.Player;

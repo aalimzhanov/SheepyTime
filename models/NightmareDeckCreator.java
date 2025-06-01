@@ -1,17 +1,16 @@
-package factories;
+package models;
 
-import models.Deck;
 import models.cards.JumpNightmareCard;
 import models.cards.MoveNightmareCard;
 import models.cards.ScareNightmareCard;
 
 /**
- * The NightmareCardFactory class is responsible for creating nightmare cards and adding them to a deck.
+ * The NightmareDeckCreator class is responsible for creating nightmare cards and adding them to a deck.
  * It provides methods to create different types of nightmare cards based on the user's choice.
  * 
  * @author Adil Alimzhanov, Tan Karageldi, Tolga Cohce, Derrick Ansah
  */
-public class NightmareCardFactory {
+public class NightmareDeckCreator {
     
     /**
      * Creates nightmare cards based on the user's choice and adds them to the specified deck.
@@ -31,9 +30,6 @@ public class NightmareCardFactory {
                 addJumpNightmareCards(deck, 4, 2);
                 addJumpNightmareCards(deck, 2, 3);
                 deck.addCard(new JumpNightmareCard(1));
-                break;
-            case "Spider":
-                // Spider cards to be added
                 break;
             default:
                 break;

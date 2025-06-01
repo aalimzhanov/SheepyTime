@@ -11,8 +11,8 @@ import views.NightmareView;
  */
 public class NightmareController {
 
-    Nightmare model;
-    NightmareView view;
+    private Nightmare model;
+    private NightmareView view;
 
     /**
      * Constructs a NightmareController object with the specified Nightmare model and NightmareView.
@@ -29,7 +29,7 @@ public class NightmareController {
      * Updates the view by calling the updateView method of the NightmareView.
      */
     public void updateView(){
-        view.updateView(model);
+        view.updateView(model.getName(), model.getDescription(), model.getDifficulty());
     }
     
     /**

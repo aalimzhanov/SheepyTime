@@ -1,4 +1,4 @@
-package tests.CardTests;
+package CardTests;
 
 import models.cards.MoveSpacesCard;
 import models.GameBoard;
@@ -37,6 +37,32 @@ public class MoveSpacesCardTest {
         assertEquals(1, gameBoard.getMovablePosition(player));
         moveSpacesCard.executeAction(player, gameBoard, input);
         assertEquals(2, gameBoard.getMovablePosition(player));
+    }
+
+    @Test
+    void testExecuteAction2() {
+        Player player = new Player("Adil","blue");
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.placeMovable(player, 1);
+        moveSpacesCard.executeAction(player, gameBoard, input);
+        assertEquals(2, gameBoard.getMovablePosition(player), "Player should move to the next space.");
+    }
+    @Test
+    void testExecuteAction3() {
+        Player player = new Player("Adil","blue");
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.placeMovable(player, 10);
+        moveSpacesCard.executeAction(player, gameBoard, input);
+        assertEquals(1, gameBoard.getMovablePosition(player), "Player should wrap around to the first space.");
+    }
+    @Test
+    void testExecuteAction4() {
+        Player player = new Player("Adil","blue");
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.placeMovable(player, 1);
+        MoveSpacesCard moveSpacesCard2 = new MoveSpacesCard(-1);
+        moveSpacesCard2.executeAction(player, gameBoard, input);
+        assertEquals(1, gameBoard.getMovablePosition(player), "Player should not cross the fence backwards.");
     }
 
     @Test

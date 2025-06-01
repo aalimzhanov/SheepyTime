@@ -1,4 +1,4 @@
-package tests.ModelTests;
+package ModelTests;
 
 import models.Card;
 import models.Deck;

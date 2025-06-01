@@ -1,4 +1,4 @@
-package tests.ModelTests;
+package ModelTests;
 
 import controllers.GameBoardController;
 import controllers.PlayerController;

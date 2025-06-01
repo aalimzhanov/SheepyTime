@@ -1,4 +1,4 @@
-package tests.CardTests;
+package CardTests;
 
 import models.cards.MoveNightmareCard;
 import models.GameBoard;

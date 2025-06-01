@@ -1,8 +1,8 @@
-package tests.FactoryTests;
+package ModelTests;
 import org.junit.jupiter.api.Test;
 
 import controllers.PlayerController;
-import factories.PlayerFactory;
+import models.PlayerCreator;
 import views.UserInput;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-public class PlayerFactoryTest {
+public class PlayerCreatorTest {
 
     @Test
     public void testInitialisePlayers() {
@@ -19,7 +19,7 @@ public class PlayerFactoryTest {
         System.setIn(in);
 
         UserInput userInput = new UserInput();
-        List<PlayerController> playerControllers = PlayerFactory.intialisePlayers(userInput, 1);
+        List<PlayerController> playerControllers = PlayerCreator.intialisePlayers(userInput, 1);
 
         assertEquals(1, playerControllers.size());
         assertEquals("Adil", playerControllers.get(0).getModel().getName());

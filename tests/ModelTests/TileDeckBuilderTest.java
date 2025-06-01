@@ -1,16 +1,16 @@
-package tests.FactoryTests;
+package ModelTests;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import factories.TileDeckFactory;
 import models.TileDeck;
+import models.TileDeckBuilder;
 
-public class TileDeckFactoryTest {
+public class TileDeckBuilderTest {
 
     @Test
     public void testCreateTiles() {
-        TileDeck deck = TileDeckFactory.createTiles();
+        TileDeck deck = TileDeckBuilder.createTiles();
         assertEquals(4, deck.getNumOfTiles(), "Tile market should have 4 tiles");
     }
 

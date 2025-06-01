@@ -1,8 +1,5 @@
 package views;
 
-import controllers.TileController;
-import models.GameBoard;
-
 /**
  * This class represents the view for the game board.
  * It is responsible for displaying information about the game board state,
@@ -15,50 +12,47 @@ public class GameBoardView {
     /**
      * Displays the current game board state, including the dream tiles, movables, and nightmare position.
      *
-     * @param gameBoard the game board object
+     *
      */
-    public void displayInformation(GameBoard gameBoard) {
+    public void displayInformation() {
         System.out.println("Current Game Board State:");
-        displayTiles(gameBoard);
-        displayMovables(gameBoard);
-        displayNightmarePosition(gameBoard);
     }
 
     /**
      * Displays the dream tiles on the game board.
      *
-     * @param gameBoard the game board object
+     * @param name the name of the tile object
+     * @param position the position of the tile object
      */
-    private void displayTiles(GameBoard gameBoard) {
-        TileController[] tiles = gameBoard.getTiles();
-        if(tiles.length == 0){
-            System.out.println("No active Dream Tiles.");
-        }
-        for (int i = 0; i < tiles.length; i++) {
-            if (tiles[i] != null) {
-                System.out.println("Dream Tile at position " + (i + 1) + ": " + tiles[i].getTileName());
-            }
-        }
+    public void displayTiles(String name, int position) {
+        System.out.println("Dream Tile at position " + position + ": " + name);
     }
 
     /**
      * Displays the movables on the game board.
      *
-     * @param gameBoard the game board object
+     * @param name the name of the tile object
+     * @param position the position of the tile object
      */
-    private void displayMovables(GameBoard gameBoard) {
-        gameBoard.getMovables().forEach((movable, position) -> {
-            System.out.println(movable.getName() + " is at position: " + position);
-        });
+    public void displayMovables(String name, int position) {
+        System.out.println(name + " is at position: " + position);
     }
 
     /**
      * Displays the nightmare position on the game board.
      *
-     * @param gameBoard the game board object
+     * @param name the name of the tile object
+     * @param position the position of the tile object
      */
-    private void displayNightmarePosition(GameBoard gameBoard) {
-        System.out.println(gameBoard.getNightmare().getName() + " is at position: " + gameBoard.getNightmarePos());
+    public void displayNightmarePosition(String name, int position) {
+        System.out.println(name + " is at position: " + position);
+    }
+
+    /*
+     * Displays message for empty Dream Tile slot
+     */
+    public void displayNoNightmare() {
+        System.out.println("No active Dream Tiles.");
     }
 
     /**

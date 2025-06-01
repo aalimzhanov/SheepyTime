@@ -1,60 +1,44 @@
-package tests.TileTests;
+package TileTests;
+
+import org.junit.jupiter.api.Test;
 
 
-import models.GameBoard;
-import models.Player;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+
 import models.tiles.RestingSpotTile;
+import models.Player;
+import models.GameBoard;
 import views.UserInput;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class RestingSpotTileTest {
+    private RestingSpotTile tile;
+    private Player player;
+    private GameBoard board;
+    private UserInput userInput;
 
-    private Player scaredPlayerWithZZZs;
-    private Player bravePlayerWithZZZs;
-    private Player playerWithoutZZZs; 
-    private RestingSpotTile restingSpotTile;
-    private GameBoard board; 
-    private UserInput userInput; 
-
-    @Before
+    @BeforeEach
     public void setUp() {
-        restingSpotTile = new RestingSpotTile();
-        
-        scaredPlayerWithZZZs = new Player("scared player with ZZZs", "red");
-        scaredPlayerWithZZZs.catchZZZs(5); 
-        scaredPlayerWithZZZs.becomeScared(); 
-        
-        bravePlayerWithZZZs = new Player("brave player with ZZZs", "blue");
-        bravePlayerWithZZZs.catchZZZs(5); 
-        
-        playerWithoutZZZs = new Player("player without ZZZs", "green");
-        
-        board = new GameBoard(); 
-        userInput = new UserInput(); 
+        tile = new RestingSpotTile();
+        player = new Player("Adil", "blue");
+        board = null;
+        userInput = null;
+        tile.placeZzzs(1, false);
     }
 
     @Test
-    public void testActivateEffectCatchesZZZAndBecomesBraveForScaredPlayer() {
-        int initialZZZs = scaredPlayerWithZZZs.getNumOfZzzs();
-        restingSpotTile.activateEffect(scaredPlayerWithZZZs, board, userInput);
-        assertEquals("Scared player should catch 1 ZZZ", initialZZZs + 1, scaredPlayerWithZZZs.getNumOfZzzs());
-        assertFalse("Scared player should become brave", scaredPlayerWithZZZs.isScared());
+    public void testActivateEffectNotScared() {
+        tile.activateEffect(player, board, userInput);
+        assertEquals(9, player.getNumOfZzzs());
+        assertFalse(player.isScared());
     }
 
     @Test
-    public void testActivateEffectCatchesZZZForBravePlayer() {
-        int initialZZZs = bravePlayerWithZZZs.getNumOfZzzs();
-        restingSpotTile.activateEffect(bravePlayerWithZZZs, board, userInput);
-        assertEquals("Brave player should catch 1 ZZZ", initialZZZs + 1, bravePlayerWithZZZs.getNumOfZzzs());
+    public void testActivateEffectScared() {
+        player.becomeScared();
+        tile.activateEffect(player, board, userInput);
+        assertEquals(9, player.getNumOfZzzs());
+        assertFalse(player.isScared());
     }
-
-    @Test
-    public void testActivateEffectDoesNotApplyForPlayerWithoutZZZs() {
-        int initialZZZs = playerWithoutZZZs.getNumOfZzzs();
-        restingSpotTile.activateEffect(playerWithoutZZZs, board, userInput);
-        assertEquals("Player without ZZZs should not catch ZZZs", initialZZZs, playerWithoutZZZs.getNumOfZzzs());
-    }
-
 }

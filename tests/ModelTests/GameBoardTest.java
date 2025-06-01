@@ -1,4 +1,4 @@
-package tests.ModelTests;
+package ModelTests;
 
 import models.GameBoard;
 import models.Movable;

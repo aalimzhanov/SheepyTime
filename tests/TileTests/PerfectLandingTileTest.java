@@ -1,55 +1,45 @@
-package tests.TileTests;
+package TileTests;
 
-import models.GameBoard;
-import models.Player;
+import org.junit.jupiter.api.Test;
+
+import controllers.TileController;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+
 import models.tiles.PerfectLandingTile;
+import models.Player;
+import models.GameBoard;
 import views.UserInput;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class PerfectLandingTileTest {
+    private PerfectLandingTile tile;
+    private Player player;
+    private GameBoard board;
+    private UserInput userInput;
 
-    private Player playerCrossedFenceWithZZZs;
-    private Player playerNotCrossedFence;
-    private PerfectLandingTile perfectLandingTile;
-    private GameBoard board; 
-    private UserInput userInput; 
-
-    @Before
+    @BeforeEach
     public void setUp() {
-        perfectLandingTile = new PerfectLandingTile();
-        userInput = new UserInput(); 
-        
-        playerCrossedFenceWithZZZs = new Player("player crossed fence with ZZZs", "red");
-        playerCrossedFenceWithZZZs.crossFence(); 
-        playerCrossedFenceWithZZZs.catchZZZs(5); 
-
-        playerNotCrossedFence = new Player("PlayerNotCrossedFence", "Color");
-        
-        board = new GameBoard() {
-        };
-    }
-
+        tile = new PerfectLandingTile();
+        player = new Player("Adil", "blue");
+        board = new GameBoard();
+        userInput = null;
+        board.placeTile(3, new TileController(tile, null));
+        tile.placeZzzs(1, false);
+        board.placeMovable(player, 1);
+    }   
     @Test
-    public void testActivateEffectGainsWinksForCrossedFence() {
-        int initialWinks = playerCrossedFenceWithZZZs.getWinks();
-        perfectLandingTile.activateEffect(playerCrossedFenceWithZZZs, board, userInput);
-        assertEquals("Player should gain winks equal to the space number", initialWinks + 10, playerCrossedFenceWithZZZs.getWinks());
+    public void testActivateEffectCrossedFence() {
+        board.moveMovable(player, 12);
+        player.resetWinks();    // to offset the winks gained from crossing the fence
+        tile.activateEffect(player, board, userInput);
+        assertEquals(3, player.getWinks(), "Player should gain 3 winks");
     }
-
     @Test
-    public void testActivateEffectDoesNotGainWinksForNotCrossedFence() {
-        int initialWinks = playerNotCrossedFence.getWinks();
-        perfectLandingTile.activateEffect(playerNotCrossedFence, board, userInput);
-        assertEquals("Player should not gain winks if they haven't crossed the fence", initialWinks, playerNotCrossedFence.getWinks());
+    public void testActivateEffectNotCrossedFence() {
+        board.moveMovable(player, 2);
+        tile.activateEffect(player, board, userInput);
+        assertEquals(0, player.getWinks(), "Player should not gain any winks");
     }
-
-    @Test
-    public void testActivateEffectDecrementsZZZsWhenApplicable() {
-        int initialZZZs = playerCrossedFenceWithZZZs.getNumOfZzzs();
-        perfectLandingTile.activateEffect(playerCrossedFenceWithZZZs, board, userInput);
-        assertEquals("ZZZs should be decreased by 1", initialZZZs - 1, playerCrossedFenceWithZZZs.getNumOfZzzs());
-    }
-    
 }

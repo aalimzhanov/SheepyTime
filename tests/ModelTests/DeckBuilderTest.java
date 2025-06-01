@@ -1,16 +1,16 @@
-package tests.FactoryTests;
+package ModelTests;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import factories.DeckFactory;
 import controllers.DeckController;
+import models.DeckBuilder;
 
-public class DeckFactoryTest {
+public class DeckBuilderTest {
 
     @Test
     public void testCreateDeck() {
-        DeckController deckController = DeckFactory.createDeck();
+        DeckController deckController = DeckBuilder.createDeck();
 
         assertNotNull(deckController);
         assertNotNull(deckController.drawCard());

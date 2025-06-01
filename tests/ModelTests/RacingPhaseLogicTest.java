@@ -1,4 +1,4 @@
-package tests.ModelTests;
+package ModelTests;
 
 import controllers.DeckController;
 import controllers.GameBoardController;
@@ -61,6 +61,7 @@ public class RacingPhaseLogicTest {
         deck.addCard(new MoveNightmareCard(1));
         deck.addCard(new MoveSpacesCard(2));
         deck.addCard(new MoveSpacesCard(3));
+        deck.addCard(new MoveSpacesCard(4));
         deckController = new DeckController(deck);
         userInput = new UserInput(){
             @Override

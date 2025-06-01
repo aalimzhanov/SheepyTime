@@ -1,6 +1,20 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+	"version": "0.2.0",
+	"configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Group4_c910ff29"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Group4_68ef5bb2"
+        },
         {
             "type": "java",
             "name": "Main",
